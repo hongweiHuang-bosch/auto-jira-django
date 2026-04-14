@@ -1,0 +1,19 @@
+jira:
+  server: "https://your-jira-server"
+  username: "your-username"
+  password: "your-password"
+  field_name: ""
+
+ai:
+  base_url: "https://your-llm-gateway"
+  api_key: "your-api-key"
+  model: "Qwen3-32B-FP16"
+  connect_timeout: 10
+  read_timeout: 300
+  max_retries: 3
+  use_system_proxy: false
+  proxies: null
+
+runtime:
+  download_root: "/path/to/downloads"
+  tesseract_exe: "/usr/bin/tesseract"

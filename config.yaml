@@ -1,0 +1,20 @@
+jira:
+  server: "https://jira-shzj.auto-link.com.cn"
+  username: "DaiYungui_bosch"
+  password: "Wibe4Bbs"
+  field_name: ""
+  use_browser_download: false
+  playwright_storage_state: "playwright_jira_state.json"
+ai:
+  base_url: "http://wx8vm00005.apac.bosch.com:30001"
+  api_key: "GPqpiBWwpQwj3/nPtMVGJvMadCDYEsdw6MOjcrTY/uYzVXaOfR9hpeqx/DAIZWMWP9b+QGw6inF68yqYI+fahtrnNwo8VNO/K9N084q97pyObJQGJS8fc6MuqNx22wT/ZUQ8t7VPbYHigFwWfgNXeXOVbPwVLGrW2zQ97wG3BI4="
+  model: "Qwen3-32B-FP16"
+  connect_timeout: 10
+  read_timeout: 300
+  max_retries: 3
+  use_system_proxy: false
+  proxies: null
+
+runtime:
+  download_root: "/path/to/downloads"
+  tesseract_exe: "/usr/bin/tesseract"

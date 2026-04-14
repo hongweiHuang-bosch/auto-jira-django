@@ -1,0 +1,10 @@
+jira:
+  server: "https://jira-shzj.auto-link.com.cn"
+  username: "DaiYungui_bosch"
+  password: "Wibe4Bbs"
+
+ai:
+  base_url: "http://wx8vm00005.apac.bosch.com:30001"
+  api_key: "GPqpiBWwpQwj3/nPtMVGJvMadCDYEsdw6MOjcrTY/uYzVXaOfR9hpeqx/DAIZWMWP9b+QGw6inF68yqYI+fahtrnNwo8VNO/K9N084q97pyObJQGJS8fc6MuqNx22wT/ZUQ8t7VPbYHigFwWfgNXeXOVbPwVLGrW2zQ97wG3BI4="
+  model: "Qwen3-32B-FP16"
+  pic_model: "Qwen3-VL-8B"

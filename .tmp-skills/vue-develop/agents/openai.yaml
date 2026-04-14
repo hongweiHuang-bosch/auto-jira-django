@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vue Develop"
+  short_description: "Build and maintain Vue applications"
+  default_prompt: "Use $vue-develop to implement or refactor a Vue application feature."
