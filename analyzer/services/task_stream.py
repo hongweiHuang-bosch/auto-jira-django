@@ -85,7 +85,6 @@ def publish_groups_snapshot() -> None:
     # 可以查看payload.json 了解过程
     for subscriber_queue in subscribers:
         subscriber_queue.put(payload)
-        # print("payload"+str(payload))
 
 
 

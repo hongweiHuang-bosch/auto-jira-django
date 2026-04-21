@@ -54,7 +54,7 @@ class AnalysisRunner:
             task.finished_groups = 0
             task.message = f'{role_label} 分析开始'
             task.save(update_fields=['status', 'progress', 'total_groups', 'finished_groups', 'message', 'updated_at'])
-            print("AnalysisRunner1")
+            logger.info('analysis runner started', extra={'task_id': self.task_id, 'role_label': role_label})
             publish_groups_snapshot()
 
             pipe = WebPipeline(
@@ -66,7 +66,7 @@ class AnalysisRunner:
             )
             task.message = f"正在处理 {role_label}: {role_entry['jql'][:120]}"
             task.save(update_fields=['message', 'updated_at'])
-            print("AnalysisRunner2")
+            logger.info('analysis runner batch starting', extra={'task_id': self.task_id, 'role_label': role_label})
             publish_groups_snapshot()
 
             pipe.run_batch_with_model_map(
@@ -86,14 +86,14 @@ class AnalysisRunner:
             task.progress = 100
             task.message = f'{role_label} 已完成'
             task.save(update_fields=['finished_groups', 'progress', 'message', 'updated_at'])
-            print("AnalysisRunner3")
+            logger.info('analysis runner batch done', extra={'task_id': self.task_id, 'role_label': role_label})
             publish_groups_snapshot()
 
             task.status = 'SUCCESS'
             task.progress = 100
             task.message = f'{role_label} 分析完成'
             task.save(update_fields=['status', 'progress', 'message', 'updated_at'])
-            print("AnalysisRunner4")
+            logger.info('analysis runner succeeded', extra={'task_id': self.task_id, 'role_label': role_label})
             publish_groups_snapshot()
         except Exception as exc:
             logger.exception('分析任务失败: %s', exc)

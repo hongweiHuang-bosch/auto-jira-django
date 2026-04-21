@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from datetime import timedelta
 
 from django.utils import timezone
@@ -8,21 +9,12 @@ from analyzer.models import FilterTask, FilteredIssueSnapshot
 from legacy_core.jira_utils import JiraClient
 from legacy_core.utils import load_config
 
+logger = logging.getLogger('jira_analyzer_worker')
+
 
 def _assignee_name(issue):
     assignee = getattr(getattr(issue, 'fields', None), 'assignee', None)
     return getattr(assignee, 'displayName', '') if assignee else ''
-
-
-def claim_pending_filter_task():
-    task = FilterTask.objects.filter(status='PENDING').order_by('created_at').first()
-    if task is None:
-        return None
-    task.status = 'RUNNING'
-    task.started_at = timezone.now()
-    task.message = '正在执行 JQL 查询'
-    task.save(update_fields=['status', 'started_at', 'message', 'updated_at'])
-    return task.id
 
 
 def run_filter_task(task_id: int):
@@ -52,8 +44,10 @@ def run_filter_task(task_id: int):
         task.expires_at = timezone.now() + timedelta(hours=24)
         task.message = f'筛票完成，共 {len(issues)} 张票'
         task.save(update_fields=['status', 'issue_count', 'finished_at', 'expires_at', 'message', 'updated_at'])
+        logger.info('filter task succeeded', extra={'filter_task_id': task.id, 'issue_count': len(issues)})
     except Exception as e:
         task.status = 'FAILED'
         task.error_message = str(e)
         task.finished_at = timezone.now()
         task.save(update_fields=['status', 'error_message', 'finished_at', 'updated_at'])
+        logger.exception('filter task failed', extra={'filter_task_id': task.id})

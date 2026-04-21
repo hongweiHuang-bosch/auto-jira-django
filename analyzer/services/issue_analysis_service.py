@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import logging
+
 from django.utils import timezone
 
 from analyzer.models import IssueProcessTask
@@ -9,18 +11,26 @@ from analyzer.services.task_catalog import get_role_entry
 from legacy_core.jira_utils import JiraClient
 from legacy_core.utils import load_config
 
+logger = logging.getLogger('jira_analyzer_worker')
+
 
 def run_issue_process_task(task_id: int):
     process_task = IssueProcessTask.objects.get(pk=task_id)
     try:
         cfg = load_config('config.yaml')
         role_entry = get_role_entry(process_task.filter_task.role_index)
-        process_task.status = 'RUNNING'
         process_task.stage = 'PREPARING'
-        process_task.started_at = timezone.now()
         process_task.message = '正在准备单票分析'
-        process_task.save(update_fields=['status', 'stage', 'started_at', 'message', 'updated_at'])
+        process_task.save(update_fields=['stage', 'message', 'updated_at'])
         publish_rule_group_snapshot()
+        logger.info(
+            'running process task',
+            extra={
+                'process_task_id': process_task.id,
+                'filter_task_id': process_task.filter_task_id,
+                'issue_key': process_task.issue_key,
+            },
+        )
 
         from legacy_core.ai_client_by_langchain import AIClient
 
@@ -65,4 +75,8 @@ def run_issue_process_task(task_id: int):
             process_task.error_message = str(e)
             process_task.finished_at = timezone.now()
             process_task.save(update_fields=['status', 'error_message', 'finished_at', 'updated_at'])
+        logger.exception(
+            'process task failed',
+            extra={'process_task_id': process_task.id, 'issue_key': process_task.issue_key},
+        )
         publish_rule_group_snapshot()

@@ -47,6 +47,28 @@ class IssueProcessApiTests(APITestCase):
         )
         self.assertEqual(response.status_code, 409)
 
+    def test_create_issue_process_task_keeps_stale_running_task_as_conflict_until_worker_recovers(self):
+        task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='RUNNING',
+        )
+        IssueProcessTask.objects.filter(pk=task.pk).update(
+            updated_at=timezone.now() - timedelta(minutes=31)
+        )
+
+        response = self.client.post(
+            f'/api/filter-tasks/{self.filter_task.id}/issues/{self.snapshot.issue_key}/process-tasks/',
+            {},
+            format='json',
+        )
+
+        task.refresh_from_db()
+        self.assertEqual(response.status_code, 409)
+        self.assertEqual(task.status, 'RUNNING')
+
     def test_get_issue_process_task_detail(self):
         process_task = IssueProcessTask.objects.create(
             filter_task=self.filter_task,
