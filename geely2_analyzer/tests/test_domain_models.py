@@ -44,8 +44,8 @@ class Geely2DomainModelTests(TestCase):
         self.assertNotEqual(encrypted, 'jira-password')
         self.assertEqual(decrypt_secret(encrypted), 'jira-password')
 
-    @override_settings(DEBUG=False, JIRA_CREDENTIAL_ENCRYPTION_KEY='')
-    def test_encrypt_secret_requires_explicit_key_outside_debug(self):
+    @override_settings(DEBUG=True, JIRA_CREDENTIAL_ENCRYPTION_KEY='')
+    def test_encrypt_secret_requires_explicit_key(self):
         with self.assertRaises(ImproperlyConfigured):
             encrypt_secret('jira-password')
 
@@ -112,6 +112,18 @@ class Geely2DomainModelTests(TestCase):
                 issue_key='GEELY2-5',
             )
 
+    def test_analysis_task_requires_matching_snapshot_issue_key(self):
+        binding = self._create_binding(self.user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-7')
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisTask.objects.create(
+                user=self.user,
+                credential_binding=binding,
+                issue_snapshot=snapshot,
+                issue_key='GEELY2-7-MISMATCH',
+            )
+
     def test_analysis_result_is_one_to_one_with_analysis_task(self):
         binding = self._create_binding(self.user)
         sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
@@ -165,4 +177,27 @@ class Geely2DomainModelTests(TestCase):
                 user=self.user,
                 issue_key='GEELY2-6',
                 reply_text='跨用户结果',
+            )
+
+    def test_analysis_result_requires_matching_task_issue_key(self):
+        binding = self._create_binding(self.user)
+        sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
+        snapshot = Geely2IssueSnapshot.objects.create(
+            user=self.user,
+            last_sync_task=sync_task,
+            issue_key='GEELY2-8',
+        )
+        task = Geely2AnalysisTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            issue_snapshot=snapshot,
+            issue_key='GEELY2-8',
+        )
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisResult.objects.create(
+                analysis_task=task,
+                user=self.user,
+                issue_key='GEELY2-8-MISMATCH',
+                reply_text='错误 issue 结果',
             )

@@ -167,6 +167,9 @@ class Geely2AnalysisTask(models.Model):
         snapshot_user_id = getattr(self.issue_snapshot, 'user_id', None)
         _validate_same_user(errors, 'credential_binding', binding_user_id, user_id)
         _validate_same_user(errors, 'issue_snapshot', snapshot_user_id, user_id)
+        snapshot_issue_key = getattr(self.issue_snapshot, 'issue_key', None)
+        if snapshot_issue_key and self.issue_key and snapshot_issue_key != self.issue_key:
+            errors['issue_key'] = 'Must match issue_snapshot.issue_key.'
         if errors:
             raise ValidationError(errors)
 
@@ -215,6 +218,9 @@ class Geely2AnalysisResult(models.Model):
         user_id = getattr(self, 'user_id', None)
         related_user_id = getattr(self.analysis_task, 'user_id', None)
         _validate_same_user(errors, 'analysis_task', related_user_id, user_id)
+        task_issue_key = getattr(self.analysis_task, 'issue_key', None)
+        if task_issue_key and self.issue_key and task_issue_key != self.issue_key:
+            errors['issue_key'] = 'Must match analysis_task.issue_key.'
         if errors:
             raise ValidationError(errors)
 
