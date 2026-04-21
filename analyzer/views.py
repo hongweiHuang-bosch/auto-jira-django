@@ -1,5 +1,6 @@
 
 from __future__ import annotations
+from datetime import timedelta
 from django.shortcuts import get_object_or_404
 from django.http import StreamingHttpResponse
 from django.utils import timezone
@@ -152,7 +153,12 @@ class FilterTaskCreateView(APIView):
 
         running = FilterTask.objects.filter(role_index=role_index, status__in=['PENDING', 'RUNNING']).first()
         if running:
-            return Response({'detail': '该规则组已有进行中的筛票任务', 'filter_task_id': running.id}, status=status.HTTP_409_CONFLICT)
+            if running.updated_at < timezone.now() - timedelta(seconds=20):
+                running.status = 'EXPIRED'
+                running.message = '筛票超时，已被新任务替换'
+                running.save(update_fields=['status', 'message', 'updated_at'])
+            else:
+                return Response({'detail': '该规则组已有进行中的筛票任务', 'filter_task_id': running.id}, status=status.HTTP_409_CONFLICT)
 
         task = FilterTask.objects.create(
             role_index=role_index,
