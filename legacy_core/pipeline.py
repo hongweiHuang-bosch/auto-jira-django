@@ -257,6 +257,11 @@ class Pipeline:
         self._proto_cache: Dict[str, Dict[str, Dict[str, Any]]] = {}   # proto_path -> prop_map
         self._json_cache: Dict[Tuple[str, ...], Any] = {}               # (json_paths...) -> merged_json
 
+    # ---------- 进度钩子（子类可覆写） ----------
+    def _update_progress(self, stage: str, progress: int, message: str = ''):
+        """子类覆写此方法以实时上报处理进度。默认空实现。"""
+        pass
+
     # ---------- 缓存加载 ----------
     def _get_prop_map(self, proto_path: Optional[str]) -> Dict[str, Dict[str, Any]]:
         if not proto_path or not os.path.exists(proto_path) or not proto_path.endswith(".proto"):
@@ -538,6 +543,7 @@ class Pipeline:
         logger.info(f"!!!--- [{issue_key}] 处理 {issue_key}  车型: {model}  标题: {summary} ---!!!")
 
         # 1) 车型 文件路径
+        self._update_progress('PREPARING', 5, f'{issue_key} 正在解析车型配置')
         paths = self._resolve_paths_by_model(model, base_paths, model_to_files, fallback_files)
         if paths is None:
             logger.error(f"{issue_key} 车型映射为空")
@@ -556,6 +562,7 @@ class Pipeline:
         prop_id_map = self._get_prop_map(proto_path)
 
         # 3) 下载票中的附件
+        self._update_progress('DOWNLOADING', 15, f'{issue_key} 正在下载附件')
         download_result = download_all_need_attachment(issue, s_download_dir)
         if download_result is None:
             write_model_issue_text_file(f"{model_str}", f"{issue_key}_reply.txt", f"{issue_key}", "附件下载异常，请手动处理\n ")
@@ -582,6 +589,7 @@ class Pipeline:
 
 
             # 4.1) 上层需求
+            self._update_progress('PARSING', 25, f'{issue_key} AI 提取需求')
             ai_extract_requirement  = self.ai.chat_by_langchain(requirement_extract, comments_text)
             logger.info(f"[{issue_key}] 提取需求结果:\n{ai_extract_requirement}\n" + "-" * 80)
             if (not ai_extract_requirement):
@@ -611,6 +619,7 @@ class Pipeline:
                 f"{p_extract}",
                 f"{comments_text}"
             )
+            self._update_progress('PARSING', 35, f'{issue_key} AI 提取信号')
             ai_extract = self.ai.query_signal_by_rag(query, txt_path)
             
             if not ai_extract:
@@ -694,6 +703,7 @@ class Pipeline:
                 logger.info(f"[{issue_key}] 最大时间点:\n{max_t}")
                 logger.info(f"[{issue_key}] propids:\n{gen_propid_decimal_list(signal_to_info)}")
 
+                self._update_progress('UNPACKING', 50, f'{issue_key} 提取 Android/QNX 日志')
                 results = process_zip_packages_for_pipeline(
                     root_dir=Path(s_download_dir),
                     android_keywords=gen_propid_decimal_list(signal_to_info),  # 比如 ["559940304", "559992853"]
@@ -718,6 +728,7 @@ class Pipeline:
                     logger.info(f"[{issue_key}] 已合并 qnx 日志到 qnx_log={len(qnx_log)}")
 
                 # 10) 解析qnx android 日志
+                self._update_progress('MODEL_INFERENCE', 60, f'{issue_key} AI 分析 Android/QNX 日志')
                 ai_android_summary = self.ai.chat_by_langchain(aq_summary, android_log)
                 # ai_android_summary = summarize_long_log(self.ai, aq_summary, android_log)
                 logger.info(f"[{issue_key}] ai_android_summary={ai_android_summary}")
@@ -754,6 +765,7 @@ class Pipeline:
                     logger.warning(f"latest_cantrace is null {latest_cantrace}  ")
                     self._finalize_issue(issue_key, summary, "cantrace 路径是空，没有找到cantrace文件，请复测", cantrace_path)
                     return
+                self._update_progress('MODEL_INFERENCE', 70, f'{issue_key} 解析 CAN Trace 并绘图')
                 can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, latest_cantrace)
                 cantrace_path = can_trace_path
 
@@ -774,6 +786,7 @@ class Pipeline:
                 if ((len(merged) + len(p_cons) )> max_tokens * 2):
                     logger.warning(f"[{issue_key}] 一致性分析内容超出模型范围，建议手动处理")
                     return
+                self._update_progress('GENERATING_REPLY', 85, f'{issue_key} AI 一致性分析')
                 ai_consistency = self.ai.chat_by_langchain(p_cons, merged)
                 write_model_issue_text_file(f"{model_str}", f"{issue_key}_consistency.txt", f"{issue_key}", ai_consistency)
                 ai_res = ai_consistency
@@ -784,6 +797,7 @@ class Pipeline:
                 logger.info("self._plot_with_multi_dbc(signal_to_info, dbc_paths, log_path)")
                 logger.info(f"download_result : {download_result}")
                 logger.info(f"signals : {signals}")
+                self._update_progress('MODEL_INFERENCE', 70, f'{issue_key} 解析 CAN Trace 并绘图')
                 can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, download_result["can_files"][0])
                 cantrace_path = can_trace_path
                 prop_signal_info = propid_text + group_text
@@ -798,6 +812,7 @@ class Pipeline:
                 if ((len(merged) + len(p_cons) )> max_tokens * 2):
                     logger.warning(f"[{issue_key}] 一致性分析内容超出模型范围，建议手动处理")
                     return
+                self._update_progress('GENERATING_REPLY', 85, f'{issue_key} AI 分析 CAN Trace')
                 ai_cantrace_res = self.ai.chat_by_langchain(c_compare, merged)
                 write_model_issue_text_file(f"{model_str}", f"{issue_key}_only_cantrace.txt", f"{issue_key}", ai_cantrace_res)
                 ai_res = ai_cantrace_res
@@ -813,4 +828,5 @@ class Pipeline:
                 idx = ai_res.find(key)
                 if idx != -1:
                     final_res = ai_res[idx + len(key):].strip()
+            self._update_progress('SAVING_RESULT', 95, f'{issue_key} 正在保存结果')
             self._finalize_issue(issue_key, summary, final_res or ai_res, cantrace_path)

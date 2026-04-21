@@ -18,6 +18,16 @@ def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
             super().__init__(*a, **kw)
             self.process_task_id = process_task_id
 
+        def _update_progress(self, stage: str, progress: int, message: str = ''):
+            """覆写 Pipeline 的空钩子，实时写入处理进度。"""
+            IssueProcessTask.objects.filter(pk=self.process_task_id).update(
+                stage=stage,
+                progress=progress,
+                message=message,
+                updated_at=timezone.now(),
+            )
+            publish_rule_group_snapshot()
+
         def save_true_or_false(self, issue_key):
             return None
 

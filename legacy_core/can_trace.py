@@ -14,6 +14,7 @@ from typing import Dict, Any, List, Tuple, Optional
 
 import cantools
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import mplcursors
 import numpy as np  # 若后续需要平滑/统计可用

@@ -1,5 +1,6 @@
 
 from __future__ import annotations
+from datetime import timedelta
 from django.shortcuts import get_object_or_404
 from django.http import StreamingHttpResponse
 from django.utils import timezone
@@ -192,13 +193,23 @@ class RuleGroupStreamView2(View):
 
 
 class IssueProcessTaskCreateView(APIView):
+    STUCK_TIMEOUT_MINUTES = 30
+
     def post(self, request, filter_task_id: int, issue_key: str):
         filter_task = get_object_or_404(FilterTask, pk=filter_task_id)
         snapshot = get_object_or_404(FilteredIssueSnapshot, filter_task=filter_task, issue_key=issue_key)
 
         running = IssueProcessTask.objects.filter(issue_key=issue_key, status__in=['PENDING', 'RUNNING']).order_by('-created_at').first()
         if running is not None:
-            return Response({'detail': '当前票已有进行中的处理任务', 'process_task_id': running.id}, status=status.HTTP_409_CONFLICT)
+            # 超过 30 分钟未完成的任务视为卡死，自动标记失败
+            cutoff = timezone.now() - timedelta(minutes=self.STUCK_TIMEOUT_MINUTES)
+            if running.updated_at < cutoff:
+                running.status = 'FAILED'
+                running.error_message = f'任务超过 {self.STUCK_TIMEOUT_MINUTES} 分钟无进展，自动标记失败'
+                running.finished_at = timezone.now()
+                running.save(update_fields=['status', 'error_message', 'finished_at', 'updated_at'])
+            else:
+                return Response({'detail': '当前票已有进行中的处理任务', 'process_task_id': running.id}, status=status.HTTP_409_CONFLICT)
 
         process_task = IssueProcessTask.objects.create(
             filter_task=filter_task,

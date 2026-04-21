@@ -1084,8 +1084,8 @@ MAP_CAR_ROLE = (
     
     # chery 8255 D01系列
     {   
-        "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DPINT-2941", #
-        # "jql": "project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND assignee = currentUser() AND resolution = Unresolved order by updated DESC",
+        # "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DPINT-2941", #
+        "jql": "project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND assignee = currentUser() AND resolution = Unresolved order by updated DESC",
         "expand": "changelog",
 
         "base_paths": {
