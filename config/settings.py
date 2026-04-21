@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "analyzer",
     "platform_accounts",
+    "geely2_analyzer",
 ]
 
 MIDDLEWARE = [
