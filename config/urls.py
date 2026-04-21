@@ -10,6 +10,7 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('api/', include('analyzer.urls')),
     path('api/platform/', include('platform_accounts.urls')),
+    path('api/geely2/', include('geely2_analyzer.urls')),
 ]
 
 if settings.DEBUG:
