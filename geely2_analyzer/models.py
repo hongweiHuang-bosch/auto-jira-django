@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 
 from .services.credential_crypto import encrypt_secret
@@ -21,6 +21,19 @@ def _persisted_values(instance, *fields):
     if not instance.pk:
         return None
     return type(instance)._base_manager.filter(pk=instance.pk).values(*fields).first()
+
+
+def _safe_related_value(instance, field_name, attr_name):
+    relation_id = getattr(instance, f'{field_name}_id', None)
+    if relation_id is None:
+        return None
+
+    try:
+        related = getattr(instance, field_name)
+    except ObjectDoesNotExist:
+        return None
+
+    return getattr(related, attr_name, None)
 
 
 class ValidatedRelationQuerySet(models.QuerySet):
@@ -81,12 +94,7 @@ class JiraCredentialBinding(ValidatedRelationModel):
         user_id = getattr(self, 'user_id', None)
         persisted = _persisted_values(self, 'user_id')
         if persisted and persisted['user_id'] != user_id:
-            has_related_tasks = (
-                Geely2SyncTask.objects.filter(credential_binding_id=self.pk).exists()
-                or Geely2AnalysisTask.objects.filter(credential_binding_id=self.pk).exists()
-            )
-            if has_related_tasks:
-                errors['user'] = 'Cannot change user while related tasks exist.'
+            errors['user'] = 'Cannot change user after creation.'
         if errors:
             raise ValidationError(errors)
 
@@ -138,12 +146,15 @@ class Geely2SyncTask(ValidatedRelationModel):
     def clean(self):
         errors = {}
         user_id = getattr(self, 'user_id', None)
-        related_user_id = getattr(self.credential_binding, 'user_id', None)
+        credential_binding_id = getattr(self, 'credential_binding_id', None)
+        related_user_id = _safe_related_value(self, 'credential_binding', 'user_id')
         _validate_same_user(errors, 'credential_binding', related_user_id, user_id)
-        persisted = _persisted_values(self, 'user_id')
-        has_snapshots = Geely2IssueSnapshot.objects.filter(last_sync_task_id=self.pk).exists()
-        if persisted and persisted['user_id'] != user_id and has_snapshots:
-            errors['user'] = 'Cannot change user while snapshots exist.'
+        persisted = _persisted_values(self, 'user_id', 'credential_binding_id')
+        if persisted:
+            if persisted['user_id'] != user_id:
+                errors['user'] = 'Cannot change user after creation.'
+            if persisted['credential_binding_id'] != credential_binding_id:
+                errors['credential_binding'] = 'Cannot change credential_binding after creation.'
         if errors:
             raise ValidationError(errors)
 
@@ -178,15 +189,14 @@ class Geely2IssueSnapshot(ValidatedRelationModel):
     def clean(self):
         errors = {}
         user_id = getattr(self, 'user_id', None)
-        related_user_id = getattr(self.last_sync_task, 'user_id', None)
+        related_user_id = _safe_related_value(self, 'last_sync_task', 'user_id')
         _validate_same_user(errors, 'last_sync_task', related_user_id, user_id)
         persisted = _persisted_values(self, 'user_id', 'issue_key')
-        has_analysis_tasks = Geely2AnalysisTask.objects.filter(issue_snapshot_id=self.pk).exists()
-        if persisted and has_analysis_tasks:
+        if persisted:
             if persisted['user_id'] != user_id:
-                errors['user'] = 'Cannot change user while analysis tasks exist.'
+                errors['user'] = 'Cannot change user after creation.'
             if persisted['issue_key'] != self.issue_key:
-                errors['issue_key'] = 'Cannot change issue_key while analysis tasks exist.'
+                errors['issue_key'] = 'Cannot change issue_key after creation.'
         if errors:
             raise ValidationError(errors)
 
@@ -246,20 +256,25 @@ class Geely2AnalysisTask(ValidatedRelationModel):
     def clean(self):
         errors = {}
         user_id = getattr(self, 'user_id', None)
-        binding_user_id = getattr(self.credential_binding, 'user_id', None)
-        snapshot_user_id = getattr(self.issue_snapshot, 'user_id', None)
+        credential_binding_id = getattr(self, 'credential_binding_id', None)
+        issue_snapshot_id = getattr(self, 'issue_snapshot_id', None)
+        binding_user_id = _safe_related_value(self, 'credential_binding', 'user_id')
+        snapshot_user_id = _safe_related_value(self, 'issue_snapshot', 'user_id')
         _validate_same_user(errors, 'credential_binding', binding_user_id, user_id)
         _validate_same_user(errors, 'issue_snapshot', snapshot_user_id, user_id)
-        snapshot_issue_key = getattr(self.issue_snapshot, 'issue_key', None)
+        snapshot_issue_key = _safe_related_value(self, 'issue_snapshot', 'issue_key')
         if snapshot_issue_key and self.issue_key and snapshot_issue_key != self.issue_key:
             errors['issue_key'] = 'Must match issue_snapshot.issue_key.'
-        persisted = _persisted_values(self, 'user_id', 'issue_key')
-        has_result = Geely2AnalysisResult.objects.filter(analysis_task_id=self.pk).exists()
-        if persisted and has_result:
+        persisted = _persisted_values(self, 'user_id', 'issue_key', 'credential_binding_id', 'issue_snapshot_id')
+        if persisted:
             if persisted['user_id'] != user_id:
-                errors['user'] = 'Cannot change user while result exists.'
+                errors['user'] = 'Cannot change user after creation.'
             if persisted['issue_key'] != self.issue_key:
-                errors['issue_key'] = 'Cannot change issue_key while result exists.'
+                errors['issue_key'] = 'Cannot change issue_key after creation.'
+            if persisted['credential_binding_id'] != credential_binding_id:
+                errors['credential_binding'] = 'Cannot change credential_binding after creation.'
+            if persisted['issue_snapshot_id'] != issue_snapshot_id:
+                errors['issue_snapshot'] = 'Cannot change issue_snapshot after creation.'
         if errors:
             raise ValidationError(errors)
 
@@ -306,11 +321,20 @@ class Geely2AnalysisResult(ValidatedRelationModel):
     def clean(self):
         errors = {}
         user_id = getattr(self, 'user_id', None)
-        related_user_id = getattr(self.analysis_task, 'user_id', None)
+        analysis_task_id = getattr(self, 'analysis_task_id', None)
+        related_user_id = _safe_related_value(self, 'analysis_task', 'user_id')
         _validate_same_user(errors, 'analysis_task', related_user_id, user_id)
-        task_issue_key = getattr(self.analysis_task, 'issue_key', None)
+        task_issue_key = _safe_related_value(self, 'analysis_task', 'issue_key')
         if task_issue_key and self.issue_key and task_issue_key != self.issue_key:
             errors['issue_key'] = 'Must match analysis_task.issue_key.'
+        persisted = _persisted_values(self, 'analysis_task_id', 'user_id', 'issue_key')
+        if persisted:
+            if persisted['analysis_task_id'] != analysis_task_id:
+                errors['analysis_task'] = 'Cannot change analysis_task after creation.'
+            if persisted['user_id'] != user_id:
+                errors['user'] = 'Cannot change user after creation.'
+            if persisted['issue_key'] != self.issue_key:
+                errors['issue_key'] = 'Cannot change issue_key after creation.'
         if errors:
             raise ValidationError(errors)
 
