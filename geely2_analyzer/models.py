@@ -1,5 +1,11 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
+
+
+def _validate_same_user(errors, field_name, related_user_id, user_id):
+    if related_user_id is not None and user_id is not None and related_user_id != user_id:
+        errors[field_name] = 'Must belong to the same user.'
 
 
 class JiraCredentialBinding(models.Model):
@@ -51,6 +57,18 @@ class Geely2SyncTask(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
+    def clean(self):
+        errors = {}
+        user_id = getattr(self, 'user_id', None)
+        related_user_id = getattr(self.credential_binding, 'user_id', None)
+        _validate_same_user(errors, 'credential_binding', related_user_id, user_id)
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
+
 
 class Geely2IssueSnapshot(models.Model):
     user = models.ForeignKey(
@@ -78,6 +96,18 @@ class Geely2IssueSnapshot(models.Model):
     class Meta:
         ordering = ["issue_key"]
         unique_together = ("user", "issue_key")
+
+    def clean(self):
+        errors = {}
+        user_id = getattr(self, 'user_id', None)
+        related_user_id = getattr(self.last_sync_task, 'user_id', None)
+        _validate_same_user(errors, 'last_sync_task', related_user_id, user_id)
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
 
 
 class Geely2AnalysisTask(models.Model):
@@ -130,6 +160,20 @@ class Geely2AnalysisTask(models.Model):
     class Meta:
         ordering = ["-created_at"]
 
+    def clean(self):
+        errors = {}
+        user_id = getattr(self, 'user_id', None)
+        binding_user_id = getattr(self.credential_binding, 'user_id', None)
+        snapshot_user_id = getattr(self.issue_snapshot, 'user_id', None)
+        _validate_same_user(errors, 'credential_binding', binding_user_id, user_id)
+        _validate_same_user(errors, 'issue_snapshot', snapshot_user_id, user_id)
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
+
 
 class Geely2AnalysisResult(models.Model):
     COMMENT_STATUS_CHOICES = [
@@ -165,3 +209,15 @@ class Geely2AnalysisResult(models.Model):
     last_error = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        errors = {}
+        user_id = getattr(self, 'user_id', None)
+        related_user_id = getattr(self.analysis_task, 'user_id', None)
+        _validate_same_user(errors, 'analysis_task', related_user_id, user_id)
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
