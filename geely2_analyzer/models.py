@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from .services.credential_crypto import encrypt_secret, is_encrypted_secret
+from .services.credential_crypto import encrypt_secret
 
 
 def _validate_same_user(errors, field_name, related_user_id, user_id):
@@ -49,6 +49,8 @@ class ValidatedRelationModel(models.Model):
 
     class Meta:
         abstract = True
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
 
     def save(self, *args, **kwargs):
         _prepare_for_persist(self)
@@ -70,6 +72,8 @@ class JiraCredentialBinding(ValidatedRelationModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
         unique_together = ("user", "project_code")
 
     def clean(self):
@@ -87,7 +91,14 @@ class JiraCredentialBinding(ValidatedRelationModel):
             raise ValidationError(errors)
 
     def _prepare_for_save(self):
-        if self.encrypted_password and not is_encrypted_secret(self.encrypted_password):
+        if not self.encrypted_password:
+            return
+
+        persisted = _persisted_values(self, 'encrypted_password')
+        if persisted and persisted['encrypted_password'] == self.encrypted_password:
+            return
+
+        if self.encrypted_password:
             self.encrypted_password = encrypt_secret(self.encrypted_password)
 
 
@@ -120,6 +131,8 @@ class Geely2SyncTask(ValidatedRelationModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
         ordering = ["-created_at"]
 
     def clean(self):
@@ -157,6 +170,8 @@ class Geely2IssueSnapshot(ValidatedRelationModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
         ordering = ["issue_key"]
         unique_together = ("user", "issue_key")
 
@@ -224,6 +239,8 @@ class Geely2AnalysisTask(ValidatedRelationModel):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
         ordering = ["-created_at"]
 
     def clean(self):
@@ -281,6 +298,10 @@ class Geely2AnalysisResult(ValidatedRelationModel):
     last_error = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        base_manager_name = 'objects'
+        default_manager_name = 'objects'
 
     def clean(self):
         errors = {}

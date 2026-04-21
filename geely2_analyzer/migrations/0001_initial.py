@@ -83,6 +83,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "base_manager_name": "objects",
+                "default_manager_name": "objects",
                 "ordering": ["-created_at"],
             },
         ),
@@ -139,6 +141,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            options={
+                "base_manager_name": "objects",
+                "default_manager_name": "objects",
+            },
         ),
         migrations.CreateModel(
             name="Geely2IssueSnapshot",
@@ -172,6 +178,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "base_manager_name": "objects",
+                "default_manager_name": "objects",
                 "ordering": ["issue_key"],
             },
         ),
@@ -227,6 +235,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "base_manager_name": "objects",
+                "default_manager_name": "objects",
                 "ordering": ["-created_at"],
             },
         ),
@@ -273,6 +283,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
+                "base_manager_name": "objects",
+                "default_manager_name": "objects",
                 "unique_together": {("user", "project_code")},
             },
         ),

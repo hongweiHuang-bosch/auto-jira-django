@@ -36,7 +36,7 @@ class Geely2DomainModelTests(TestCase):
             project_code=project_code,
             jira_base_url='https://boolbool.atlassian.net/',
             jira_username=f'{user.username}@example.com',
-            encrypted_password=encrypt_secret('jira-password'),
+            encrypted_password='jira-password',
         )
 
     def test_encrypt_and_decrypt_secret_round_trip(self):
@@ -117,6 +117,22 @@ class Geely2DomainModelTests(TestCase):
         self.assertNotEqual(binding.encrypted_password, 'enc::plain-secret')
         self.assertEqual(decrypt_secret(binding.encrypted_password), 'enc::plain-secret')
 
+    def test_credential_binding_encrypts_foreign_token_wrapped_with_prefix_as_plaintext(self):
+        foreign_key = Fernet.generate_key().decode('utf-8')
+        foreign_token = Fernet(foreign_key.encode('utf-8')).encrypt(b'foreign-secret').decode('utf-8')
+        plaintext = f'enc::{foreign_token}'
+
+        binding = JiraCredentialBinding.objects.create(
+            user=self.user,
+            project_code='geely2',
+            jira_base_url='https://boolbool.atlassian.net/',
+            jira_username='foreign-token@example.com',
+            encrypted_password=plaintext,
+        )
+
+        self.assertNotEqual(binding.encrypted_password, plaintext)
+        self.assertEqual(decrypt_secret(binding.encrypted_password), plaintext)
+
     def test_credential_binding_queryset_update_is_blocked(self):
         binding = JiraCredentialBinding.objects.create(
             user=self.user,
@@ -128,6 +144,34 @@ class Geely2DomainModelTests(TestCase):
 
         with self.assertRaises(RuntimeError):
             JiraCredentialBinding.objects.filter(pk=binding.pk).update(encrypted_password='plain-update')
+
+    def test_credential_binding_base_manager_update_is_blocked(self):
+        binding = JiraCredentialBinding.objects.create(
+            user=self.user,
+            project_code='geely2',
+            jira_base_url='https://boolbool.atlassian.net/',
+            jira_username='base-update@example.com',
+            encrypted_password='base-update-secret',
+        )
+
+        with self.assertRaises(RuntimeError):
+            JiraCredentialBinding._base_manager.filter(pk=binding.pk).update(encrypted_password='plain-bypass')
+
+    def test_credential_binding_base_manager_bulk_create_encrypts_plaintext_password(self):
+        JiraCredentialBinding._base_manager.bulk_create([
+            JiraCredentialBinding(
+                user=self.user,
+                project_code='geely2',
+                jira_base_url='https://boolbool.atlassian.net/',
+                jira_username='base-bulk@example.com',
+                encrypted_password='base-bulk-secret',
+            )
+        ])
+
+        binding = JiraCredentialBinding.objects.get(user=self.user, project_code='geely2')
+
+        self.assertNotEqual(binding.encrypted_password, 'base-bulk-secret')
+        self.assertEqual(decrypt_secret(binding.encrypted_password), 'base-bulk-secret')
 
     def test_credential_binding_user_cannot_change_after_related_tasks_exist(self):
         binding = self._create_binding(self.user)
@@ -244,6 +288,20 @@ class Geely2DomainModelTests(TestCase):
                     credential_binding=other_binding,
                     issue_snapshot=snapshot,
                     issue_key='GEELY2-7-BULK',
+                )
+            ])
+
+    def test_analysis_task_base_manager_bulk_create_validates_constraints(self):
+        other_binding = self._create_binding(self.other_user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-7-BASE-BULK')
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisTask._base_manager.bulk_create([
+                Geely2AnalysisTask(
+                    user=self.user,
+                    credential_binding=other_binding,
+                    issue_snapshot=snapshot,
+                    issue_key='GEELY2-7-BASE-BULK',
                 )
             ])
 
