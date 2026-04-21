@@ -68,6 +68,55 @@ class Geely2DomainModelTests(TestCase):
         self.assertNotEqual(binding.encrypted_password, 'plain-secret')
         self.assertEqual(decrypt_secret(binding.encrypted_password), 'plain-secret')
 
+    def test_credential_binding_preserves_existing_ciphertext_on_save(self):
+        original_key = Fernet.generate_key().decode('utf-8')
+        rotated_key = Fernet.generate_key().decode('utf-8')
+
+        with override_settings(JIRA_CREDENTIAL_ENCRYPTION_KEY=original_key):
+            binding = JiraCredentialBinding.objects.create(
+                user=self.user,
+                project_code='geely2',
+                jira_base_url='https://boolbool.atlassian.net/',
+                jira_username='cipher@example.com',
+                encrypted_password='stable-secret',
+            )
+
+        original_ciphertext = binding.encrypted_password
+
+        with override_settings(JIRA_CREDENTIAL_ENCRYPTION_KEY=rotated_key):
+            binding.is_active = False
+            binding.save()
+
+        self.assertEqual(binding.encrypted_password, original_ciphertext)
+
+    def test_credential_binding_bulk_create_encrypts_plaintext_password(self):
+        JiraCredentialBinding.objects.bulk_create([
+            JiraCredentialBinding(
+                user=self.user,
+                project_code='geely2',
+                jira_base_url='https://boolbool.atlassian.net/',
+                jira_username='bulk@example.com',
+                encrypted_password='bulk-secret',
+            )
+        ])
+
+        binding = JiraCredentialBinding.objects.get(user=self.user, project_code='geely2')
+
+        self.assertNotEqual(binding.encrypted_password, 'bulk-secret')
+        self.assertEqual(decrypt_secret(binding.encrypted_password), 'bulk-secret')
+
+    def test_credential_binding_queryset_update_is_blocked(self):
+        binding = JiraCredentialBinding.objects.create(
+            user=self.user,
+            project_code='geely2',
+            jira_base_url='https://boolbool.atlassian.net/',
+            jira_username='update@example.com',
+            encrypted_password='update-secret',
+        )
+
+        with self.assertRaises(RuntimeError):
+            JiraCredentialBinding.objects.filter(pk=binding.pk).update(encrypted_password='plain-update')
+
     def test_issue_snapshot_is_unique_per_user_and_issue_key(self):
         Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-1', summary='A')
         with self.assertRaises(IntegrityError):

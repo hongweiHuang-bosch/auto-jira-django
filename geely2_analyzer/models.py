@@ -1,9 +1,8 @@
-from cryptography.fernet import InvalidToken
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from .services.credential_crypto import decrypt_secret, encrypt_secret
+from .services.credential_crypto import encrypt_secret, is_encrypted_secret
 
 
 def _validate_same_user(errors, field_name, related_user_id, user_id):
@@ -11,15 +10,22 @@ def _validate_same_user(errors, field_name, related_user_id, user_id):
         errors[field_name] = 'Must belong to the same user.'
 
 
+def _prepare_for_persist(instance):
+    prepare = getattr(instance, '_prepare_for_save', None)
+    if callable(prepare):
+        prepare()
+    instance.full_clean(validate_unique=False)
+
+
 class ValidatedRelationQuerySet(models.QuerySet):
     def bulk_create(self, objs, **kwargs):
         for obj in objs:
-            obj.full_clean(validate_unique=False)
+            _prepare_for_persist(obj)
         return super().bulk_create(objs, **kwargs)
 
     def bulk_update(self, objs, fields, batch_size=None):
         for obj in objs:
-            obj.full_clean(validate_unique=False)
+            _prepare_for_persist(obj)
         return super().bulk_update(objs, fields, batch_size=batch_size)
 
     def update(self, **kwargs):
@@ -39,11 +45,11 @@ class ValidatedRelationModel(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.full_clean(validate_unique=False)
+        _prepare_for_persist(self)
         return super().save(*args, **kwargs)
 
 
-class JiraCredentialBinding(models.Model):
+class JiraCredentialBinding(ValidatedRelationModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -60,15 +66,9 @@ class JiraCredentialBinding(models.Model):
     class Meta:
         unique_together = ("user", "project_code")
 
-    def save(self, *args, **kwargs):
-        if self.encrypted_password:
-            try:
-                decrypt_secret(self.encrypted_password)
-            except InvalidToken:
-                self.encrypted_password = encrypt_secret(self.encrypted_password)
-
-        self.full_clean(validate_unique=False)
-        return super().save(*args, **kwargs)
+    def _prepare_for_save(self):
+        if self.encrypted_password and not is_encrypted_secret(self.encrypted_password):
+            self.encrypted_password = encrypt_secret(self.encrypted_password)
 
 
 class Geely2SyncTask(ValidatedRelationModel):
