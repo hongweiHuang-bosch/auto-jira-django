@@ -105,6 +105,18 @@ class Geely2DomainModelTests(TestCase):
         self.assertNotEqual(binding.encrypted_password, 'bulk-secret')
         self.assertEqual(decrypt_secret(binding.encrypted_password), 'bulk-secret')
 
+    def test_credential_binding_encrypts_plaintext_password_with_prefix_like_value(self):
+        binding = JiraCredentialBinding.objects.create(
+            user=self.user,
+            project_code='geely2',
+            jira_base_url='https://boolbool.atlassian.net/',
+            jira_username='prefix@example.com',
+            encrypted_password='enc::plain-secret',
+        )
+
+        self.assertNotEqual(binding.encrypted_password, 'enc::plain-secret')
+        self.assertEqual(decrypt_secret(binding.encrypted_password), 'enc::plain-secret')
+
     def test_credential_binding_queryset_update_is_blocked(self):
         binding = JiraCredentialBinding.objects.create(
             user=self.user,
@@ -116,6 +128,15 @@ class Geely2DomainModelTests(TestCase):
 
         with self.assertRaises(RuntimeError):
             JiraCredentialBinding.objects.filter(pk=binding.pk).update(encrypted_password='plain-update')
+
+    def test_credential_binding_user_cannot_change_after_related_tasks_exist(self):
+        binding = self._create_binding(self.user)
+        Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
+
+        binding.user = self.other_user
+
+        with self.assertRaises(ValidationError):
+            binding.save()
 
     def test_issue_snapshot_is_unique_per_user_and_issue_key(self):
         Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-1', summary='A')
@@ -141,6 +162,21 @@ class Geely2DomainModelTests(TestCase):
                 last_sync_task=other_sync_task,
                 issue_key='GEELY2-3',
             )
+
+    def test_issue_snapshot_issue_key_cannot_change_after_analysis_task_exists(self):
+        binding = self._create_binding(self.user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-CHAIN')
+        Geely2AnalysisTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            issue_snapshot=snapshot,
+            issue_key='GEELY2-CHAIN',
+        )
+
+        snapshot.issue_key = 'GEELY2-CHAIN-CHANGED'
+
+        with self.assertRaises(ValidationError):
+            snapshot.save()
 
     def test_analysis_task_requires_related_objects_owned_by_same_user(self):
         user_binding = self._create_binding(self.user)

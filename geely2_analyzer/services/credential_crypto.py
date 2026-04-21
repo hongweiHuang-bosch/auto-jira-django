@@ -1,3 +1,6 @@
+import base64
+import binascii
+
 from cryptography.fernet import Fernet
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -15,7 +18,16 @@ def _build_fernet() -> Fernet:
 
 
 def is_encrypted_secret(value: str) -> bool:
-    return value.startswith(ENCRYPTED_SECRET_PREFIX)
+    if not value.startswith(ENCRYPTED_SECRET_PREFIX):
+        return False
+
+    token = value[len(ENCRYPTED_SECRET_PREFIX):]
+    try:
+        decoded = base64.urlsafe_b64decode(token + '=' * (-len(token) % 4))
+    except (binascii.Error, ValueError):
+        return False
+
+    return len(decoded) > 57 and decoded[0] == 0x80
 
 
 def encrypt_secret(raw_value: str) -> str:
