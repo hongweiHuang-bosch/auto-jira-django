@@ -1,6 +1,9 @@
+from cryptography.fernet import InvalidToken
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+
+from .services.credential_crypto import decrypt_secret, encrypt_secret
 
 
 def _validate_same_user(errors, field_name, related_user_id, user_id):
@@ -11,13 +14,18 @@ def _validate_same_user(errors, field_name, related_user_id, user_id):
 class ValidatedRelationQuerySet(models.QuerySet):
     def bulk_create(self, objs, **kwargs):
         for obj in objs:
-            obj.clean()
+            obj.full_clean(validate_unique=False)
         return super().bulk_create(objs, **kwargs)
 
     def bulk_update(self, objs, fields, batch_size=None):
         for obj in objs:
-            obj.clean()
+            obj.full_clean(validate_unique=False)
         return super().bulk_update(objs, fields, batch_size=batch_size)
+
+    def update(self, **kwargs):
+        raise RuntimeError(
+            'Use model save() or bulk_update() with validated instances instead of QuerySet.update().'
+        )
 
 
 class ValidatedRelationManager(models.Manager.from_queryset(ValidatedRelationQuerySet)):
@@ -31,7 +39,7 @@ class ValidatedRelationModel(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.clean()
+        self.full_clean(validate_unique=False)
         return super().save(*args, **kwargs)
 
 
@@ -51,6 +59,16 @@ class JiraCredentialBinding(models.Model):
 
     class Meta:
         unique_together = ("user", "project_code")
+
+    def save(self, *args, **kwargs):
+        if self.encrypted_password:
+            try:
+                decrypt_secret(self.encrypted_password)
+            except InvalidToken:
+                self.encrypted_password = encrypt_secret(self.encrypted_password)
+
+        self.full_clean(validate_unique=False)
+        return super().save(*args, **kwargs)
 
 
 class Geely2SyncTask(ValidatedRelationModel):
@@ -212,7 +230,7 @@ class Geely2AnalysisResult(ValidatedRelationModel):
     issue_key = models.CharField(max_length=64)
     ai_summary = models.TextField(blank=True, default="")
     reply_text = models.TextField(blank=True, default="")
-    evidence_payload = models.JSONField(default=dict)
+    evidence_payload = models.JSONField(default=dict, blank=True)
     confidence = models.FloatField(default=0)
     risk_notes = models.TextField(blank=True, default="")
     needs_user_confirmation = models.BooleanField(default=True)

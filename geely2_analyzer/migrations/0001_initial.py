@@ -101,7 +101,7 @@ class Migration(migrations.Migration):
                 ("issue_key", models.CharField(max_length=64)),
                 ("ai_summary", models.TextField(blank=True, default="")),
                 ("reply_text", models.TextField(blank=True, default="")),
-                ("evidence_payload", models.JSONField(default=dict)),
+                ("evidence_payload", models.JSONField(blank=True, default=dict)),
                 ("confidence", models.FloatField(default=0)),
                 ("risk_notes", models.TextField(blank=True, default="")),
                 ("needs_user_confirmation", models.BooleanField(default=True)),

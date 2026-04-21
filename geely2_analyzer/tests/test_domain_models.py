@@ -56,6 +56,18 @@ class Geely2DomainModelTests(TestCase):
 
         self.assertNotIn('encrypted_password', serialized)
 
+    def test_credential_binding_encrypts_plaintext_password_on_save(self):
+        binding = JiraCredentialBinding.objects.create(
+            user=self.user,
+            project_code='geely2',
+            jira_base_url='https://boolbool.atlassian.net/',
+            jira_username='plain@example.com',
+            encrypted_password='plain-secret',
+        )
+
+        self.assertNotEqual(binding.encrypted_password, 'plain-secret')
+        self.assertEqual(decrypt_secret(binding.encrypted_password), 'plain-secret')
+
     def test_issue_snapshot_is_unique_per_user_and_issue_key(self):
         Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-1', summary='A')
         with self.assertRaises(IntegrityError):
@@ -122,6 +134,18 @@ class Geely2DomainModelTests(TestCase):
                 credential_binding=binding,
                 issue_snapshot=snapshot,
                 issue_key='GEELY2-7-MISMATCH',
+            )
+
+    def test_analysis_task_requires_non_blank_issue_key(self):
+        binding = self._create_binding(self.user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-7-REQUIRED')
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisTask.objects.create(
+                user=self.user,
+                credential_binding=binding,
+                issue_snapshot=snapshot,
+                issue_key='',
             )
 
     def test_analysis_task_bulk_create_validates_constraints(self):
@@ -216,6 +240,29 @@ class Geely2DomainModelTests(TestCase):
                 reply_text='错误 issue 结果',
             )
 
+    def test_analysis_result_requires_non_blank_issue_key(self):
+        binding = self._create_binding(self.user)
+        sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
+        snapshot = Geely2IssueSnapshot.objects.create(
+            user=self.user,
+            last_sync_task=sync_task,
+            issue_key='GEELY2-8-REQUIRED',
+        )
+        task = Geely2AnalysisTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            issue_snapshot=snapshot,
+            issue_key='GEELY2-8-REQUIRED',
+        )
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisResult.objects.create(
+                analysis_task=task,
+                user=self.user,
+                issue_key='',
+                reply_text='空 issue 结果',
+            )
+
     def test_analysis_result_bulk_create_validates_constraints(self):
         binding = self._create_binding(self.user)
         sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
@@ -240,3 +287,16 @@ class Geely2DomainModelTests(TestCase):
                     reply_text='批量错误 issue 结果',
                 )
             ])
+
+    def test_queryset_update_is_blocked_for_validated_models(self):
+        binding = self._create_binding(self.user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-UPDATE')
+        task = Geely2AnalysisTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            issue_snapshot=snapshot,
+            issue_key='GEELY2-UPDATE',
+        )
+
+        with self.assertRaises(RuntimeError):
+            Geely2AnalysisTask.objects.filter(pk=task.pk).update(issue_key='GEELY2-MISMATCH')
