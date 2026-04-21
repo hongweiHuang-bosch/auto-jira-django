@@ -2,10 +2,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+
+class SessionStatusCodeAuthentication(SessionAuthentication):
+    def authenticate_header(self, request):
+        return 'Session'
 
 
 class CsrfBootstrapView(APIView):
@@ -31,7 +36,7 @@ class LoginView(APIView):
 
 
 class SessionView(APIView):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    authentication_classes = [SessionStatusCodeAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -39,7 +44,7 @@ class SessionView(APIView):
 
 
 class LogoutView(APIView):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    authentication_classes = [SessionStatusCodeAuthentication]
     permission_classes = [IsAuthenticated]
 
     def post(self, request):

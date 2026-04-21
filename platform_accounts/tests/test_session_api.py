@@ -1,3 +1,4 @@
+import base64
 import json
 
 from django.contrib.auth import get_user_model
@@ -32,3 +33,18 @@ class SessionApiTests(TestCase):
 
         me_after_logout = self.client.get('/api/platform/session/')
         self.assertEqual(me_after_logout.status_code, 401)
+
+    def test_protected_endpoints_require_session_auth(self):
+        credentials = base64.b64encode(b'geely_user:Geely2Pass123!').decode()
+
+        session_response = self.client.get(
+            '/api/platform/session/',
+            HTTP_AUTHORIZATION=f'Basic {credentials}',
+        )
+        self.assertEqual(session_response.status_code, 401)
+
+        logout_response = self.client.post(
+            '/api/platform/logout/',
+            HTTP_AUTHORIZATION=f'Basic {credentials}',
+        )
+        self.assertEqual(logout_response.status_code, 401)
