@@ -25,6 +25,8 @@ class LoginView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        SessionAuthentication().enforce_csrf(request)
+
         username = request.data.get('username', '')
         password = request.data.get('password', '')
         user = authenticate(request, username=username, password=password)
