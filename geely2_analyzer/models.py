@@ -149,6 +149,15 @@ class Geely2SyncTask(ValidatedRelationModel):
         credential_binding_id = getattr(self, 'credential_binding_id', None)
         related_user_id = _safe_related_value(self, 'credential_binding', 'user_id')
         _validate_same_user(errors, 'credential_binding', related_user_id, user_id)
+        if self.status in {'PENDING', 'RUNNING'} and user_id is not None:
+            running_tasks = Geely2SyncTask.objects.filter(
+                user_id=user_id,
+                status__in=['PENDING', 'RUNNING'],
+            )
+            if self.pk:
+                running_tasks = running_tasks.exclude(pk=self.pk)
+            if running_tasks.exists():
+                errors['status'] = 'Another pending or running sync task already exists for this user.'
         persisted = _persisted_values(self, 'user_id', 'credential_binding_id')
         if persisted:
             if persisted['user_id'] != user_id:

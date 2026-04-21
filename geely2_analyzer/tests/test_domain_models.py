@@ -237,8 +237,16 @@ class Geely2DomainModelTests(TestCase):
 
     def test_issue_snapshot_last_sync_task_can_refresh_after_analysis_task_exists(self):
         binding = self._create_binding(self.user)
-        first_sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
-        second_sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
+        first_sync_task = Geely2SyncTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            status='SUCCESS',
+        )
+        second_sync_task = Geely2SyncTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            status='SUCCESS',
+        )
         snapshot = Geely2IssueSnapshot.objects.create(
             user=self.user,
             last_sync_task=first_sync_task,
