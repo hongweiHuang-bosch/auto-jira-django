@@ -3,10 +3,16 @@ from django.urls import path
 from .views import (
     TaskGroupListView, TaskGroupStreamView, TaskStartView, TaskDetailView,
     ResultListView, ResultUpdateView, ResultCommentView,
-    RuleGroupListView, FilterTaskCreateView, LatestFilterTaskView,
-    FilterTaskIssueListView, RuleGroupStreamView2,
+    FilterTaskCreateView,
     IssueProcessTaskCreateView, IssueProcessTaskDetailView,
     IssueProcessResultUpdateView, IssueProcessResultCommentView,
+)
+from .views_rule_groups import (
+    FilterTaskIssueListView,
+    LatestFilterTaskView,
+    RuleGroupDetailView,
+    RuleGroupListView,
+    RuleGroupStreamView,
 )
 
 urlpatterns = [
@@ -19,7 +25,8 @@ urlpatterns = [
     path('results/<int:pk>/comment/', ResultCommentView.as_view(), name='result-comment'),
     # 新增：规则组筛票 & 单票处理
     path('rule-groups/', RuleGroupListView.as_view(), name='rule-group-list'),
-    path('rule-groups/stream/', RuleGroupStreamView2.as_view(), name='rule-group-stream'),
+    path('rule-groups/stream/', RuleGroupStreamView.as_view(), name='rule-group-stream'),
+    path('rule-groups/<int:role_index>/detail/', RuleGroupDetailView.as_view(), name='rule-group-detail'),
     path('rule-groups/<int:role_index>/filter-tasks/', FilterTaskCreateView.as_view(), name='filter-task-create'),
     path('rule-groups/<int:role_index>/filter-tasks/latest/', LatestFilterTaskView.as_view(), name='latest-filter-task'),
     path('filter-tasks/<int:pk>/issues/', FilterTaskIssueListView.as_view(), name='filter-task-issues'),
