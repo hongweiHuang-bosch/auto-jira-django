@@ -124,6 +124,20 @@ class Geely2DomainModelTests(TestCase):
                 issue_key='GEELY2-7-MISMATCH',
             )
 
+    def test_analysis_task_bulk_create_validates_constraints(self):
+        other_binding = self._create_binding(self.other_user)
+        snapshot = Geely2IssueSnapshot.objects.create(user=self.user, issue_key='GEELY2-7-BULK')
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisTask.objects.bulk_create([
+                Geely2AnalysisTask(
+                    user=self.user,
+                    credential_binding=other_binding,
+                    issue_snapshot=snapshot,
+                    issue_key='GEELY2-7-BULK',
+                )
+            ])
+
     def test_analysis_result_is_one_to_one_with_analysis_task(self):
         binding = self._create_binding(self.user)
         sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
@@ -201,3 +215,28 @@ class Geely2DomainModelTests(TestCase):
                 issue_key='GEELY2-8-MISMATCH',
                 reply_text='错误 issue 结果',
             )
+
+    def test_analysis_result_bulk_create_validates_constraints(self):
+        binding = self._create_binding(self.user)
+        sync_task = Geely2SyncTask.objects.create(user=self.user, credential_binding=binding)
+        snapshot = Geely2IssueSnapshot.objects.create(
+            user=self.user,
+            last_sync_task=sync_task,
+            issue_key='GEELY2-8-BULK',
+        )
+        task = Geely2AnalysisTask.objects.create(
+            user=self.user,
+            credential_binding=binding,
+            issue_snapshot=snapshot,
+            issue_key='GEELY2-8-BULK',
+        )
+
+        with self.assertRaises(ValidationError):
+            Geely2AnalysisResult.objects.bulk_create([
+                Geely2AnalysisResult(
+                    analysis_task=task,
+                    user=self.user,
+                    issue_key='GEELY2-8-BULK-MISMATCH',
+                    reply_text='批量错误 issue 结果',
+                )
+            ])

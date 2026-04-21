@@ -8,6 +8,33 @@ def _validate_same_user(errors, field_name, related_user_id, user_id):
         errors[field_name] = 'Must belong to the same user.'
 
 
+class ValidatedRelationQuerySet(models.QuerySet):
+    def bulk_create(self, objs, **kwargs):
+        for obj in objs:
+            obj.clean()
+        return super().bulk_create(objs, **kwargs)
+
+    def bulk_update(self, objs, fields, batch_size=None):
+        for obj in objs:
+            obj.clean()
+        return super().bulk_update(objs, fields, batch_size=batch_size)
+
+
+class ValidatedRelationManager(models.Manager.from_queryset(ValidatedRelationQuerySet)):
+    pass
+
+
+class ValidatedRelationModel(models.Model):
+    objects = ValidatedRelationManager()
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
+
+
 class JiraCredentialBinding(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -26,7 +53,7 @@ class JiraCredentialBinding(models.Model):
         unique_together = ("user", "project_code")
 
 
-class Geely2SyncTask(models.Model):
+class Geely2SyncTask(ValidatedRelationModel):
     STATUS_CHOICES = [
         ("PENDING", "PENDING"),
         ("RUNNING", "RUNNING"),
@@ -65,12 +92,8 @@ class Geely2SyncTask(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def save(self, *args, **kwargs):
-        self.clean()
-        return super().save(*args, **kwargs)
 
-
-class Geely2IssueSnapshot(models.Model):
+class Geely2IssueSnapshot(ValidatedRelationModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -88,8 +111,6 @@ class Geely2IssueSnapshot(models.Model):
     assignee = models.CharField(max_length=255, blank=True, default="")
     jira_updated_at = models.DateTimeField(null=True, blank=True)
     current_analysis_status = models.CharField(max_length=20, default="IDLE")
-    latest_analysis_task_id = models.PositiveIntegerField(null=True, blank=True)
-    latest_result_id = models.PositiveIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -105,12 +126,8 @@ class Geely2IssueSnapshot(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def save(self, *args, **kwargs):
-        self.clean()
-        return super().save(*args, **kwargs)
 
-
-class Geely2AnalysisTask(models.Model):
+class Geely2AnalysisTask(ValidatedRelationModel):
     STATUS_CHOICES = [
         ("PENDING", "PENDING"),
         ("RUNNING", "RUNNING"),
@@ -173,12 +190,8 @@ class Geely2AnalysisTask(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def save(self, *args, **kwargs):
-        self.clean()
-        return super().save(*args, **kwargs)
 
-
-class Geely2AnalysisResult(models.Model):
+class Geely2AnalysisResult(ValidatedRelationModel):
     COMMENT_STATUS_CHOICES = [
         ("NOT_CONFIRMED", "NOT_CONFIRMED"),
         ("CONFIRMED_NOT_COMMENTED", "CONFIRMED_NOT_COMMENTED"),
@@ -224,6 +237,3 @@ class Geely2AnalysisResult(models.Model):
         if errors:
             raise ValidationError(errors)
 
-    def save(self, *args, **kwargs):
-        self.clean()
-        return super().save(*args, **kwargs)

@@ -160,14 +160,6 @@ class Migration(migrations.Migration):
                     "current_analysis_status",
                     models.CharField(default="IDLE", max_length=20),
                 ),
-                (
-                    "latest_analysis_task_id",
-                    models.PositiveIntegerField(blank=True, null=True),
-                ),
-                (
-                    "latest_result_id",
-                    models.PositiveIntegerField(blank=True, null=True),
-                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 (
