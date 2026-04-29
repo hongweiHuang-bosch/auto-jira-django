@@ -6,6 +6,7 @@ from datetime import timedelta
 from django.utils import timezone
 
 from analyzer.models import FilterTask, FilteredIssueSnapshot
+from analyzer.services.rule_group_stream import publish_rule_group_snapshot
 from legacy_core.jira_utils import JiraClient
 from legacy_core.utils import load_config
 
@@ -44,10 +45,12 @@ def run_filter_task(task_id: int):
         task.expires_at = timezone.now() + timedelta(hours=24)
         task.message = f'筛票完成，共 {len(issues)} 张票'
         task.save(update_fields=['status', 'issue_count', 'finished_at', 'expires_at', 'message', 'updated_at'])
+        publish_rule_group_snapshot()
         logger.info('filter task succeeded', extra={'filter_task_id': task.id, 'issue_count': len(issues)})
     except Exception as e:
         task.status = 'FAILED'
         task.error_message = str(e)
         task.finished_at = timezone.now()
         task.save(update_fields=['status', 'error_message', 'finished_at', 'updated_at'])
+        publish_rule_group_snapshot()
         logger.exception('filter task failed', extra={'filter_task_id': task.id})

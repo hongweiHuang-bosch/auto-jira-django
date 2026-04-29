@@ -1,0 +1,1017 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: IMMO CEM CGW PM25 PLG PEPS BM TBOX BSD IPM AVM IHU
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ ICMLanguageSet : 0|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ ThemeSys : 0|3@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ ICM_4_BrightnessFed : 0|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ ICM_2_Maintenance_tips : 0|14@0+ (1,0) [0|16383] "" Vector__XXX
+ SG_ CEM_ControlMode_Sts : 0|2@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ ScreenDisplayReq : 0|1@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ CEM_AutoFail_Reason : 0|4@0- (1,0) [0|0] "" Vector__XXX
+ SG_ MessageCounter : 0|4@0- (1,0) [0|0] "" Vector__XXX
+ SG_ ExtCtrlValveTorq : 0|8@0+ (0.1,0) [0|24] "Nm" Vector__XXX
+ SG_ CRCCheck : 0|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ Passengerseatadjust_Sts : 0|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ PassengerseatadjustSts : 0|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ EPS_1_EPSModeSts : 0|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ HMA_HighbeamReq : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ DriverMode : 0|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ PLG_1_AR_LensDirty : 0|1@0+ (1,0) [0|1] "bit" Vector__XXX
+ SG_ Checksum : 0|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ RolingCounter : 0|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ PLGUnlockinformation : 0|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ RearDoorCloseFailCause : 0|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ RearDoorOpenFailCause : 0|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ FootkickSWITCH : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ RearDoorStatusValidData : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1410 EMS_10: 8 CGW
+ SG_ EMS_VIN_Info8 : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info7 : 55|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info6 : 47|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info5 : 39|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info4 : 31|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info3 : 23|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info2 : 15|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EMS_VIN_Info1 : 7|8@0+ (1,0) [0|255] ""  IHU
+
+BO_ 1409 EMS_9: 8 CGW
+ SG_ EMS_TotalOdometer_Km : 7|20@0+ (1,0) [0|999999] ""  IHU
+
+BO_ 1406 HUD_1: 8 CGW
+ SG_ STAT_HUDProfileID : 31|3@0+ (1,0) [0|7] ""  IHU
+ SG_ STAT_ADASDisplay : 23|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_BluetoothWechart_Display : 21|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_Auto_HUDBrightness : 19|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_HUDBrightness : 15|4@0+ (1,0) [0|15] ""  IHU
+ SG_ STAT_HUDDisplayMod : 11|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_Navigati_OnDisplay : 9|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_HUDDisplayOnOff : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ STAT_HUDHeight : 5|4@0+ (1,0) [0|15] ""  IHU
+ SG_ STAT_HUD : 1|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1195 HCU_6_G: 8 CGW
+ SG_ HCU_6_G_VehStrtWarn : 48|1@0+ (1,0) [0|1] ""  IHU
+ SG_ HCU_6_G_ElecPwrVal : 43|11@0+ (1,-1000) [-1000|1000] "Kw"  IHU
+ SG_ HCU_6_G_DynRngAval : 37|10@0+ (1,0) [0|1022] "KM"  IHU
+ SG_ HCU_6_G_SumFuel : 22|17@0+ (0.1,0) [0|9999.9] "L"  IHU
+ SG_ HCU_6_G_SumPlgChrgEgy : 7|17@0+ (0.1,0) [0|9999.9] "kWh"  IHU
+
+BO_ 825 FCM_3_G: 8 CGW
+ SG_ FCM_3_NextRightLane_Mark : 61|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_3_NextLeftLane_Mark : 58|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_3_YieldSIgn : 53|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_Crossingsign : 54|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_Constructionareasign : 55|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_Noentrysign : 40|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_NOU_turnsign : 41|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_StopSign : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_NoRightTurn_sign : 39|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_NoLeftTurn_sign : 38|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_RightLane_C0 : 47|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM_3_LeftLane_C0 : 37|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM_3_FrontObject_BrakeLamp : 30|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_FrontObject_IndicatorLeft : 23|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_FrontObject_IndicatorRight : 22|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_3_ACCRightObject_LatPos : 29|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM_3_ACCLeftObject_LatPos : 21|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM_3_ACCRightObjectDetected : 11|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_3_ACCLeftObjectDetected : 9|2@0+ (1,0) [0|3] ""  IHU
+ SG_ LaneCurvatureRadius : 7|11@0+ (1E-005,-0.01023) [-0.01023|0.01024] ""  IHU
+
+BO_ 785 FCM_4: 8 CGW
+ SG_ FCM_4_Obiect_Dy : 25|6@0+ (0.1,-3.2) [-3.2|3.1] ""  IHU
+ SG_ FCM_4_ACCRightObject_LongPos : 55|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_4_ACCLeftObject_LongPos : 47|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM4LatFeatureRightVisualization : 28|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM4LatFeature_LeftVisualization : 31|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_4_ACCRightObject_Type : 18|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_4_ACCLeftObject_Type : 21|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM4LaneLateralPositionNextRight : 11|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM4LaneLateralPosition_Nextleft : 1|6@0+ (0.2,0) [0|12.6] ""  IHU
+ SG_ FCM_4_RightLane_Mark : 4|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_4_LeftLane_Mark : 7|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 1054 DCDC_2: 8 CGW
+ SG_ DCDC_DCDCSysFault : 52|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 837 FCM_3: 8 CGW
+ SG_ Read2go_On_Off_FEEDBACK : 43|2@0+ (1,0) [0|3] ""  IHU
+ SG_ Read2go_Active : 41|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1066 ICM_6: 8 IHU
+ SG_ ICM_6_SumTrip : 26|17@0+ (0.1,0) [0|9999.9] ""  CGW
+ SG_ TotalOdometer_Km_OBDValidData : 29|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_6_TotalOdometer_Km_OBD : 5|24@0+ (0.1,0) [0|999999.9] ""  CGW
+ SG_ Set_HundECAverHisClearSts : 28|1@0+ (1,0) [0|1] ""  CEM
+
+BO_ 806 TMF_3: 8 CGW
+ SG_ TMF_SpdAct : 39|16@0+ (1,-32767) [-32767|32767] "Rpm"  IHU
+ SG_ TMF_TMFSysFault : 8|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1106 ICM_2: 4 IHU
+ SG_ ICM_2_QDashACCFail : 17|2@0+ (1,0) [0|3] ""  CGW
+ SG_ ICM_2_DISFail : 18|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_2_AirBagLampFailSts : 9|2@0+ (1,0) [0|3] ""  CGW
+ SG_ ICM_2_STAT_Chime : 0|8@1+ (1,0) [0|255] ""  CGW
+
+BO_ 829 CGW_eLSD_1: 8 CGW
+ SG_ eLSD_1_SystemOperatingMode : 6|4@0+ (1,0) [0|15] ""  IHU
+ SG_ eLSD_1_Estimated_Torque : 39|16@0+ (0.25,0) [0|3000] ""  IHU
+ SG_ eLSD_1_Coupling_Thermal_Failsafe : 10|1@0+ (1,0) [0|1] ""  IHU
+ SG_ eLSD_1_Coupling_Fault_Status : 9|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1158 CGW_AWD_2: 8 CGW
+ SG_ CouplingThermalFailsafe : 5|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AWDoutserviceDispRq : 7|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 813 CGW_AWD_1: 8 CGW
+ SG_ AWDdrivingMode : 7|3@0+ (1,0) [0|7] ""  IHU
+ SG_ EstimatedCouplingTorq : 1|14@0+ (0.25,0) [0|3000] ""  IHU
+
+BO_ 2015 Diag_OBD_REQ_Broadcast: 8 CGW
+ SG_ IHU_Request_Frame_Type_1 : 7|4@0+ (1,0) [0|7] ""  IHU
+
+BO_ 1879 ICM_response: 8 IHU
+ SG_ ICM_response_frame_type : 7|4@0+ (1,0) [0|7] ""  CGW
+
+BO_ 1863 CGW_ICM_Request: 8 CGW
+ SG_ ICM_Request_frame_type : 7|4@0+ (1,0) [0|7] ""  IHU
+
+BO_ 924 SAM_1_G: 8 CGW
+ SG_ SteeringAngle : 7|16@0+ (0.0625,-2048) [-2048|2047.9375] "deg"  IHU
+
+BO_ 434 CGW_GSM_EGS_1: 4 CGW
+ SG_ EGSM_WarnInfo : 25|1@0+ (1,0) [0|1] ""  IHU
+ SG_ GSM_Warninfo : 29|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1450 BMS_12: 8 CGW
+ SG_ BMSH_OverSOC : 41|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1115 TMF_4: 8 CGW
+ SG_ TMF_SysTempOvrInd : 15|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1099 ISGF_4: 8 CGW
+ SG_ ISGF_SysTempOvrInd : 15|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 777 ISGF_2: 8 CGW
+ SG_ ISGF_SpdAct : 39|16@0+ (1,-32767) [0|32767] "rpm"  IHU
+ SG_ ISGF_ISGFSysFault : 8|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1175 IPB_ESP_15: 8 CGW
+ SG_ CST_SensitivitySts : 11|2@0+ (1,0) [0|3] ""  IHU
+ SG_ CST_Status : 15|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BrakepedalFeelSts : 13|2@0+ (1,0) [0|3] ""  IHU
+ SG_ IPB_System_Status : 54|3@0+ (1,0) [0|7] ""  IHU
+ SG_ IPB_BrakeFluidSts : 5|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 897 EPS_1: 3 CGW
+ SG_ EPS_1_MessageCounter : 15|4@0+ (1,0) [0|15] ""  IHU
+ SG_ EPSSteeringAngleCalibrationSts : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EPS_1_EPSFailSts : 0|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 990 FCM_7: 8 CGW
+ SG_ FCM_7_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_7_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_7_NeborRiLineCrvt : 33|10@0+ (6E-005,-0.0156) [-0.0156|0.0156] ""  IHU
+ SG_ FCM_7_NeborRiLineColor : 30|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_7_NeborLeLineCrvt : 9|10@0+ (6E-005,-0.0156) [-0.0156|0.0156] ""  IHU
+ SG_ FCM_7_NeborLeLineColor : 6|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_7_NeborRiLineHozlDst : 26|9@0+ (0.1,-25) [-25|25] "m"  IHU
+ SG_ FCM_7_NeborRiLineTyp : 28|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_7_NeborRiLineID : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_7_NeborLeLineHozlDst : 2|9@0+ (0.1,-25) [-25|25] "m"  IHU
+ SG_ FCM_7_NeborLeLineTyp : 4|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_7_NeborLeLineID : 7|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 988 FCM_6: 8 CGW
+ SG_ FCM_6_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_6_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_6_Resd_1 : 55|4@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_6_EgoRiLineCrvt : 33|10@0+ (6E-005,-0.0156) [-0.0156|0.0156] ""  IHU
+ SG_ FCM_6_EgoRiLineColor : 30|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_6_EgoLeLineColor : 6|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_6_EgoRiLineHozlDst : 26|9@0+ (0.1,-25) [-25|25] "m"  IHU
+ SG_ FCM_6_EgoRiLineTyp : 28|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_6_EgoRiLineID : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_6_EgoLeLineCrvt : 9|10@0+ (6E-005,-0.0156) [-0.0156|0.0156] "1/m"  IHU
+ SG_ FCM_6_EgoLeLineHozlDst : 2|9@0+ (0.1,-25) [-25|25] "m"  IHU
+ SG_ FCM_6_EgoLeLineTyp : 4|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_6_EgoLeLineID : 7|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1018 FCM_FRM_9: 8 CGW
+ SG_ FCM_FRM_9_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_FRM_9_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_9_RiObjID : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_9_LeObjID : 7|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_9_RiObjHozDstY : 34|10@0+ (0.1,-50) [-50|50] "m"  IHU
+ SG_ FCM_FRM_9_RiObjLgtDstX : 26|8@0+ (0.5,0) [0|127] "m"  IHU
+ SG_ FCM_FRM_9_RiObjTyp : 30|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_9_LeObjHozDstY : 10|10@0+ (0.1,-50) [-50|50] "m"  IHU
+ SG_ FCM_FRM_9_LeObjLgtDstX : 2|8@0+ (0.5,0) [0|127] "m"  IHU
+ SG_ FCM_FRM_9_LeObjTyp : 6|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 1005 FCM_FRM_8: 8 CGW
+ SG_ FCM_FRM_8_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_FRM_8_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_8_FrntFarObjHozDstY : 34|10@0+ (1,0) [0|50] ""  IHU
+ SG_ FCM_FRM_8_FrntFarObjLgtDstX : 26|8@0+ (1,0) [0|127] ""  IHU
+ SG_ FCM_FRM_8_FrntFarObjTyp : 30|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_8_FrntFarObjID : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_8_ACCObjID : 7|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_8_ACCObjHozDstY : 10|10@0+ (0.1,-50) [-50|50] "m"  IHU
+ SG_ FCM_FRM_8_ACCObjLgtDstX : 2|8@0+ (0.5,0) [0|127] "m"  IHU
+ SG_ FCM_FRM_8_ACCObjTyp : 6|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 1020 FCM_10: 8 CGW
+ SG_ FCM_10_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_10_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_10_TJAICAExitTextInfoSts : 37|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_TLISysSts : 5|2@0+ (1,0) [0|0] ""  IHU
+ SG_ FCM_10_TSISysSts : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_LDPTJAELKTakeoverReq : 39|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_WarnModSts : 33|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_ELKIntvMod : 47|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_10_TJAICAEnaRcmend : 24|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_10_TJAICATextinfo : 27|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_10_EgoLeftLineHeatgAg : 44|9@0+ (0.004,-1.02) [0|1.02] ""  IHU
+ SG_ FCM_10_TSINoParkWarn : 28|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_10_TSISgnLongStayDisp : 11|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_10_TSISgnForb : 15|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_10_TSISgnGiWay : 3|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_10_TLITrfcLi : 23|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_SLAONOFFSts : 35|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_10_ELKSysSts : 31|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_10_LDPSysSts : 21|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_10_LDWSysSts : 18|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 903 FCM_FRM_6: 8 CGW
+ SG_ FCM_FRM_6_CRC : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_FRM_6_MsgCntr : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_6_AEBDecCtrlRequest : 24|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_TakeOverReq : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_FCW_preWarning : 16|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_DistanceWarning : 17|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_DrvrCfmSCFDispFb : 18|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_SCF_SpdLimUnit : 20|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_FRM_6_SCF_SpdLimSts : 23|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_FRM_6_SCF_PopoverReq : 8|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_FRM_6_TextinfoWarn : 3|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_6_Textinfo_Info : 7|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_FRM_6_TimeGapSetICM : 11|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_FRM_6_FCWMode : 30|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_FRM_6_AEBMode : 27|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_FRM_6_VSetDis : 44|9@0+ (0.5,0) [0|255.5] "KPH"  IHU
+ SG_ FCM_FRM_6_ACCMode : 37|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 874 DWD_1: 8 CGW
+ SG_ DWD_Distance : 20|5@0+ (1,0) [0|31] ""  IHU
+ SG_ DWD_WorkSts : 1|2@0+ (1,0) [0|3] ""  IHU
+ SG_ RSensorFailSts : 15|1@0+ (1,0) [0|1] ""  IHU
+ SG_ LSensorFailSts : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ DWD_SoundIndcn : 13|2@0+ (1,0) [0|3] ""  IHU
+ SG_ DWD_TextDisp : 5|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 1000 RBCM_2: 8 CGW
+ SG_ RBCM_2_CHILD_SAFETY_LOCKSTS : 0|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1270 EPB_G: 2 CGW
+ SG_ IPB_EPB_Status : 7|3@0+ (1,0) [0|7] ""  IHU
+ SG_ IPB_RWUActive : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ IPB_EPBWarningMessage : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ IPB_Yellowwarning : 11|2@0+ (1,0) [0|3] ""  IHU
+ SG_ IPB_Redwarning : 13|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1281 CGW_ABS_ESP_G: 7 CGW
+ SG_ CGW_ABS_ESP_G_FUSA_1 : 47|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ABSFailSts : 5|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_Checksum : 55|8@0+ (1,0) [0|255] ""  IHU
+ SG_ ESP_G_CDPFailSts : 46|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_PressureMasCylindValidData : 36|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_PressureMasterCylinder : 30|10@0+ (1,0) [0|1023] ""  IHU
+ SG_ ESP_G_MessageCounter : 35|4@0+ (1,0) [0|15] ""  IHU
+ SG_ ESP_G_HHCFailSts : 15|1@0+ (1,0) [0|1] ""  IHU
+ SG_ VehicleSpeedVSOSigValidData : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ VehicleSpeedVSOSig : 12|13@0+ (0.0625,0) [0|511.875] "Km/h"  IHU
+ SG_ CDPActive : 13|1@0+ (1,0) [0|1] ""  IHU
+ SG_ HDCFailSts : 42|1@0+ (1,0) [0|1] ""  IHU
+ SG_ HDCCtrlSts : 41|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVHFailSts : 45|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVHSts : 44|2@0+ (1,0) [0|3] ""  IHU
+ SG_ EBDFailSts : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ VDCActive : 0|1@0+ (1,0) [0|1] ""  IHU
+ SG_ TCSActive : 1|1@0+ (1,0) [0|1] ""  IHU
+ SG_ VDCFailSts : 2|1@0+ (1,0) [0|1] ""  IHU
+ SG_ TCSFailSts : 3|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESPoffSwitchSts : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVHWarningMessage : 7|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1328 ICM_4: 8 IHU
+ SG_ ICM_4_Maintenance_tips : 55|14@0+ (1,0) [0|16383] ""  CGW
+ SG_ ICM_4_Brake_Fuel_Level : 3|2@0+ (1,0) [0|3] ""  TBOX
+ SG_ ICM_4_Engine_Oil_Pressure : 5|2@0+ (1,0) [0|3] ""  TBOX
+ SG_ ICM_4_AverageFuelConsume : 1|10@0+ (0.1,0) [0|20] ""  TBOX
+ SG_ ICM_4_DistenceToEmpty_Km : 17|10@0+ (1,0) [0|999] ""  TBOX
+ SG_ ICM_4_AverageVehicleSpeed : 36|13@0+ (1,0) [0|512] ""  TBOX
+
+BO_ 1056 CGW_GBC_1: 4 TBOX
+ SG_ GBC_1_InfoDisplay : 14|3@0+ (1,0) [0|7] ""  IHU
+ SG_ GBCFailSts : 20|1@0+ (1,0) [0|0] ""  IHU
+
+BO_ 1573 NMm_TBOX: 2 TBOX
+ SG_ Counter : 11|4@0+ (1,0) [0|15] ""  CGW
+ SG_ ControllerSts : 13|2@0+ (1,0) [0|3] ""  CGW
+ SG_ CurrentFailSts : 14|1@0+ (1,0) [0|1] ""  CGW
+ SG_ AL : 15|1@0+ (1,0) [0|1] ""  CGW
+ SG_ NetworkCommand : 1|2@0+ (1,0) [0|3] ""  CGW
+
+BO_ 1569 NMm_BM: 8 BM
+ SG_ UsrData5_RFR : 55|8@0+ (1,0) [0|255] ""  IHU
+ SG_ UsrData4_RFR : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ UsrData3_RFR : 47|8@0+ (1,0) [0|255] ""  IHU
+ SG_ UsrData2_RFR : 39|8@0+ (1,0) [0|255] ""  IHU
+ SG_ ECUSPEC_AWAKE_RFR : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ DIAGNOSTIC_AWAKE_RFR : 30|1@0+ (1,0) [0|1] ""  IHU
+ SG_ IGNITION_AWAKE_RFR : 26|1@0+ (1,0) [0|1] ""  IHU
+ SG_ NETWORK_AWAKE_RFR : 27|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ECUSPEC_WAKEUP_RFR : 28|1@0+ (1,0) [0|1] ""  IHU
+ SG_ NETWORK_WAKEUP_RFR : 29|1@0+ (1,0) [0|1] ""  IHU
+ SG_ RESET_WAKEUP_RFR : 25|1@0+ (1,0) [0|1] ""  IHU
+ SG_ RMR_RFR : 8|1@0+ (1,0) [0|1] ""  IHU,CGW
+ SG_ NMm_RFR_Reserved1 : 15|7@0+ (1,0) [0|127] ""  IHU,CGW
+ SG_ UsrData0_RFR : 23|8@0+ (1,0) [0|255] ""  IHU,CGW
+ SG_ IGNITION_WAKEUP_RFR : 24|1@0+ (1,0) [0|1] ""  IHU,CGW
+ SG_ SrcNodeID_RFR : 7|8@0+ (1,0) [0|255] ""  IHU,CGW
+
+BO_ 1546 NMm_PLG: 2 PLG
+ SG_ Counter : 11|4@0+ (1,0) [0|15] ""  CGW
+ SG_ ControllerSts : 13|2@0+ (1,0) [0|3] ""  CGW
+ SG_ CurrentFailSts : 14|1@0+ (1,0) [0|1] ""  CGW
+ SG_ AL : 15|1@0+ (1,0) [0|1] ""  CGW
+ SG_ NetworkCommand : 1|2@0+ (1,0) [0|0] ""  CGW
+
+BO_ 1583 NWM_DSM: 2 CEM
+ SG_ Counter : 11|4@0+ (1,0) [0|0] ""  CGW
+ SG_ ControllSts : 13|2@0+ (1,0) [0|3] ""  CGW
+ SG_ CurrentFailSts : 7|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ActiveLoads : 14|1@0+ (1,0) [0|1] ""  CGW
+ SG_ NetworkCommand : 1|2@0+ (1,0) [0|3] ""  CGW
+
+BO_ 775 FCM_2: 8 CGW
+ SG_ Curvedeceleration_ON_OFF_Sts : 22|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_2_weather_signal : 53|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_LDW_LKA_RightVisualization : 15|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_LDW_LKA_LeftVisualization : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_CRCCheck : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_2_MessageCounter : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ FCM_2_LDWOnOffSts : 43|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_TJA_ICA_Mode : 47|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_2_TJA_ICA_Textinfo : 34|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_2_ADAS_TakeoverReq : 37|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_2_Camera_Textinfo : 39|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_SLASpdlimitWarning : 24|1@0+ (1,0) [0|1] ""  IHU
+ SG_ FCM_2_SLAOnOffsts : 26|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_SLASpdlimit : 18|8@0+ (1,0) [0|255] ""  IHU
+ SG_ FCM_2_SLAState : 21|3@0+ (1,0) [0|7] ""  IHU
+ SG_ FCM_2_LDWLKA_Sensitivityfeedback : 8|2@0+ (1,0) [0|3] ""  IHU
+ SG_ FCM_2_LDP_Status : 13|3@0+ (1,0) [0|7] ""  IHU
+ SG_ HMAOnOffsts : 5|2@0+ (1,0) [0|3] ""  IHU
+ SG_ HMA_Status : 2|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 1152 CEM_PEPS: 8 PEPS
+ SG_ CEM_PEPS_SSB_Switchsts : 53|2@0+ (1,0) [0|3] ""  IHU
+ SG_ CEM_PEPS_RKE_in_car_Unlock : 29|1@0+ (1,0) [0|1] ""  IHU
+ SG_ checksum : 63|8@0+ (1,0) [0|255] ""  CGW,TBOX
+ SG_ MessageCounter : 51|4@0+ (1,0) [0|15] ""  CGW,TBOX
+ SG_ CEM_PEPS_Polling_Sts : 45|1@0+ (1,0) [0|1] ""  IHU
+ SG_ CEM_PEPS_WCM_Sts : 41|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ CrankingRequest : 47|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ IDInformation : 34|3@0+ (1,0) [0|7] ""  IHU
+ SG_ PEPS_UnLockReq : 39|1@0+ (1,0) [0|1] ""  PLG
+ SG_ CEM_PEPS_SmartSystemWarning_5_1 : 38|4@0+ (1,0) [0|15] ""  IHU,TBOX
+ SG_ OrderInformation : 27|4@0+ (1,0) [0|15] ""  PLG
+ SG_ CEM_PEPS_SmartSystemWarning_5_0 : 28|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ InformationSource : 31|2@0+ (1,0) [0|3] ""  PLG
+ SG_ CEM_PEPS_SmartSystemWarning_4_0 : 18|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_4_3 : 17|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ SmartSystemWarning_3_3 : 16|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ ExteriorIdentificationResultSig : 22|4@0+ (1,0) [0|15] ""  IHU
+ SG_ StarterSwitchFlag : 23|1@0+ (1,0) [0|0] ""  CGW
+ SG_ CEM_PEPS_SmartSystemWarning_2_0 : 8|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_2_1 : 9|1@0+ (1,0) [0|1] ""  IHU
+ SG_ CEM_PEPS_SmartSystemWarning_2_2 : 10|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_2_3 : 11|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_1_0 : 12|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_1_1 : 13|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_1_2 : 14|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_1_3 : 15|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ Trunk_backDoorExternalSwitch : 7|2@0+ (1,0) [0|3] ""  IHU,PLG
+ SG_ CEM_PEPS_SmartSystemWarning_4_2 : 4|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ SmartSystemWarning_4_1 : 5|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_3_2 : 3|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_3_1 : 2|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ CEM_PEPS_SmartSystemWarning_3_0 : 1|1@0+ (1,0) [0|1] ""  IHU,TBOX
+ SG_ P_N_SwitchSts : 0|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 1078 PLG: 8 PLG
+ SG_ PLG_1_PLG_SAS_Sts : 47|8@0+ (1,0) [0|0] ""  IHU
+ SG_ PLG_1_RearDoorMoveDir : 19|2@0+ (1,0) [0|3] ""  IHU
+ SG_ PLG_1_RearDoorOpenDegree : 7|4@0+ (1,0) [0|15] ""  IHU
+ SG_ PLG_1_PLG_LockSts : 3|1@0+ (1,0) [0|1] ""  IHU,PEPS
+ SG_ PLG_1_RearDoorStatus : 0|1@0+ (1,0) [0|1] ""  IHU,PEPS
+
+BO_ 647 ICM_5: 8 IHU
+ SG_ ICM_5_TRSeatBeltWarningSts : 17|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_TFSeatBeltWarningSts : 16|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_ACC_Kilometre_Mile : 39|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_DriverSeatBeltSwitchQbit : 24|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_DriverSeatBeltSwitch : 25|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_Checksum : 63|8@0+ (1,0) [0|255] ""  CGW
+ SG_ ICM_5_MessageCounter : 51|4@0+ (1,0) [0|15] ""  CGW
+ SG_ ICM_5_FuelLevel : 15|8@0+ (1,0) [0|100] "%"  CGW
+ SG_ ICM_5_FuelValidData : 0|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_FuelOutOfRange : 1|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_FuelShortPower : 2|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_5_FuelShortGround : 3|1@0+ (1,0) [0|1] ""  CGW
+
+BO_ 1333 CEM_IPM_3: 8 IPM
+ SG_ CEM_IPM_3_ACMAXReq_Sts : 38|2@0+ (1,0) [0|3] ""  IHU
+ SG_ ExternalTemperatureFailSts_GS : 33|2@0+ (1,0) [0|3] ""  IHU
+ SG_ CEM_IPM_3_InternalTemperatureRaw : 47|8@0+ (0.5,-40) [-40|85] "°Ê"  IHU,TBOX
+ SG_ CEM_IPM_3_ExternalTemperatureRaw : 55|8@0+ (0.5,-40) [-40|85] "°Ê"  IHU,CGW,TBOX
+
+BO_ 916 BCM_1: 8 Vector__XXX
+ SG_ MotorTemperature : 63|8@0+ (1,-48) [-48|207] ""  BM
+ SG_ InstPowerConsum : 55|8@0+ (0.196,0) [0|49.98] ""  BM
+ SG_ ResidualOdometer : 39|14@0+ (0.1,0) [0|1600] "km"  BM
+ SG_ StartFailed : 31|1@0+ (1,0) [0|1] ""  BM
+ SG_ AlarmMode : 30|3@0+ (1,0) [0|7] ""  BM
+ SG_ ArmingFailed : 27|3@0+ (1,0) [0|7] ""  BM
+ SG_ RR_WIN_Postion : 23|2@0+ (1,0) [0|3] ""  BM
+ SG_ RL_WIN_Postion : 21|2@0+ (1,0) [0|3] ""  BM
+ SG_ FR_WIN_Postion : 19|2@0+ (1,0) [0|3] ""  BM
+ SG_ FL_WIN_Postion : 17|2@0+ (1,0) [0|3] ""  BM
+ SG_ TrunkSts : 14|1@0+ (1,0) [0|1] ""  BM
+ SG_ HoodSts : 13|1@0+ (1,0) [0|1] ""  BM
+ SG_ LHRDoorSts : 12|1@0+ (1,0) [0|1] ""  BM
+ SG_ RHRDoorSts : 11|1@0+ (1,0) [0|1] ""  BM
+ SG_ PsngrDoorSts : 10|1@0+ (1,0) [0|1] ""  BM
+ SG_ DriverDoorSts : 9|1@0+ (1,0) [0|1] ""  BM
+ SG_ TrunkLockSts : 8|1@0+ (1,0) [0|1] ""  BM
+ SG_ RHRDoorLockSts : 7|1@0+ (1,0) [0|1] ""  BM
+ SG_ LHRDoorLockSts : 6|1@0+ (1,0) [0|1] ""  BM
+ SG_ PsngrDoorLockSts : 5|1@0+ (1,0) [0|1] ""  BM
+ SG_ DriverDoorLockSts : 4|1@0+ (1,0) [0|1] ""  BM
+ SG_ ONRelaySts : 3|1@0+ (1,0) [0|1] ""  BM
+ SG_ ACCRelaySts : 2|1@0+ (1,0) [0|1] ""  BM
+ SG_ KeySts : 1|2@0+ (1,0) [0|3] ""  BM
+
+BO_ 1097 BSD_1: 8 BSD
+ SG_ BSD_1_MessageCounter : 35|4@0+ (1,0) [0|15] ""  IHU
+ SG_ BSD_1_DOWWarningRight : 23|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BSD_1_DOWWarningLeft : 21|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BSD_1_RCWSts : 11|1@0+ (1,0) [0|1] ""  IHU
+ SG_ BSD_1_RCWWarning : 10|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BSD_1_DOWSts : 8|1@0+ (1,0) [0|1] ""  IHU
+ SG_ Checksum : 47|8@0+ (1,0) [0|255] ""  IHU
+ SG_ BSD_1_RCTAWarningRight : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ BSD_1_RCTAWarningLeft : 15|1@0+ (1,0) [0|1] ""  IHU
+ SG_ BSD_1_BSDWarningRignt : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BSD_1_BSDWarningLeft : 5|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BSD_1_RCTAState : 3|1@0+ (1,0) [0|1] ""  IHU
+ SG_ BSD_1_BSDState : 2|1@0+ (1,0) [0|1] ""  IHU
+ SG_ BSD_1_SystemState : 1|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1542 NWM_AVM: 2 AVM
+ SG_ NetworkCommand : 1|2@0+ (1,0) [0|3] ""  CGW
+ SG_ CurrentFailSts : 14|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ControllerSts : 13|2@0+ (1,0) [0|3] ""  CGW
+ SG_ Counter : 11|4@0+ (1,0) [0|15] ""  CGW
+ SG_ AL_ActiveLoads : 15|1@0+ (1,0) [0|1] ""  CGW
+
+BO_ 848 CGW_EPB_G: 8 TBOX
+ SG_ MessageCounter : 51|4@0+ (1,0) [0|15] ""  IHU
+ SG_ Checksum : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ EPB_1_EPB_Disp_Largeslopeparking : 55|1@0+ (1,0) [0|1] ""  IHU
+ SG_ RWUActive : 25|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EPBErrorStatus : 27|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EPBSystemstsValid : 15|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EPBSwitchSts : 13|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ EPB_1_EPB_Disp_State : 54|2@0+ (1,0) [0|3] ""  IHU
+ SG_ EPB_1_EPB_Disp_WithoutBrake : 52|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EPBSystemSts : 6|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ EPB_1_EPBWarningLampSts : 3|2@0+ (1,0) [0|3] ""  IHU
+ SG_ EPB_1_EPBParkLampSts : 1|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 800 CGW_ABM_G: 4 TBOX
+ SG_ MessageCounter : 15|4@0+ (1,0) [0|15] ""  IHU
+ SG_ Checksum : 23|8@0+ (1,0) [0|255] ""  IHU
+ SG_ ABM_1_CrashOutputSts : 31|8@0+ (1,0) [0|255] ""  IHU,AVM
+ SG_ PsngrSeatBeltWarning : 1|2@0+ (1,0) [0|3] ""  IHU
+ SG_ PsngrBagSts : 5|2@0+ (1,0) [0|3] ""  IHU
+ SG_ ABM_1_G_AirBagFailSts : 7|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 832 CGW_SAM_G: 8 TBOX
+ SG_ AngleFailure : 31|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ BatteryWarning : 30|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ CANWarning : 28|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ SASInit : 27|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ MessageCounter : 47|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ SASCalibrated : 26|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ InternalFaultcodeBits : 39|8@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ InternalFailure : 29|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ SteeringAngleSpeedValidData : 24|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ SAS_1_G_SteeringAngleValidData : 25|1@0+ (1,0) [0|1] ""  IHU
+ SG_ SteeringAngleSpeed : 23|8@0+ (4,0) [0|1016] "deg/sec" Vector__XXX
+ SG_ SAS_1_G_SteeringAngle : 7|16@0+ (0.0625,-2048) [-2048|2047.9375] "deg"  IHU,AVM
+
+BO_ 769 CGW_TCU_G: 4 TBOX
+ SG_ TCU_G_GBWarmUpReq : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ TCU_G_CluSelfLrng : 24|1@0+ (1,0) [0|1] ""  IHU
+ SG_ TCU_G_STAT_LeverModeDisp : 23|3@0+ (1,0) [0|7] ""  IHU
+ SG_ TCU_G_InforDisplay_7 : 19|4@0+ (1,0) [0|15] ""  IHU
+ SG_ ReverseGearInfo : 15|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ TCU_G_ClutchTemperature : 3|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TCU_G_GBPositoionDisplay : 14|5@0+ (1,0) [0|31] ""  IHU,BSD,CEM
+ SG_ TCU_G_GBFaultstatus : 9|2@0+ (1,0) [0|3] ""  IHU
+ SG_ BuzzerRequest : 7|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 704 ABS_ESP_G: 8 CGW
+ SG_ ABS_ESP_G_0x2C0_FUSA_5 : 30|7@0+ (1,0) [0|127] ""  IHU
+ SG_ ABS_ESP_G_0x2C0_FUSA_4 : 6|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ABS_ESP_G_0x2C0_FUSA_3 : 39|4@0+ (1,0) [0|15] ""  IHU
+ SG_ ABS_ESP_G_0x2C0_FUSA_2 : 47|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ABS_ESP_G_0x2C0_FUSA_1 : 63|8@0+ (1,0) [0|255] ""  IHU
+ SG_ ESP_G_HDCFailSts : 42|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_HDCCtrlSts : 41|2@0+ (1,0) [0|3] ""  IHU
+ SG_ ESP_G_AVHWarningMessage : 7|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_Checksum : 55|8@0+ (1,0) [0|255] ""  IHU
+ SG_ ESP_G_AVHActive : 43|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_AVHAvailable : 44|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_AVHStandby : 45|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_CDPFailSts : 46|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_MessageCounter : 35|4@0+ (1,0) [0|15] ""  IHU
+ SG_ ESP_VehicleSpeedVSOSigValidData : 31|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_VehicleSpeedVSOSig : 12|13@0+ (0.0625,0) [0|511.875] "km/h"  IHU
+ SG_ ESP_G_CDPActive : 13|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_ESPoffSwitchSts : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_HHCFailSts : 15|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_VDCActive : 0|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_TCSActive : 1|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_VDCFailSts : 2|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_TCSFailSts : 3|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_EBDFailSts : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ESP_G_ABSFailSts : 5|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 640 CGW_EMS_G: 8 TBOX
+ SG_ EMS_1_G_OilPressureWarningLamp : 60|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_GPFWarning : 3|2@0+ (1,0) [0|3] ""  IHU
+ SG_ SSMStatus : 52|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ EMS_1_G_ISS_Sts_GS : 44|5@0+ (1,0) [0|31] ""  IHU
+ SG_ EMS_1_G_EngineSts : 58|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_GearReduceIndication : 57|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_GearRaiseIndication : 56|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_IMMOCodeWarningLightSts : 62|2@0+ (1,0) [0|3] ""  IHU
+ SG_ EMS_1_G_TargetGearPosition : 49|3@0+ (1,0) [0|7] ""  AVM,IHU
+ SG_ EMS_1_G_EPCSts : 53|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_EngineSpeedValidData : 54|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_RollingCounterValidData : 55|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_EngineSpeed : 39|11@0+ (4,0) [0|8000] "rpm"  BSD,IHU
+ SG_ EMS_1_G_FuelRollingCounter : 31|8@0+ (7.88519E-005,0) [0|0.020028382] "Ltr"  IHU
+ SG_ EMS_1_G_EngineCoolantTemperture : 23|8@0+ (0.75,-48) [-48|142.5] "°Ê"  CEM,IHU,IPM
+ SG_ EMS_CruiseControlStsForDisplay : 9|2@0+ (1,0) [0|0] ""  IHU
+ SG_ EngineCoolantTempertureFailSts : 11|1@0+ (1,0) [0|1] ""  IHU,IPM
+ SG_ EMS_1_G_MILSts : 13|2@0+ (1,0) [0|3] ""  IHU
+ SG_ ISS_Switch_Sts : 14|1@0+ (1,0) [0|1] ""  IHU
+ SG_ EMS_1_G_IEMSts : 1|1@0+ (1,0) [0|1] ""  IHU
+ SG_ ISSSts : 7|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1308 AVM_2: 3 AVM
+ SG_ BSD_WarningState : 19|2@0- (1,0) [0|0] "" Vector__XXX
+ SG_ LDW_WarningState : 17|2@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DVR_WorkState : 14|2@0- (1,0) [0|0] "" Vector__XXX
+ SG_ AVM_DefDispMode : 12|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ AVM_BSD_FunSts : 11|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_LDW_FunSts : 10|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_RadarWariningSts : 9|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_SteeringWheelSts : 8|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_LanguageSts : 7|3@0+ (1,0) [0|7] ""  IHU
+ SG_ AVM_WorkModeSts : 3|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_DisplaySts : 1|2@0+ (1,0) [0|3] ""  IHU
+
+BO_ 1567 NWM_RADAR: 2 Vector__XXX
+ SG_ counter : 11|4@0+ (1,0) [0|15] ""  CGW
+ SG_ ControllerSts : 13|2@0+ (1,0) [0|3] ""  CGW
+ SG_ CurrentFailSts : 14|1@0+ (1,0) [0|1] ""  CGW
+ SG_ AL : 15|1@0+ (1,0) [0|1] ""  CGW
+ SG_ NC : 1|2@0+ (1,0) [0|3] ""  CGW
+
+BO_ 1326 ICM_3: 8 IHU
+ SG_ DATA7 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA6 : 55|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA5 : 47|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA4 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA3 : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA2 : 23|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ DATA1 : 15|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ F_DL : 3|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ PCItype : 7|4@0+ (1,0) [0|15] "" Vector__XXX
+
+BO_ 1088 RADAR_1: 8 CGW
+ SG_ RAD1_Pas_Switch : 45|1@0+ (1,0) [0|1] ""  IHU
+ SG_ RAD1_RadarWorkSts : 61|1@0+ (1,0) [0|1] ""  IHU
+ SG_ RAD1_RadarDetectSts : 63|2@0+ (1,0) [0|3] ""  IHU
+ SG_ RAD1_AudibleBeepRate : 55|3@0+ (1,0) [0|7] ""  IHU
+ SG_ RAD1_LHMFRadarSensorDistance : 60|5@0+ (5,25) [25|160] "cm"  IHU
+ SG_ RAD1_RHMFRadarSensorDistance : 52|5@0+ (5,25) [25|160] "cm"  IHU
+ SG_ RAD1_RHFRadarSensorDistance : 44|5@0+ (5,25) [25|160] "cm"  IHU
+ SG_ RAD1_LHFRadarSensorDistance : 36|5@0+ (5,25) [25|160] "cm"  IHU
+ SG_ RAD1_RHRRadarSensorDistance : 29|6@0+ (5,25) [25|180] "cm"  IHU
+ SG_ RAD1_LHMRRadarSensorDistance : 21|6@0+ (5,25) [25|180] "cm"  IHU
+ SG_ RAD1_RHMRRadarSensorDistance : 13|6@0+ (5,25) [25|180] "cm"  IHU
+ SG_ RAD1_LHRRadarSensorDistance : 5|6@0+ (5,25) [25|180] "cm"  IHU
+
+BO_ 1556 NWM_ICM: 8 IHU
+ SG_ UsrData5_ICM : 63|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ UsrData4_ICM : 55|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ UsrData3_ICM : 47|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ UsrData2_ICM : 39|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ ECUSPEC_AWAKE_ICM : 31|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ DIAGNOSTIC_AWAKE_ICM : 30|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ IGNITION_AWAKE_ICM : 29|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ NETWORK_AWAKE_ICM : 28|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ECUSPEC_WAKEUP_ICM : 27|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ NETWORK_WAKEUP_ICM : 26|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ RESET_WAKEUP_ICM : 25|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ SrcNodeID_ICM_SNI : 7|8@0+ (1,0) [0|255] ""  CGW
+ SG_ UsrData0_ICM : 23|8@0+ (1,0) [0|255] ""  CGW
+ SG_ NMm_ICM_Reserved1_CBV : 15|7@0+ (1,0) [0|127] ""  CGW
+ SG_ RMR_ICM_CBV : 8|1@0+ (1,0) [0|1] ""  CGW
+ SG_ IGNITION_WAKEUP_ICM : 24|1@0+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 1568 NWM_IPM: 8 IPM
+ SG_ SrcNodeID_RFR : 7|8@0+ (1,0) [0|255] ""  CGW
+ SG_ UsrData0_RFR : 23|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ NMm_RFR_Reserved1 : 15|7@0+ (1,0) [0|127] "" Vector__XXX
+ SG_ RMR_RFR : 8|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ IGNITION_WAKEUP_RFR : 24|1@0+ (1,0) [0|1] ""  CGW
+
+BO_ 1312 AVM_1: 8 AVM
+ SG_ AVM_SETViewSideSts : 15|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ AVM_LANG_Sta : 12|3@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ AVM_Request_TIME_DATA : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ AVM_OP_VIEW_DVR_SW_Sta : 9|2@0+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 1307 CEM_BCM_5: 8 CEM
+ SG_ CEM_5_RRTyrePressure : 63|8@0+ (0.0275,0) [0|3.4925] "bar"  TBOX,IHU
+ SG_ CEM_5_LRTyrePressure : 55|8@0+ (0.0275,0) [0|3.4925] "bar"  TBOX,IHU
+ SG_ CEM_5_RFTyrePressure : 47|8@0+ (0.0275,0) [0|3.4925] "bar"  TBOX,IHU
+ SG_ CEM_5_LFTyrePressure : 39|8@0+ (0.0275,0) [0|3.4925] "bar"  TBOX,IHU
+ SG_ CEM_5_TyreTemperature : 31|8@0+ (1,-60) [-40|100] "°Ê"  TBOX,IHU
+ SG_ CEM_5_TyrePosition : 17|2@0+ (1,0) [0|3] ""  TBOX,IHU
+ SG_ CEM_5_TirePositionWarning_RRTyre : 10|3@0+ (1,0) [0|7] ""  TBOX,IHU
+ SG_ CEM_5_TirePositionWarning_LRTyre : 13|3@0+ (1,0) [0|7] ""  TBOX,IHU
+ SG_ CEM_5_TirePositionWarning_RFTyre : 0|3@0+ (1,0) [0|7] ""  TBOX,IHU
+ SG_ CEM_5_TirePositionWarning_LFTyre : 3|3@0+ (1,0) [0|7] ""  TBOX,IHU
+ SG_ CEM_5_TirePressureWarningLampSts : 5|2@0+ (1,0) [0|3] ""  TBOX,IHU
+ SG_ WarningBuzzerSts : 6|1@0+ (1,0) [0|1] ""  IHU
+ SG_ CEM_5_TirePressureSystemFailSts : 7|1@0+ (1,0) [0|1] ""  TBOX,IHU
+
+BO_ 1072 ICM_1: 8 IHU
+ SG_ ICM_1_BrakeFluidLevel : 47|1@0+ (1,0) [0|1] ""  CGW
+ SG_ ICM_1_MessageCounter : 31|4@0- (1,0) [0|0] "" Vector__XXX
+ SG_ ICM_1_RMSeatBeltWarningSts : 7|1@0+ (1,0) [0|0] ""  CGW,TBOX
+ SG_ ICM_1_RRSeatBeltWarningSts : 6|1@0+ (1,0) [0|0] ""  CGW,TBOX
+ SG_ ICM_1_RFSeatBeltWarningSts : 5|1@0+ (1,0) [0|0] ""  CGW,TBOX
+ SG_ ICM_1_LDWLKA_LaneAssitTypeReq : 45|2@0+ (1,0) [0|3] ""  CGW
+ SG_ ICM_1_ECOModeSWSts : 24|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICM_1_DisplayVehicleSpeed : 4|13@0+ (0.0625,0) [0|511.875] "km/h"  CGW,TBOX
+ SG_ ICM_1_TotalOdometer_Km : 43|20@0+ (1,0) [0|999999] "km"  CGW,TBOX
+ SG_ ICM_1_HandBrakeSts : 46|1@0+ (1,0) [0|1] ""  CGW,TBOX
+ SG_ ICM_1_FuelLevel : 39|8@0+ (1,0) [0|100] "%"  CGW,TBOX
+ SG_ ICM_1_FuelLevelFailSts : 27|1@0+ (1,0) [0|1] ""  CGW,TBOX
+ SG_ ICM_PassengerSeatBeltWarningSts : 26|1@0+ (1,0) [0|1] ""  TBOX
+ SG_ ICM_1_DriverSeatBeltWarningSts : 25|1@0+ (1,0) [0|1] ""  CGW,TBOX
+ SG_ ICM_1_BatteryVoltageLevel : 23|8@0+ (0.1,0) [0|25.4] "V"  CGW,TBOX
+
+BO_TX_BU_ 775 : TBOX,CGW;
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 PLG_1_AR_LensDirty "π‚∏–Ω≈ÃﬂæµÕ∑‘‡Œ€";
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","OnChangeAndIfActive","OnChangeAndIfActiveWithRepetition";
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 2147483647;
+BA_DEF_ SG_  "GenSigStartValue" INT 0 2147483647;
+BA_DEF_ SG_  "GenSigTimeoutValue" INT 0 2147483647;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","OnChange","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed","IfActive","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 65535;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 65535;
+BA_DEF_ BO_  "GenMsgFastOnStart" INT 0 65535;
+BA_DEF_ BO_  "NmAsrMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagUudtResponse" ENUM  "False","True";
+BA_DEF_ BO_  "TpTxIndex" INT 0 255;
+BA_DEF_ BU_  "ILUsed" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmAsrNode" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmAsrNodeIdentifier" HEX 0 255;
+BA_DEF_ BU_  "NmAsrCanMsgCycleOffset" INT 0 635;
+BA_DEF_ BU_  "NmAsrCanMsgReducedTime" INT 500 818;
+BA_DEF_ BU_  "NmStationAddress" HEX 0 255;
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "ILTxTimeout" INT 0 65535;
+BA_DEF_  "NmType" STRING ;
+BA_DEF_  "NmAsrMessageCount" INT 128 128;
+BA_DEF_  "NmAsrBaseAddress" HEX 0 2047;
+BA_DEF_  "NmAsrTimeoutTime" INT 2500 2500;
+BA_DEF_  "NmAsrWaitBusSleepTime" INT 1500 1500;
+BA_DEF_  "NmAsrRepeatMessageTime" INT 3000 3000;
+BA_DEF_  "NmAsrCanMsgCycleTime" INT 1000 1000;
+BA_DEF_REL_ BU_SG_REL_  "GenSigTimeoutTime" INT 0 65535;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigTimeoutValue" 0;
+BA_DEF_DEF_  "GenMsgILSupport" "No";
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 3;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgFastOnStart" 0;
+BA_DEF_DEF_  "NmAsrMessage" "No";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagUudtResponse" "False";
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "ILUsed" "No";
+BA_DEF_DEF_  "NmAsrNode" "No";
+BA_DEF_DEF_  "NmAsrNodeIdentifier" 255;
+BA_DEF_DEF_  "NmAsrCanMsgCycleOffset" 0;
+BA_DEF_DEF_  "NmAsrCanMsgReducedTime" 575;
+BA_DEF_DEF_  "NmStationAddress" 255;
+BA_DEF_DEF_  "Manufacturer" "Vector";
+BA_DEF_DEF_  "ILTxTimeout" 0;
+BA_DEF_DEF_  "NmType" "NmAsr";
+BA_DEF_DEF_  "NmAsrMessageCount" 128;
+BA_DEF_DEF_  "NmAsrBaseAddress" 1536;
+BA_DEF_DEF_  "NmAsrTimeoutTime" 2500;
+BA_DEF_DEF_  "NmAsrWaitBusSleepTime" 1500;
+BA_DEF_DEF_  "NmAsrRepeatMessageTime" 3000;
+BA_DEF_DEF_  "NmAsrCanMsgCycleTime" 1000;
+BA_DEF_DEF_REL_ "GenSigTimeoutTime" 0;
+BA_ "ILUsed" BU_ IHU 1;
+BA_ "NmAsrNode" BU_ IHU 1;
+BA_ "NmAsrNodeIdentifier" BU_ IHU 20;
+BA_ "NmStationAddress" BU_ IHU 20;
+BA_ "GenMsgNrOfRepetition" BO_ 1410 0;
+BA_ "GenMsgCycleTime" BO_ 1410 1000;
+BA_ "GenMsgILSupport" BO_ 1410 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1409 0;
+BA_ "GenMsgCycleTime" BO_ 1409 1000;
+BA_ "GenMsgILSupport" BO_ 1409 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1406 0;
+BA_ "GenMsgCycleTime" BO_ 1406 1000;
+BA_ "GenMsgILSupport" BO_ 1406 1;
+BA_ "GenMsgILSupport" BO_ 1195 1;
+BA_ "GenMsgCycleTime" BO_ 1195 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1195 0;
+BA_ "GenMsgNrOfRepetition" BO_ 825 0;
+BA_ "GenMsgCycleTime" BO_ 825 100;
+BA_ "GenMsgILSupport" BO_ 825 1;
+BA_ "GenMsgNrOfRepetition" BO_ 785 0;
+BA_ "GenMsgCycleTime" BO_ 785 100;
+BA_ "GenMsgILSupport" BO_ 785 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1054 0;
+BA_ "GenMsgCycleTime" BO_ 1054 100;
+BA_ "GenMsgILSupport" BO_ 1054 1;
+BA_ "GenMsgNrOfRepetition" BO_ 837 0;
+BA_ "GenMsgCycleTime" BO_ 837 20;
+BA_ "GenMsgILSupport" BO_ 837 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1066 0;
+BA_ "GenMsgCycleTime" BO_ 1066 100;
+BA_ "GenMsgILSupport" BO_ 1066 1;
+BA_ "GenMsgILSupport" BO_ 806 1;
+BA_ "GenMsgCycleTime" BO_ 806 50;
+BA_ "GenMsgNrOfRepetition" BO_ 806 0;
+BA_ "GenMsgNrOfRepetition" BO_ 1106 0;
+BA_ "GenMsgCycleTime" BO_ 1106 100;
+BA_ "GenMsgILSupport" BO_ 1106 1;
+BA_ "GenMsgNrOfRepetition" BO_ 829 0;
+BA_ "GenMsgCycleTime" BO_ 829 20;
+BA_ "GenMsgILSupport" BO_ 829 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1158 0;
+BA_ "GenMsgCycleTime" BO_ 1158 20;
+BA_ "GenMsgILSupport" BO_ 1158 1;
+BA_ "GenMsgNrOfRepetition" BO_ 813 0;
+BA_ "GenMsgILSupport" BO_ 813 1;
+BA_ "GenMsgCycleTime" BO_ 813 20;
+BA_ "DiagState" BO_ 2015 1;
+BA_ "GenMsgNrOfRepetition" BO_ 2015 0;
+BA_ "GenMsgSendType" BO_ 2015 8;
+BA_ "DiagResponse" BO_ 1879 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1879 0;
+BA_ "GenMsgSendType" BO_ 1879 8;
+BA_ "DiagRequest" BO_ 1863 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1863 0;
+BA_ "GenMsgSendType" BO_ 1863 8;
+BA_ "GenMsgILSupport" BO_ 924 1;
+BA_ "GenMsgCycleTime" BO_ 924 10;
+BA_ "GenMsgNrOfRepetition" BO_ 924 0;
+BA_ "GenMsgILSupport" BO_ 434 1;
+BA_ "GenMsgNrOfRepetition" BO_ 434 0;
+BA_ "GenMsgCycleTime" BO_ 434 20;
+BA_ "GenMsgNrOfRepetition" BO_ 1450 0;
+BA_ "GenMsgCycleTime" BO_ 1450 1000;
+BA_ "GenMsgILSupport" BO_ 1450 1;
+BA_ "GenMsgILSupport" BO_ 1115 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1115 0;
+BA_ "GenMsgCycleTime" BO_ 1115 50;
+BA_ "GenMsgILSupport" BO_ 1099 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1099 0;
+BA_ "GenMsgCycleTime" BO_ 1099 50;
+BA_ "GenMsgILSupport" BO_ 777 1;
+BA_ "GenMsgNrOfRepetition" BO_ 777 0;
+BA_ "GenMsgCycleTime" BO_ 777 50;
+BA_ "GenMsgILSupport" BO_ 1175 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1175 0;
+BA_ "GenMsgCycleTime" BO_ 1175 100;
+BA_ "GenMsgILSupport" BO_ 897 1;
+BA_ "GenMsgNrOfRepetition" BO_ 897 0;
+BA_ "GenMsgCycleTime" BO_ 897 100;
+BA_ "GenMsgILSupport" BO_ 990 1;
+BA_ "GenMsgCycleTime" BO_ 990 50;
+BA_ "GenMsgNrOfRepetition" BO_ 990 0;
+BA_ "GenMsgILSupport" BO_ 988 1;
+BA_ "GenMsgCycleTime" BO_ 988 50;
+BA_ "GenMsgNrOfRepetition" BO_ 988 0;
+BA_ "GenMsgILSupport" BO_ 1018 1;
+BA_ "GenMsgCycleTime" BO_ 1018 50;
+BA_ "GenMsgNrOfRepetition" BO_ 1018 0;
+BA_ "GenMsgILSupport" BO_ 1005 1;
+BA_ "GenMsgCycleTime" BO_ 1005 50;
+BA_ "GenMsgNrOfRepetition" BO_ 1005 0;
+BA_ "GenMsgILSupport" BO_ 1020 1;
+BA_ "GenMsgCycleTime" BO_ 1020 50;
+BA_ "GenMsgNrOfRepetition" BO_ 1020 0;
+BA_ "GenMsgILSupport" BO_ 903 1;
+BA_ "GenMsgCycleTime" BO_ 903 50;
+BA_ "GenMsgNrOfRepetition" BO_ 903 0;
+BA_ "GenMsgILSupport" BO_ 874 1;
+BA_ "GenMsgCycleTime" BO_ 874 100;
+BA_ "GenMsgNrOfRepetition" BO_ 874 0;
+BA_ "GenMsgNrOfRepetition" BO_ 1000 0;
+BA_ "GenMsgCycleTime" BO_ 1000 50;
+BA_ "GenMsgILSupport" BO_ 1000 1;
+BA_ "GenMsgCycleTime" BO_ 1270 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1270 0;
+BA_ "GenMsgILSupport" BO_ 1270 1;
+BA_ "GenMsgILSupport" BO_ 1281 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1281 0;
+BA_ "GenMsgCycleTime" BO_ 1281 100;
+BA_ "GenMsgCycleTime" BO_ 1328 500;
+BA_ "GenMsgILSupport" BO_ 1328 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1328 0;
+BA_ "GenMsgCycleTime" BO_ 1056 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1056 0;
+BA_ "GenMsgILSupport" BO_ 1056 1;
+BA_ "NmAsrMessage" BO_ 1569 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1569 0;
+BA_ "GenMsgCycleTime" BO_ 1569 1000;
+BA_ "GenMsgNrOfRepetition" BO_ 775 0;
+BA_ "GenMsgCycleTime" BO_ 775 50;
+BA_ "GenMsgILSupport" BO_ 775 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1152 0;
+BA_ "GenMsgCycleTime" BO_ 1152 50;
+BA_ "GenMsgILSupport" BO_ 1152 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1078 0;
+BA_ "GenMsgCycleTime" BO_ 1078 100;
+BA_ "GenMsgILSupport" BO_ 1078 1;
+BA_ "GenMsgILSupport" BO_ 647 1;
+BA_ "GenMsgNrOfRepetition" BO_ 647 0;
+BA_ "GenMsgCycleTime" BO_ 647 20;
+BA_ "GenMsgNrOfRepetition" BO_ 1333 0;
+BA_ "GenMsgCycleTime" BO_ 1333 100;
+BA_ "GenMsgILSupport" BO_ 1333 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1097 0;
+BA_ "GenMsgCycleTime" BO_ 1097 100;
+BA_ "GenMsgILSupport" BO_ 1097 1;
+BA_ "GenMsgNrOfRepetition" BO_ 848 0;
+BA_ "GenMsgCycleTime" BO_ 848 100;
+BA_ "GenMsgILSupport" BO_ 848 1;
+BA_ "GenMsgNrOfRepetition" BO_ 800 0;
+BA_ "GenMsgCycleTime" BO_ 800 500;
+BA_ "GenMsgILSupport" BO_ 800 1;
+BA_ "GenMsgNrOfRepetition" BO_ 832 0;
+BA_ "GenMsgCycleTime" BO_ 832 10;
+BA_ "GenMsgILSupport" BO_ 832 1;
+BA_ "GenMsgNrOfRepetition" BO_ 769 0;
+BA_ "GenMsgCycleTime" BO_ 769 100;
+BA_ "GenMsgILSupport" BO_ 769 1;
+BA_ "GenMsgNrOfRepetition" BO_ 704 0;
+BA_ "GenMsgCycleTime" BO_ 704 100;
+BA_ "GenMsgILSupport" BO_ 704 1;
+BA_ "GenMsgNrOfRepetition" BO_ 640 0;
+BA_ "GenMsgCycleTime" BO_ 640 100;
+BA_ "GenMsgILSupport" BO_ 640 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1308 0;
+BA_ "GenMsgCycleTime" BO_ 1308 500;
+BA_ "GenMsgILSupport" BO_ 1308 1;
+BA_ "GenMsgSendType" BO_ 1326 8;
+BA_ "GenMsgILSupport" BO_ 1326 1;
+BA_ "GenMsgCycleTimeFast" BO_ 1326 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1088 0;
+BA_ "GenMsgCycleTime" BO_ 1088 100;
+BA_ "GenMsgILSupport" BO_ 1088 1;
+BA_ "NmAsrMessage" BO_ 1556 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1556 0;
+BA_ "GenMsgCycleTime" BO_ 1556 1000;
+BA_ "GenMsgCycleTime" BO_ 1312 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1307 0;
+BA_ "GenMsgCycleTime" BO_ 1307 500;
+BA_ "GenMsgILSupport" BO_ 1307 1;
+BA_ "GenMsgILSupport" BO_ 1072 1;
+BA_ "GenMsgNrOfRepetition" BO_ 1072 0;
+BA_ "GenMsgCycleTime" BO_ 1072 20;
+BA_ "GenSigStartValue" SG_ 1195 HCU_6_G_ElecPwrVal 1000;
+BA_ "GenSigStartValue" SG_ 825 LaneCurvatureRadius 1023;
+BA_ "GenSigStartValue" SG_ 1066 TotalOdometer_Km_OBDValidData 1;
+BA_ "GenSigStartValue" SG_ 806 TMF_SpdAct 32767;
+BA_ "GenSigStartValue" SG_ 924 SteeringAngle 32768;
+BA_ "GenSigStartValue" SG_ 777 ISGF_SpdAct 32767;
+BA_ "GenSigStartValue" SG_ 1175 CST_SensitivitySts 2;
+BA_ "GenSigStartValue" SG_ 1175 CST_Status 1;
+BA_ "GenSigStartValue" SG_ 990 FCM_7_NeborRiLineCrvt 260;
+BA_ "GenSigStartValue" SG_ 990 FCM_7_NeborLeLineCrvt 260;
+BA_ "GenSigStartValue" SG_ 990 FCM_7_NeborRiLineHozlDst 250;
+BA_ "GenSigStartValue" SG_ 990 FCM_7_NeborLeLineHozlDst 250;
+BA_ "GenSigStartValue" SG_ 988 FCM_6_EgoRiLineCrvt 260;
+BA_ "GenSigStartValue" SG_ 988 FCM_6_EgoRiLineHozlDst 250;
+BA_ "GenSigStartValue" SG_ 988 FCM_6_EgoLeLineCrvt 260;
+BA_ "GenSigStartValue" SG_ 988 FCM_6_EgoLeLineHozlDst 250;
+BA_ "GenSigStartValue" SG_ 1018 FCM_FRM_9_RiObjHozDstY 500;
+BA_ "GenSigStartValue" SG_ 1018 FCM_FRM_9_LeObjHozDstY 500;
+BA_ "GenSigStartValue" SG_ 1005 FCM_FRM_8_ACCObjHozDstY 500;
+BA_ "GenSigStartValue" SG_ 1020 FCM_10_TJAICAExitTextInfoSts 1;
+BA_ "GenSigStartValue" SG_ 1020 FCM_10_WarnModSts 3;
+BA_ "GenSigStartValue" SG_ 1020 FCM_10_EgoLeftLineHeatgAg 255;
+BA_ "GenSigStartValue" SG_ 1020 FCM_10_SLAONOFFSts 1;
+BA_ "GenSigStartValue" SG_ 903 FCM_FRM_6_FCWMode 1;
+BA_ "GenSigStartValue" SG_ 903 FCM_FRM_6_AEBMode 1;
+BA_ "GenSigStartValue" SG_ 640 EMS_1_G_FuelRollingCounter 0;
+BA_ "GenSigSendType" SG_ 1326 DATA7 2;
+BA_ "GenSigSendType" SG_ 1326 DATA6 2;
+BA_ "GenSigSendType" SG_ 1326 DATA5 2;
+BA_ "GenSigSendType" SG_ 1326 DATA4 2;
+BA_ "GenSigSendType" SG_ 1326 DATA3 2;
+BA_ "GenSigSendType" SG_ 1326 DATA2 2;
+BA_ "GenSigSendType" SG_ 1326 DATA1 2;
+BA_ "GenSigSendType" SG_ 1326 F_DL 2;
+BA_ "GenSigSendType" SG_ 1326 PCItype 2;
+BA_ "GenSigStartValue" SG_ 1307 CEM_5_TyreTemperature 60;
+SIG_GROUP_ 1281 CGW_ABS_ESP_G_0x501_E2E 1 : AVHWarningMessage ESPoffSwitchSts TCSFailSts VDCFailSts TCSActive VDCActive EBDFailSts AVHSts AVHFailSts HDCCtrlSts HDCFailSts CDPActive VehicleSpeedVSOSig VehicleSpeedVSOSigValidData ESP_G_HHCFailSts ESP_G_MessageCounter ESP_G_PressureMasterCylinder ESP_G_PressureMasCylindValidData ESP_G_CDPFailSts ESP_G_Checksum ABSFailSts CGW_ABS_ESP_G_FUSA_1;
+SIG_GROUP_ 704 ABS_ESP_G_0x2C0_E2E 1 : ABS_ESP_G_0x2C0_FUSA_1 ABS_ESP_G_0x2C0_FUSA_2 ABS_ESP_G_0x2C0_FUSA_3 ABS_ESP_G_0x2C0_FUSA_4 ABS_ESP_G_0x2C0_FUSA_5 ESP_G_ABSFailSts ESP_G_EBDFailSts ESP_G_TCSFailSts ESP_G_VDCFailSts ESP_G_TCSActive ESP_G_VDCActive ESP_G_HHCFailSts ESP_G_ESPoffSwitchSts ESP_G_CDPActive ESP_G_VehicleSpeedVSOSig ESP_VehicleSpeedVSOSigValidData ESP_G_MessageCounter ESP_G_CDPFailSts ESP_G_AVHStandby ESP_G_AVHAvailable ESP_G_AVHActive ESP_G_Checksum ESP_G_AVHWarningMessage ESP_G_HDCCtrlSts ESP_G_HDCFailSts;
+

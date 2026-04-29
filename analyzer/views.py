@@ -153,7 +153,7 @@ class FilterTaskCreateView(APIView):
 
         running = FilterTask.objects.filter(role_index=role_index, status__in=['PENDING', 'RUNNING']).first()
         if running:
-            if running.updated_at < timezone.now() - timedelta(seconds=20):
+            if running.updated_at < timezone.now() - timedelta(seconds=30):
                 running.status = 'EXPIRED'
                 running.message = '筛票超时，已被新任务替换'
                 running.save(update_fields=['status', 'message', 'updated_at'])

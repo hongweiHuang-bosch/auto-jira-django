@@ -1,0 +1,643 @@
+VERSION "PrivateDHUCAN"
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ZDC DAS IHU
+
+
+BO_ 514 IHU_5: 8 IHU
+ SG_ IHU_5_Status_Feedback : 2|1@0+ (1,0) [0|1] ""  ZDC
+ SG_ IHU_5_SET_PAS_Switch : 1|2@0+ (1,0) [0|3] ""  ZDC
+
+BO_ 513 IHU_4: 8 IHU
+ SG_ FPSlotLocked_Btn : 19|2@0+ (1,0) [0|3] ""  ZDC
+ SG_ Set_TrailSw : 17|2@0+ (1,0) [0|3] ""  ZDC
+ SG_ ParkIn_Direction : 15|2@0+ (1,0) [0|3] ""  ZDC
+ SG_ Engage_Confirm_Switch : 12|2@0+ (1,0) [0|3] ""  ZDC
+ SG_ Open_Switch : 10|3@0+ (1,0) [0|7] ""  ZDC
+ SG_ Resume_Switch : 7|2@0+ (1,0) [0|3] ""  ZDC
+ SG_ APAKeySts : 5|1@0+ (1,0) [0|1] ""  ZDC
+ SG_ AVMViewModeSwitch : 4|3@0+ (1,0) [0|7] ""  ZDC
+ SG_ TransparentHoodSwitch : 1|2@0+ (1,0) [0|3] ""  ZDC
+
+BO_ 515 IHU_1: 8 IHU
+ SG_ licenseplate_8 : 45|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_7 : 35|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_6 : 25|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_5 : 31|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_4 : 21|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_3 : 11|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_2 : 1|6@0+ (1,0) [0|63] ""  ZDC
+ SG_ licenseplate_1 : 7|6@0+ (1,0) [0|63] ""  ZDC
+
+BO_ 622 ZDC_Lane_3_4_Extd: 8 ZDC
+ SG_ Lane4_LineMarkColor : 62|1@0+ (1,0) [0|1] ""  IHU
+ SG_ Lane4_WidthMarking : 53|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane4_ViewRangeEnd : 44|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane4_Confidence : 60|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Lane4_ViewRangeStart : 35|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane4_Type : 39|4@0+ (1,0) [0|15] ""  IHU
+ SG_ Lane3_LineMarkColor : 30|1@0+ (1,0) [0|1] ""  IHU
+ SG_ Lane3_WidthMarking : 21|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane3_Confidence : 28|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Lane3_ViewRangeEnd : 12|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane3_ViewRangeStart : 3|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane3_Type : 7|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 621 ZDC_Lane_4: 8 ZDC
+ SG_ Lane4_CurvatureRate : 47|16@0+ (1E-008,-0.00032768) [-0.00032768|0.00032767] ""  IHU
+ SG_ Lane4_Curvature : 31|16@0+ (1E-006,-0.032768) [-0.032768|0.032767] ""  IHU
+ SG_ Lane4_HeadingAngle : 13|12@0+ (0.0005,-1.024) [-1.024|1.0235] ""  IHU
+ SG_ Lane4_Position : 7|10@0+ (0.025,-12.8) [-12.8|12.7] ""  IHU
+
+BO_ 620 ZDC_Lane_3: 8 ZDC
+ SG_ Lane3_CurvatureRate : 47|16@0+ (1E-008,-0.00032768) [-0.00032768|0.00032767] ""  IHU
+ SG_ Lane3_Curvature : 31|16@0+ (1E-006,-0.032768) [-0.032768|0.032767] ""  IHU
+ SG_ Lane3_HeadingAngle : 13|12@0+ (0.0005,-1.024) [-1.024|1.0235] ""  IHU
+ SG_ Lane3_Position : 7|10@0+ (0.025,-12.8) [-12.8|12.7] ""  IHU
+
+BO_ 618 ZDC_Lane_1_2_Extd: 8 ZDC
+ SG_ Lane2_LineMarkColor : 62|1@0+ (1,0) [0|1] ""  IHU
+ SG_ Lane2_WidthMarking : 53|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane2_Confidence : 60|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Lane2_ViewRangeEnd : 44|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane2_ViewRangeStart : 35|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane2_Type : 39|4@0+ (1,0) [0|15] ""  IHU
+ SG_ Lane1_LineMarkColor : 30|1@0+ (1,0) [0|1] ""  IHU
+ SG_ Lane1_WidthMarking : 21|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane1_Confidence : 28|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Lane1_ViewRangeEnd : 12|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane1_ViewRangeStart : 3|7@0+ (1,0) [0|127] ""  IHU
+ SG_ Lane1_Type : 7|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 617 ZDC_Lane_2: 8 ZDC
+ SG_ Lane2_CurvatureRate : 47|16@0+ (1E-008,-0.00032768) [-0.00032768|0.00032767] ""  IHU
+ SG_ Lane2_Curvature : 31|16@0+ (1E-006,-0.032768) [-0.032768|0.032767] ""  IHU
+ SG_ Lane2_HeadingAngle : 13|12@0+ (0.0005,-1.024) [-1.024|1.0235] ""  IHU
+ SG_ Lane2_Position : 7|10@0+ (0.025,-12.8) [-12.8|12.7] ""  IHU
+
+BO_ 616 ZDC_Lane_1: 8 ZDC
+ SG_ Lane1_CurvatureRate : 47|16@0+ (1E-008,-0.00032768) [-0.00032768|0.00032767] ""  IHU
+ SG_ Lane1_Curvature : 31|16@0+ (1E-006,-0.032768) [-0.032768|0.032767] ""  IHU
+ SG_ Lane1_HeadingAngle : 13|12@0+ (0.0005,-1.024) [-1.024|1.0235] ""  IHU
+ SG_ Lane1_Position : 7|10@0+ (0.025,-12.8) [-12.8|12.775] ""  IHU
+
+BO_ 614 ZDC_VRU_05_06: 8 ZDC
+ SG_ VRU_PosY_06 : 39|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_06 : 60|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_06 : 47|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_06 : 54|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_06 : 50|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_06 : 63|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_PosY_05 : 7|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_05 : 28|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_05 : 15|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_05 : 22|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_05 : 18|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_05 : 31|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 613 ZDC_VRU_03_04: 8 ZDC
+ SG_ VRU_PosY_04 : 39|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_04 : 60|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_04 : 47|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_04 : 54|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_04 : 50|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_04 : 63|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_PosY_03 : 7|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_03 : 28|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_03 : 15|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_03 : 22|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_03 : 18|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_03 : 31|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 612 ZDC_VRU_01_02: 8 ZDC
+ SG_ VRU_PosY_02 : 39|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_02 : 60|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_02 : 47|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_02 : 54|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_02 : 50|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_02 : 63|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_PosY_01 : 7|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ VRU_Confidence_01 : 28|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ VRU_PosX_01 : 15|9@0+ (0.1,0) [0|51.1] ""  IHU
+ SG_ VRU_Heading_01 : 22|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_Class_01 : 18|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VRU_ID_01 : 31|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 625 ZDC_Track_06: 8 ZDC
+ SG_ Confidence_06 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_06 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_06 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_06 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_06 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_06 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_06 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_06 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 624 ZDC_Track_05: 8 ZDC
+ SG_ Confidence_05 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_05 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_05 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_05 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_05 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_05 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_05 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_05 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 611 ZDC_Track_04: 8 ZDC
+ SG_ Confidence_04 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_04 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_04 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_04 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_04 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_04 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_04 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_04 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 610 ZDC_Track_03: 8 ZDC
+ SG_ Confidence_03 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_03 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_03 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_03 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_03 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_03 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_03 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_03 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 609 ZDC_Track_02: 8 ZDC
+ SG_ Confidence_02 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_02 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_02 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_02 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_02 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_02 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_02 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_02 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 608 ZDC_Track_01: 8 ZDC
+ SG_ Confidence_01 : 47|5@0+ (0.05,0) [0|1] ""  IHU
+ SG_ Heading_01 : 39|8@0+ (2,-180) [-180|180] ""  IHU
+ SG_ TTC_01 : 15|6@0+ (0.1,0) [0|6.3] ""  IHU
+ SG_ L_lat_rel_01 : 31|8@0+ (0.1,-12.8) [-12.8|12.7] ""  IHU
+ SG_ L_long_rel_01 : 9|10@0+ (0.1,0) [0|102.3] ""  IHU
+ SG_ CutInout_01 : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ TrackID_01 : 2|3@0+ (1,0) [0|7] ""  IHU
+ SG_ MC_object_class_01 : 5|3@0+ (1,0) [0|7] ""  IHU
+
+BO_ 577 VTR_1: 8 DAS
+ SG_ VTR_1_AliveCounter : 43|4@0+ (1,0) [0|15] ""  IHU
+ SG_ VTR_1_Failure_Display : 25|2@0+ (1,0) [0|3] ""  IHU
+ SG_ VTR_1_Terminated_Display : 23|4@0+ (1,0) [0|15] ""  IHU
+ SG_ VTR_1_Suspend_Display : 19|4@0+ (1,0) [0|15] ""  IHU
+ SG_ VTR_1_Active_Display : 15|2@0+ (1,0) [0|3] ""  IHU
+ SG_ VTR_1_Shakehand_display : 13|2@0+ (1,0) [0|3] ""  IHU
+ SG_ VTR_1_Planning_Display : 10|3@0+ (1,0) [0|7] ""  IHU
+ SG_ VTR_1_SystemSts : 7|4@0+ (1,0) [0|15] ""  IHU
+
+BO_ 576 APA_3: 8 DAS
+ SG_ APA_3_AliveCounter : 43|4@0+ (1,0) [0|15] ""  IHU
+ SG_ Status_Feedback : 38|3@0+ (1,0) [0|7] ""  IHU
+ SG_ APA_Active : 35|1@0+ (1,0) [0|1] ""  IHU
+ SG_ APA_3_Failure_Display : 34|3@0+ (1,0) [0|7] ""  IHU
+ SG_ APA_3_Terminate_Display : 31|4@0+ (1,0) [0|15] ""  IHU
+ SG_ APA_3_Suspend_Display : 27|4@0+ (1,0) [0|15] ""  IHU
+ SG_ APA_3_Active_Display : 23|4@0+ (1,0) [0|15] ""  IHU
+ SG_ APA_3_Shakehand_Display : 17|2@0+ (1,0) [0|3] ""  IHU
+ SG_ APA_3_Search_Display : 15|8@0+ (1,0) [0|127] ""  IHU
+ SG_ APA_3_APA_SystemSts : 7|4@0+ (1,0) [0|15] ""  IHU
+ SG_ APA_3_Button_Available : 3|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 512 IHU_AVM_APA_RPA: 8 IHU
+ SG_ IHU_AVM_Set_FactoryDefault : 23|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_AutoExit : 21|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_Transparency : 31|7@0+ (1,0) [0|100] ""  DAS
+ SG_ IHU_AVM_Set_PASTrigger : 24|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_GuideLine : 17|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_LicensePlate : 19|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_Language : 15|3@0+ (1,0) [0|7] ""  DAS
+ SG_ IHU_AVM_Set_BodyColor : 12|3@0+ (1,0) [0|7] ""  DAS
+ SG_ IHU_AVM_Set_AutoZoom : 9|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_TurnIndication : 7|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_SteeringWheel : 5|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_Set_RadarWarining : 3|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_OP_SW : 1|2@0+ (1,0) [0|3] ""  DAS
+
+BO_ 544 IHU_AVM: 8 IHU
+ SG_ IHU_AVM_CalibrationReq : 35|3@0+ (1,0) [0|7] ""  DAS
+ SG_ IHU_AVM_TouchEvt : 31|2@0+ (1,0) [0|3] ""  DAS
+ SG_ IHU_AVM_BtnPressInputValueY : 11|12@0+ (1,0) [0|4095] ""  DAS
+ SG_ IHU_AVM_BtnPressInputValueX : 7|12@0+ (1,0) [0|4095] ""  DAS
+
+BO_ 528 AVM_2: 8 DAS
+ SG_ AVM_SET_PAS_SwitchFB : 7|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM2LeftRight_Btn_Enabling_State : 5|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM2_RearWide_Btn_Enabling_State : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM2FrontWide_Btn_Enabling_State : 3|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_2_3D_VIEW_Btn_Enabling_State : 2|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_2_2D_VIEW_Btn_Enabling_State : 1|1@0+ (1,0) [0|1] ""  IHU
+
+BO_ 560 AVM_1: 8 DAS
+ SG_ AVM_1_TrailSwFeedback : 41|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_TransparentHoodSwFeedback : 43|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetLanguageFeedback : 55|3@0+ (1,0) [0|7] ""  IHU
+ SG_ AVM_1_SetSteeringWheelFeedback : 45|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetRadarWariningFeedback : 47|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetFactoryDefaultFeedback : 33|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetGuideLineFeedback : 35|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetLicensePlateFeedback : 37|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetAutoExitFeedback : 39|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetTransparencyFeedback : 31|7@0+ (1,0) [0|100] ""  IHU
+ SG_ AVM_1_SetPDCTriggerFeedback : 17|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetAutoZoomFeedback : 19|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_SetBodyColorFeedback : 22|3@0+ (1,0) [0|7] ""  IHU
+ SG_ AVM_1_SetTurnIndicationFeedback : 8|2@0+ (1,0) [0|3] ""  IHU
+ SG_ AVM_1_AVMCalibrationState : 49|4@0+ (1,0) [0|15] ""  IHU
+ SG_ AVM_1_AVMDisplayMode : 13|5@0+ (1,0) [0|31] ""  IHU
+ SG_ AVM_1_AVMActDeactDisplay : 1|4@0+ (1,0) [0|15] ""  IHU
+ SG_ AVM_1_AVMFuncSts : 52|3@0+ (1,0) [0|7] ""  IHU
+ SG_ AVM_1_FaultStatusCameraRight : 4|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_1_FaultStatusCameraRear : 5|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_1_FaultStatusCameraLeft : 6|1@0+ (1,0) [0|1] ""  IHU
+ SG_ AVM_1_FaultStatusCameraFront : 7|1@0+ (1,0) [0|1] ""  IHU
+
+
+
+BA_DEF_  "Baudrate" INT 1000 1000000;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "cyclic","spontaneous","not-used","not-used","not-used","cyclicAndSpontaneous","not-used","cyclicIfActive","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65536;
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 65536;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 65536;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ SG_  "GenSigStartValue" HEX 0 80000000;
+BA_DEF_ BU_  "NmAsrNodeIdentifier" INT 0 255;
+BA_DEF_ BU_  "NmAsrNode" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 100000;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 300000;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmAsrMessage" ENUM  "No","Yes";
+BA_DEF_  "NmAsrBaseAddress" HEX 0 536870911;
+BA_DEF_  "NmAsrMessageCount" INT 0 255;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ILused" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigFuncType" ENUM  "NoFunction","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","n/a","CHK","CNTR","n/a","n/a","n/a","CNTR_AR_01","CRC_AR_01_BOTH","CRC_AR_01_ALT","CRC_AR_01_LOW","CRC_AR_01_NIBBLE","CNTR_AR_04","CRC_AR_04A","CNTR_AR_05","CRC_AR_05";
+BA_DEF_ SG_  "GenSigDataID" STRING ;
+BA_DEF_ SG_  "SigGroup" STRING ;
+BA_DEF_DEF_  "Baudrate" 1000;
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "NmAsrNodeIdentifier" 0;
+BA_DEF_DEF_  "NmAsrNode" "No";
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "ProtocolType" "";
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "NmAsrMessage" "No";
+BA_DEF_DEF_  "NmAsrBaseAddress" 1280;
+BA_DEF_DEF_  "NmAsrMessageCount" 64;
+BA_DEF_DEF_  "NodeLayerModules" "CANoeILNLSPA.dll";
+BA_DEF_DEF_  "ILused" "Yes";
+BA_DEF_DEF_  "GenSigFuncType" "NoFunction";
+BA_DEF_DEF_  "GenSigDataID" "";
+BA_DEF_DEF_  "SigGroup" "";
+BA_ "Baudrate" 500000;
+BA_ "ProtocolType" "CAN";
+BA_ "BusType" "CAN";
+BA_ "NmAsrMessageCount" 64;
+BA_ "NmAsrBaseAddress" 1536;
+BA_ "DBName" "CAN02";
+BA_ "ILused" BU_ DAS 0;
+BA_ "ILused" BU_ IHU 0;
+BA_ "NodeLayerModules" BU_ IHU "CANoeILNLSPA.dll";
+BA_ "GenMsgSendType" BO_ 514 0;
+BA_ "GenMsgCycleTime" BO_ 514 1000;
+BA_ "GenMsgNrOfRepetition" BO_ 514 2;
+BA_ "GenMsgCycleTimeFast" BO_ 514 100;
+BA_ "GenMsgNrOfRepetition" BO_ 513 2;
+BA_ "GenMsgCycleTimeFast" BO_ 513 100;
+BA_ "GenMsgSendType" BO_ 515 0;
+BA_ "GenMsgCycleTime" BO_ 515 100;
+BA_ "GenMsgSendType" BO_ 622 0;
+BA_ "GenMsgCycleTime" BO_ 622 50;
+BA_ "GenMsgSendType" BO_ 621 0;
+BA_ "GenMsgCycleTime" BO_ 621 50;
+BA_ "GenMsgSendType" BO_ 620 0;
+BA_ "GenMsgCycleTime" BO_ 620 50;
+BA_ "GenMsgSendType" BO_ 618 0;
+BA_ "GenMsgCycleTime" BO_ 618 50;
+BA_ "GenMsgSendType" BO_ 617 0;
+BA_ "GenMsgCycleTime" BO_ 617 50;
+BA_ "GenMsgSendType" BO_ 616 0;
+BA_ "GenMsgCycleTime" BO_ 616 50;
+BA_ "GenMsgSendType" BO_ 614 0;
+BA_ "GenMsgCycleTime" BO_ 614 50;
+BA_ "GenMsgSendType" BO_ 613 0;
+BA_ "GenMsgCycleTime" BO_ 613 50;
+BA_ "GenMsgSendType" BO_ 612 0;
+BA_ "GenMsgCycleTime" BO_ 612 50;
+BA_ "GenMsgSendType" BO_ 625 0;
+BA_ "GenMsgCycleTime" BO_ 625 50;
+BA_ "GenMsgSendType" BO_ 624 0;
+BA_ "GenMsgCycleTime" BO_ 624 50;
+BA_ "GenMsgSendType" BO_ 611 0;
+BA_ "GenMsgCycleTime" BO_ 611 50;
+BA_ "GenMsgSendType" BO_ 610 0;
+BA_ "GenMsgCycleTime" BO_ 610 50;
+BA_ "GenMsgSendType" BO_ 609 0;
+BA_ "GenMsgCycleTime" BO_ 609 50;
+BA_ "GenMsgSendType" BO_ 608 0;
+BA_ "GenMsgCycleTime" BO_ 608 50;
+BA_ "GenMsgSendType" BO_ 577 0;
+BA_ "GenMsgCycleTime" BO_ 577 50;
+BA_ "GenMsgSendType" BO_ 576 0;
+BA_ "GenMsgCycleTime" BO_ 576 50;
+BA_ "GenMsgNrOfRepetition" BO_ 576 0;
+BA_ "GenMsgNrOfRepetition" BO_ 512 2;
+BA_ "GenMsgCycleTimeFast" BO_ 512 100;
+BA_ "GenMsgNrOfRepetition" BO_ 544 2;
+BA_ "GenMsgCycleTimeFast" BO_ 544 20;
+BA_ "GenMsgSendType" BO_ 528 0;
+BA_ "GenMsgCycleTime" BO_ 528 100;
+BA_ "GenMsgCycleTime" BO_ 560 500;
+BA_ "GenMsgSendType" BO_ 560 0;
+BA_ "GenSigSendType" SG_ 514 IHU_5_Status_Feedback 2;
+BA_ "GenSigSendType" SG_ 514 IHU_5_SET_PAS_Switch 2;
+BA_ "GenSigSendType" SG_ 513 FPSlotLocked_Btn 2;
+BA_ "GenSigSendType" SG_ 513 Set_TrailSw 2;
+BA_ "GenSigSendType" SG_ 513 ParkIn_Direction 2;
+BA_ "GenSigSendType" SG_ 513 Engage_Confirm_Switch 2;
+BA_ "GenSigSendType" SG_ 513 Open_Switch 2;
+BA_ "GenSigSendType" SG_ 513 Resume_Switch 2;
+BA_ "GenSigSendType" SG_ 513 APAKeySts 2;
+BA_ "GenSigSendType" SG_ 513 AVMViewModeSwitch 2;
+BA_ "GenSigSendType" SG_ 513 TransparentHoodSwitch 2;
+BA_ "GenSigSendType" SG_ 515 licenseplate_8 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_7 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_6 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_5 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_4 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_3 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_2 0;
+BA_ "GenSigSendType" SG_ 515 licenseplate_1 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_LineMarkColor 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_WidthMarking 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_ViewRangeEnd 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_Confidence 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_ViewRangeStart 0;
+BA_ "GenSigSendType" SG_ 622 Lane4_Type 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_LineMarkColor 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_WidthMarking 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_Confidence 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_ViewRangeEnd 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_ViewRangeStart 0;
+BA_ "GenSigSendType" SG_ 622 Lane3_Type 0;
+BA_ "GenSigSendType" SG_ 621 Lane4_CurvatureRate 0;
+BA_ "GenSigStartValue" SG_ 621 Lane4_CurvatureRate 32768;
+BA_ "GenSigSendType" SG_ 621 Lane4_Curvature 0;
+BA_ "GenSigStartValue" SG_ 621 Lane4_Curvature 32768;
+BA_ "GenSigSendType" SG_ 621 Lane4_HeadingAngle 0;
+BA_ "GenSigStartValue" SG_ 621 Lane4_HeadingAngle 2048;
+BA_ "GenSigSendType" SG_ 621 Lane4_Position 0;
+BA_ "GenSigStartValue" SG_ 621 Lane4_Position 512;
+BA_ "GenSigSendType" SG_ 620 Lane3_CurvatureRate 0;
+BA_ "GenSigStartValue" SG_ 620 Lane3_CurvatureRate 32768;
+BA_ "GenSigSendType" SG_ 620 Lane3_Curvature 0;
+BA_ "GenSigStartValue" SG_ 620 Lane3_Curvature 32768;
+BA_ "GenSigSendType" SG_ 620 Lane3_HeadingAngle 0;
+BA_ "GenSigStartValue" SG_ 620 Lane3_HeadingAngle 2048;
+BA_ "GenSigSendType" SG_ 620 Lane3_Position 0;
+BA_ "GenSigStartValue" SG_ 620 Lane3_Position 512;
+BA_ "GenSigSendType" SG_ 618 Lane2_LineMarkColor 0;
+BA_ "GenSigSendType" SG_ 618 Lane2_WidthMarking 0;
+BA_ "GenSigSendType" SG_ 618 Lane2_Confidence 0;
+BA_ "GenSigSendType" SG_ 618 Lane2_ViewRangeEnd 0;
+BA_ "GenSigSendType" SG_ 618 Lane2_ViewRangeStart 0;
+BA_ "GenSigSendType" SG_ 618 Lane2_Type 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_LineMarkColor 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_WidthMarking 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_Confidence 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_ViewRangeEnd 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_ViewRangeStart 0;
+BA_ "GenSigSendType" SG_ 618 Lane1_Type 0;
+BA_ "GenSigSendType" SG_ 617 Lane2_CurvatureRate 0;
+BA_ "GenSigStartValue" SG_ 617 Lane2_CurvatureRate 32768;
+BA_ "GenSigSendType" SG_ 617 Lane2_Curvature 0;
+BA_ "GenSigStartValue" SG_ 617 Lane2_Curvature 32768;
+BA_ "GenSigSendType" SG_ 617 Lane2_HeadingAngle 0;
+BA_ "GenSigStartValue" SG_ 617 Lane2_HeadingAngle 2048;
+BA_ "GenSigSendType" SG_ 617 Lane2_Position 0;
+BA_ "GenSigStartValue" SG_ 617 Lane2_Position 512;
+BA_ "GenSigSendType" SG_ 616 Lane1_CurvatureRate 0;
+BA_ "GenSigStartValue" SG_ 616 Lane1_CurvatureRate 32768;
+BA_ "GenSigSendType" SG_ 616 Lane1_Curvature 0;
+BA_ "GenSigStartValue" SG_ 616 Lane1_Curvature 32768;
+BA_ "GenSigSendType" SG_ 616 Lane1_HeadingAngle 0;
+BA_ "GenSigStartValue" SG_ 616 Lane1_HeadingAngle 2048;
+BA_ "GenSigSendType" SG_ 616 Lane1_Position 0;
+BA_ "GenSigStartValue" SG_ 616 Lane1_Position 512;
+BA_ "GenSigSendType" SG_ 614 VRU_PosY_06 0;
+BA_ "GenSigStartValue" SG_ 614 VRU_PosY_06 128;
+BA_ "GenSigSendType" SG_ 614 VRU_Confidence_06 0;
+BA_ "GenSigSendType" SG_ 614 VRU_PosX_06 0;
+BA_ "GenSigSendType" SG_ 614 VRU_Heading_06 0;
+BA_ "GenSigSendType" SG_ 614 VRU_Class_06 0;
+BA_ "GenSigSendType" SG_ 614 VRU_ID_06 0;
+BA_ "GenSigSendType" SG_ 614 VRU_PosY_05 0;
+BA_ "GenSigStartValue" SG_ 614 VRU_PosY_05 128;
+BA_ "GenSigSendType" SG_ 614 VRU_Confidence_05 0;
+BA_ "GenSigSendType" SG_ 614 VRU_PosX_05 0;
+BA_ "GenSigSendType" SG_ 614 VRU_Heading_05 0;
+BA_ "GenSigSendType" SG_ 614 VRU_Class_05 0;
+BA_ "GenSigSendType" SG_ 614 VRU_ID_05 0;
+BA_ "GenSigSendType" SG_ 613 VRU_PosY_04 0;
+BA_ "GenSigStartValue" SG_ 613 VRU_PosY_04 128;
+BA_ "GenSigSendType" SG_ 613 VRU_Confidence_04 0;
+BA_ "GenSigSendType" SG_ 613 VRU_PosX_04 0;
+BA_ "GenSigSendType" SG_ 613 VRU_Heading_04 0;
+BA_ "GenSigSendType" SG_ 613 VRU_Class_04 0;
+BA_ "GenSigSendType" SG_ 613 VRU_ID_04 0;
+BA_ "GenSigSendType" SG_ 613 VRU_PosY_03 0;
+BA_ "GenSigStartValue" SG_ 613 VRU_PosY_03 128;
+BA_ "GenSigSendType" SG_ 613 VRU_Confidence_03 0;
+BA_ "GenSigSendType" SG_ 613 VRU_PosX_03 0;
+BA_ "GenSigSendType" SG_ 613 VRU_Heading_03 0;
+BA_ "GenSigSendType" SG_ 613 VRU_Class_03 0;
+BA_ "GenSigSendType" SG_ 613 VRU_ID_03 0;
+BA_ "GenSigSendType" SG_ 612 VRU_PosY_02 0;
+BA_ "GenSigStartValue" SG_ 612 VRU_PosY_02 128;
+BA_ "GenSigSendType" SG_ 612 VRU_Confidence_02 0;
+BA_ "GenSigSendType" SG_ 612 VRU_PosX_02 0;
+BA_ "GenSigSendType" SG_ 612 VRU_Heading_02 0;
+BA_ "GenSigSendType" SG_ 612 VRU_Class_02 0;
+BA_ "GenSigSendType" SG_ 612 VRU_ID_02 0;
+BA_ "GenSigSendType" SG_ 612 VRU_PosY_01 0;
+BA_ "GenSigStartValue" SG_ 612 VRU_PosY_01 128;
+BA_ "GenSigSendType" SG_ 612 VRU_Confidence_01 0;
+BA_ "GenSigSendType" SG_ 612 VRU_PosX_01 0;
+BA_ "GenSigSendType" SG_ 612 VRU_Heading_01 0;
+BA_ "GenSigSendType" SG_ 612 VRU_Class_01 0;
+BA_ "GenSigSendType" SG_ 612 VRU_ID_01 0;
+BA_ "GenSigSendType" SG_ 625 Confidence_06 0;
+BA_ "GenSigSendType" SG_ 625 Heading_06 0;
+BA_ "GenSigStartValue" SG_ 625 Heading_06 90;
+BA_ "GenSigSendType" SG_ 625 TTC_06 0;
+BA_ "GenSigSendType" SG_ 625 L_lat_rel_06 0;
+BA_ "GenSigStartValue" SG_ 625 L_lat_rel_06 128;
+BA_ "GenSigSendType" SG_ 625 L_long_rel_06 0;
+BA_ "GenSigSendType" SG_ 625 CutInout_06 0;
+BA_ "GenSigSendType" SG_ 625 TrackID_06 0;
+BA_ "GenSigSendType" SG_ 625 MC_object_class_06 0;
+BA_ "GenSigSendType" SG_ 624 Confidence_05 0;
+BA_ "GenSigSendType" SG_ 624 Heading_05 0;
+BA_ "GenSigStartValue" SG_ 624 Heading_05 90;
+BA_ "GenSigSendType" SG_ 624 TTC_05 0;
+BA_ "GenSigSendType" SG_ 624 L_lat_rel_05 0;
+BA_ "GenSigStartValue" SG_ 624 L_lat_rel_05 128;
+BA_ "GenSigSendType" SG_ 624 L_long_rel_05 0;
+BA_ "GenSigSendType" SG_ 624 CutInout_05 0;
+BA_ "GenSigSendType" SG_ 624 TrackID_05 0;
+BA_ "GenSigSendType" SG_ 624 MC_object_class_05 0;
+BA_ "GenSigSendType" SG_ 611 Confidence_04 0;
+BA_ "GenSigSendType" SG_ 611 Heading_04 0;
+BA_ "GenSigStartValue" SG_ 611 Heading_04 90;
+BA_ "GenSigSendType" SG_ 611 TTC_04 0;
+BA_ "GenSigSendType" SG_ 611 L_lat_rel_04 0;
+BA_ "GenSigStartValue" SG_ 611 L_lat_rel_04 128;
+BA_ "GenSigSendType" SG_ 611 L_long_rel_04 0;
+BA_ "GenSigSendType" SG_ 611 CutInout_04 0;
+BA_ "GenSigSendType" SG_ 611 TrackID_04 0;
+BA_ "GenSigSendType" SG_ 611 MC_object_class_04 0;
+BA_ "GenSigSendType" SG_ 610 Confidence_03 0;
+BA_ "GenSigSendType" SG_ 610 Heading_03 0;
+BA_ "GenSigStartValue" SG_ 610 Heading_03 90;
+BA_ "GenSigSendType" SG_ 610 TTC_03 0;
+BA_ "GenSigSendType" SG_ 610 L_lat_rel_03 0;
+BA_ "GenSigStartValue" SG_ 610 L_lat_rel_03 128;
+BA_ "GenSigSendType" SG_ 610 L_long_rel_03 0;
+BA_ "GenSigSendType" SG_ 610 CutInout_03 0;
+BA_ "GenSigSendType" SG_ 610 TrackID_03 0;
+BA_ "GenSigSendType" SG_ 610 MC_object_class_03 0;
+BA_ "GenSigSendType" SG_ 609 Confidence_02 0;
+BA_ "GenSigSendType" SG_ 609 Heading_02 0;
+BA_ "GenSigStartValue" SG_ 609 Heading_02 90;
+BA_ "GenSigSendType" SG_ 609 TTC_02 0;
+BA_ "GenSigSendType" SG_ 609 L_lat_rel_02 0;
+BA_ "GenSigStartValue" SG_ 609 L_lat_rel_02 128;
+BA_ "GenSigSendType" SG_ 609 L_long_rel_02 0;
+BA_ "GenSigSendType" SG_ 609 CutInout_02 0;
+BA_ "GenSigSendType" SG_ 609 TrackID_02 0;
+BA_ "GenSigSendType" SG_ 609 MC_object_class_02 0;
+BA_ "GenSigSendType" SG_ 608 Confidence_01 0;
+BA_ "GenSigSendType" SG_ 608 Heading_01 0;
+BA_ "GenSigSendType" SG_ 608 TTC_01 0;
+BA_ "GenSigSendType" SG_ 608 L_lat_rel_01 0;
+BA_ "GenSigSendType" SG_ 608 L_long_rel_01 0;
+BA_ "GenSigSendType" SG_ 608 CutInout_01 0;
+BA_ "GenSigSendType" SG_ 608 TrackID_01 0;
+BA_ "GenSigSendType" SG_ 608 MC_object_class_01 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_AliveCounter 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Failure_Display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Terminated_Display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Suspend_Display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Active_Display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Shakehand_display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_Planning_Display 0;
+BA_ "GenSigSendType" SG_ 577 VTR_1_SystemSts 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_AliveCounter 0;
+BA_ "GenSigSendType" SG_ 576 Status_Feedback 0;
+BA_ "GenSigSendType" SG_ 576 APA_Active 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Failure_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Terminate_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Suspend_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Active_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Shakehand_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Search_Display 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_APA_SystemSts 0;
+BA_ "GenSigSendType" SG_ 576 APA_3_Button_Available 0;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_FactoryDefault 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_AutoExit 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_Transparency 2;
+BA_ "GenSigStartValue" SG_ 512 IHU_AVM_Set_Transparency 100;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_PASTrigger 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_GuideLine 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_LicensePlate 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_Language 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_BodyColor 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_AutoZoom 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_TurnIndication 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_SteeringWheel 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_Set_RadarWarining 2;
+BA_ "GenSigSendType" SG_ 512 IHU_AVM_OP_SW 2;
+BA_ "GenSigSendType" SG_ 544 IHU_AVM_CalibrationReq 2;
+BA_ "GenSigSendType" SG_ 544 IHU_AVM_TouchEvt 2;
+BA_ "GenSigSendType" SG_ 544 IHU_AVM_BtnPressInputValueY 2;
+BA_ "GenSigSendType" SG_ 544 IHU_AVM_BtnPressInputValueX 2;
+BA_ "GenSigSendType" SG_ 528 AVM_SET_PAS_SwitchFB 0;
+BA_ "GenSigSendType" SG_ 528 AVM2LeftRight_Btn_Enabling_State 0;
+BA_ "GenSigSendType" SG_ 528 AVM2_RearWide_Btn_Enabling_State 0;
+BA_ "GenSigSendType" SG_ 528 AVM2FrontWide_Btn_Enabling_State 0;
+BA_ "GenSigSendType" SG_ 528 AVM_2_3D_VIEW_Btn_Enabling_State 0;
+BA_ "GenSigSendType" SG_ 528 AVM_2_2D_VIEW_Btn_Enabling_State 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_TrailSwFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_TransparentHoodSwFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetLanguageFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetSteeringWheelFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetRadarWariningFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetFactoryDefaultFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetGuideLineFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetLicensePlateFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetAutoExitFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetTransparencyFeedback 0;
+BA_ "GenSigStartValue" SG_ 560 AVM_1_SetTransparencyFeedback 100;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetPDCTriggerFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetAutoZoomFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetBodyColorFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_SetTurnIndicationFeedback 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_AVMCalibrationState 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_AVMDisplayMode 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_AVMActDeactDisplay 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_AVMFuncSts 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_FaultStatusCameraRight 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_FaultStatusCameraRear 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_FaultStatusCameraLeft 0;
+BA_ "GenSigSendType" SG_ 560 AVM_1_FaultStatusCameraFront 0;
+

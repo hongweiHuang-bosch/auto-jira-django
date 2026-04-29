@@ -7,6 +7,7 @@ from django.db import transaction
 from django.utils import timezone
 
 from analyzer.models import FilterTask, IssueProcessTask
+from analyzer.services.rule_group_stream import publish_rule_group_snapshot
 
 logger = logging.getLogger('jira_analyzer_worker')
 
@@ -27,6 +28,7 @@ def claim_pending_filter_task(now=None):
         task.message = '正在执行 JQL 查询'
         task.save(update_fields=['status', 'started_at', 'message', 'updated_at'])
         logger.info('claimed filter task', extra={'filter_task_id': task.id, 'role_index': task.role_index})
+        publish_rule_group_snapshot()
         return task.id
 
 

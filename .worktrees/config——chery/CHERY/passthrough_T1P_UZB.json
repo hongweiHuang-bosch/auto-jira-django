@@ -1,0 +1,66 @@
+[
+  {
+    "dest": "PT_LCM",
+    "prop": "AP_CONTROL_DISPLAY_STATE_REQ"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "AP_POWER_MODE_REQUEST"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "AP_POWER_STATE_REPORT"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "BTCALL_TENMIN_T1J_STS"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "EBCALL_T1J_STS"
+  },
+  {
+    "dest": "PT_DEFAULT",
+    "prop": "ESE_DRIVEMODE"
+  },
+  {
+    "dest": "PT_HARDKEY",
+    "prop": "HW_KEY_INPUT"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "OMS_T1J_STS"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "OTA_T1J_STS"
+  },
+  {
+    "dest": "PT_RTC",
+    "prop": "SETTINGS_MCU_TIME"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "STR_T1J_STS"
+  },
+  {
+    "dest": "PT_DEFAULT",
+    "prop": "SYS_FACTORY_RESET"
+  },
+  {
+    "dest": "PT_DEFAULT",
+    "prop": "TBOX_MUTE_PIN_STS"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "VEHICLE_SET_SCREEN_SAVER_REQ"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "AP_SET_STR_DURATION_REQ"
+  },
+  {
+    "dest": "PT_LCM",
+    "prop": "AP_GET_STR_DURATION_REQ"
+  }
+]
