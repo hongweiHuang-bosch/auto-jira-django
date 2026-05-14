@@ -11,14 +11,26 @@
 **前置上下文（执行前必读）：**
 - 设计规格：`docs/superpowers/specs/2026-05-14-geely2-merge-design.md`（执行前完整阅读）
 - 工作目录：`django_jira_analyzer/`（除非另行说明，所有 `git`/`python manage.py` 命令都在此目录执行）
-- 当前分支：`feature/filter-snapshot-single-issue`，HEAD `da273d4`，工作区有 2 个未提交文件 + 若干未跟踪文件，本计划不动它们
+- 当前分支：`feature/filter-snapshot-single-issue`，HEAD `4b99c2b`（含 docs commit），工作区有 2 个未提交文件 + 若干未跟踪文件，本计划不动它们
 - worktree 路径：`.worktrees/geely2-minimal-backend/`（验证全部通过后才下线）
 - 前端目录：`../jira-analyzer-web/`（本计划不修改前端代码）
+- MySQL：通过 `~/mysql/docker-compose.yaml` 启动的 `mysql:9.3.0` 容器（root/root @ 127.0.0.1:3306），库名 `jira_analyzer`
+
+**当前数据库实测状态（2026-05-14 探测得到，影响任务 3、4、7）：**
+- `analyzer_*` 6 张表已存在并有数据
+- `geely2_analyzer_*` 5 张表**已存在**（worktree 之前已建表），含真实数据：
+  - `jiracredentialbinding` 1 条（user_id=3，jira_username=`Xin.SHEN@cn.bosch.com`，用 Fernet key `mRPLK2gvtrQ73iUlN_X8IZ4LfVkDUBYDbV4wV_b0Zz8=` 加密——已验证可解密）
+  - `geely2synctask` 4 条
+  - 其他 geely2 表为空
+- `django_migrations` 表**整表为空**（analyzer 自己的迁移记录也没有，长期遗留状态，本次不修）
+- `auth_user` 1 条（已有用户，user_id=3）
+- `django_session` 2 条
 
 **执行约束：**
 - 任何步骤"预期输出"不符合时，停下汇报，**不要打补丁式硬干**
 - 整个计划完成前不要 push 到远端
-- 任务 1～任务 4 完成前，前端验证环节（任务 7、8）会失败，按顺序推进
+- 任务 1～任务 3 完成前，前端验证环节（任务 7、8）会失败，按顺序推进
+- **不要重新生成 Fernet key**：必须复用 `mRPLK2gvtrQ73iUlN_X8IZ4LfVkDUBYDbV4wV_b0Zz8=`，否则现有 1 条凭据会无法解密、4 条同步任务关联失效
 
 ---
 
@@ -166,22 +178,14 @@ git status --short
 **文件：**
 - 创建：`.env.local`（开发本地用，**不入 git**；生产由部署侧设置）
 
-- [ ] **步骤 1：生成 Fernet 密钥**
+**前置约束**：本任务**不生成新的 Fernet key**。`JIRA_CREDENTIAL_ENCRYPTION_KEY` 必须固定为 worktree 默认值，与已加密的 1 条凭据保持兼容。
+
+- [ ] **步骤 1：导出环境变量到当前 shell**
 
 运行：
 
 ```bash
-python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-```
-
-预期：输出一行 44 字符的 base64 串，例如 `mRPLK2gvtrQ73iUlN_X8IZ4LfVkDUBYDbV4wV_b0Zz8=`。**复制保存这串值**，下一步要用，且**不能丢**——丢失会导致已加密的 Jira 凭据全部无法解密。
-
-- [ ] **步骤 2：导出环境变量到当前 shell**
-
-运行（把 `<生成出的 base64 串>` 替换成步骤 1 的输出）：
-
-```bash
-export JIRA_CREDENTIAL_ENCRYPTION_KEY="<生成出的 base64 串>"
+export JIRA_CREDENTIAL_ENCRYPTION_KEY="mRPLK2gvtrQ73iUlN_X8IZ4LfVkDUBYDbV4wV_b0Zz8="
 export DJANGO_SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(64))')"
 echo "JIRA_CREDENTIAL_ENCRYPTION_KEY length: ${#JIRA_CREDENTIAL_ENCRYPTION_KEY}"
 echo "DJANGO_SECRET_KEY length: ${#DJANGO_SECRET_KEY}"
@@ -189,7 +193,7 @@ echo "DJANGO_SECRET_KEY length: ${#DJANGO_SECRET_KEY}"
 
 预期：第一行输出 `JIRA_CREDENTIAL_ENCRYPTION_KEY length: 44`；第二行输出 `DJANGO_SECRET_KEY length: 86`。
 
-- [ ] **步骤 3：可选——写入 .env.local 方便后续 shell 复用**
+- [ ] **步骤 2：可选——写入 .env.local 方便后续 shell 复用**
 
 运行：
 
@@ -203,11 +207,11 @@ grep -q "^.env.local$" .gitignore || echo ".env.local" >> .gitignore
 git status --short .gitignore
 ```
 
-预期：`.env.local` 创建成功；`.gitignore` 末尾追加一行 `.env.local`，`git status` 显示 `M .gitignore`。
+预期：`.env.local` 创建成功；`.gitignore` 末尾追加一行 `.env.local`，`git status` 显示 `M .gitignore`（如果已含则无变化）。
 
 后续新 shell 可用 `source .env.local` 恢复环境。
 
-- [ ] **步骤 4：验证 settings 能正确加载密钥**
+- [ ] **步骤 3：验证 settings 能正确加载密钥并解密现有凭据**
 
 运行：
 
@@ -217,40 +221,60 @@ import os, django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 from geely2_analyzer.services.credential_crypto import encrypt_secret, decrypt_secret
+from geely2_analyzer.models import JiraCredentialBinding
 sample = 'verify-key-roundtrip'
 encrypted = encrypt_secret(sample)
 decrypted = decrypt_secret(encrypted)
-print('encrypted prefix:', encrypted[:7])
 print('round-trip ok:', decrypted == sample)
+binding = JiraCredentialBinding.objects.first()
+if binding:
+    plaintext = decrypt_secret(binding.encrypted_password)
+    print('existing binding decrypt ok, length:', len(plaintext))
+else:
+    print('no existing binding (unexpected)')
 "
 ```
 
 预期：
-- `encrypted prefix: enc::g` 或类似 `enc::` 开头
 - `round-trip ok: True`
+- `existing binding decrypt ok, length: 11`
 
-如果抛 `ImproperlyConfigured`：步骤 2 的 export 没生效，重做。
+如果抛 `ImproperlyConfigured`：步骤 1 的 export 没生效，重做。
+如果 `decrypt` 抛 `InvalidToken`：用错了 Fernet key（检查步骤 1 的常量是否被改过）。
 
 ---
 
-## 任务 3：数据库迁移
+## 任务 3：数据库迁移（fake-initial 模式）
+
+**重要前置**：实测 MySQL 中 `geely2_analyzer_*` 5 张表已存在且有真实数据，但 `django_migrations` 整表为空。本任务用 `--fake-initial` 让 Django 把现有 schema "认领"为已应用的 0001_initial，**不重建表、不动数据**。
 
 **文件：**
-- 数据库变更：MySQL `jira_analyzer` 库新增 5 张表（`geely2_analyzer_*`）
+- 数据库变更：仅 `django_migrations` 表新增 2 行记录（`geely2_analyzer.0001_initial`、可能含 `contenttypes`/`auth` 自动补齐）
 
-- [ ] **步骤 1：确认 MySQL 连接参数**
+- [ ] **步骤 1：确认 MySQL 连接与 schema 现状**
 
 运行：
 
 ```bash
-python manage.py dbshell -- -e "SELECT DATABASE(), VERSION();"
+python -c "
+import pymysql
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', password='root', db='jira_analyzer')
+with conn.cursor() as cur:
+    cur.execute(\"SHOW TABLES LIKE 'geely2_analyzer_%';\")
+    print('geely2 tables:', [r[0] for r in cur.fetchall()])
+    cur.execute('SELECT COUNT(*) FROM django_migrations;')
+    print('django_migrations row count:', cur.fetchone()[0])
+"
 ```
 
-预期：输出当前数据库名（默认 `jira_analyzer`）和 MySQL 版本。
+预期：
+- `geely2 tables:` 包含 5 个名称（`geely2analysisresult`/`geely2analysistask`/`geely2issuesnapshot`/`geely2synctask`/`jiracredentialbinding`）
+- `django_migrations row count: 0`
 
-如果连接失败：检查 `MYSQL_HOST/PORT/USER/PASSWORD/DATABASE` 环境变量，参考 `README.md` "三、准备数据库环境变量"一节，修复后重试。
+如果表数 ≠ 5：现状与实测不符，停下汇报。
+如果 `django_migrations` 已有记录：检查是否包含 `geely2_analyzer.0001_initial`，已有则跳过步骤 3。
 
-- [ ] **步骤 2：列出待执行的 migration**
+- [ ] **步骤 2：列出待应用的 migration**
 
 运行：
 
@@ -258,68 +282,97 @@ python manage.py dbshell -- -e "SELECT DATABASE(), VERSION();"
 python manage.py showmigrations geely2_analyzer
 ```
 
-预期：输出包含一行 `[ ] 0001_initial`（未应用）。
+预期：包含一行 `[ ] 0001_initial`（未应用）。
 
-- [ ] **步骤 3：执行迁移**
+- [ ] **步骤 3：执行 fake-initial 迁移**
 
 运行：
 
 ```bash
-python manage.py migrate geely2_analyzer
+python manage.py migrate geely2_analyzer --fake-initial
 python manage.py migrate
 ```
 
 预期：
-- 第一条命令输出 `Applying geely2_analyzer.0001_initial... OK`
-- 第二条命令输出 `No migrations to apply.`（其他 app 都已最新）
+- 第一条命令输出含 `Faked: ... 0001_initial` 或 `Running migrations: ... 0001_initial... FAKED`
+- 第二条命令输出 `Operations to perform: ... Applying contenttypes.0001_initial... OK`（其他 Django 内置 app 的 migration 真的会执行——因为 `django_migrations` 整表为空，但这些 app 的表已存在，需要 Django 自己识别 `--fake-initial`；如果报错"Table already exists"，对所有 app 重做：`python manage.py migrate --fake-initial`）
 
-- [ ] **步骤 4：验证 5 张新表创建成功**
+如果第二条报 `Table 'auth_user' already exists` 类错误：
+```bash
+python manage.py migrate --fake-initial
+```
+
+- [ ] **步骤 4：验证 migration 已记录、数据未损**
 
 运行：
 
 ```bash
-python manage.py dbshell -- -e "SHOW TABLES LIKE 'geely2_analyzer_%';"
+python -c "
+import pymysql
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', password='root', db='jira_analyzer')
+with conn.cursor() as cur:
+    cur.execute(\"SELECT app, name FROM django_migrations WHERE app IN ('geely2_analyzer','platform_accounts');\")
+    rows = cur.fetchall()
+    print('geely2/platform migrations recorded:', rows)
+    cur.execute('SELECT COUNT(*) FROM geely2_analyzer_jiracredentialbinding;')
+    print('binding rows:', cur.fetchone()[0])
+    cur.execute('SELECT COUNT(*) FROM geely2_analyzer_geely2synctask;')
+    print('sync_task rows:', cur.fetchone()[0])
+    cur.execute('SELECT COUNT(*) FROM auth_user;')
+    print('auth_user rows:', cur.fetchone()[0])
+"
 ```
 
-预期输出包含这 5 行（顺序可能不同）：
-```
-geely2_analyzer_geely2analysisresult
-geely2_analyzer_geely2analysistask
-geely2_analyzer_geely2issuesnapshot
-geely2_analyzer_geely2synctask
-geely2_analyzer_jiracredentialbinding
-```
+预期：
+- `geely2/platform migrations recorded:` 包含至少 `('geely2_analyzer', '0001_initial')`
+- `binding rows: 1`（数据未丢）
+- `sync_task rows: 4`（数据未丢）
+- `auth_user rows: 1`（数据未丢）
 
-如果只列出部分表：检查 `migrate` 输出是否中途报错，回滚用 `python manage.py migrate geely2_analyzer zero` 然后重做。
+如果任何 `rows` 数字下降：数据被破坏，停下汇报；从 docker volume 备份恢复（`~/mysql/mysql-data` 目录）。
 
 ---
 
-## 任务 4：创建至少一个 Django 用户
+## 任务 4：确认 Django 用户可用
 
-- [ ] **步骤 1：创建超级用户**
+**实测**：`auth_user` 已有 1 条记录（user_id=3），且 `JiraCredentialBinding` 已绑定到该用户。本任务**不再 createsuperuser**，仅确认现有用户可用。
+
+- [ ] **步骤 1：列出现有用户**
 
 运行：
+
+```bash
+python manage.py shell -c "
+from django.contrib.auth import get_user_model
+U = get_user_model()
+for u in U.objects.all():
+    print(f'id={u.id} username={u.username!r} is_superuser={u.is_superuser} has_usable_password={u.has_usable_password()}')
+"
+```
+
+预期：至少 1 行，且 `has_usable_password=True`。记下 `username`，任务 7 用它登录。
+
+- [ ] **步骤 2：如果忘记密码——重置（仅必要时执行）**
+
+如果你记得现有用户的密码，跳过此步。
+
+如果不记得，运行（替换 `<username>` 为步骤 1 的用户名）：
+
+```bash
+python manage.py changepassword <username>
+```
+
+按提示输入新密码两次。预期输出 `Password changed successfully for user "<username>"`.
+
+- [ ] **步骤 3（可选）：另建一个 superuser 备用**
+
+如果想要一个独立的管理员账号：
 
 ```bash
 python manage.py createsuperuser
 ```
 
-按提示交互输入：
-- Username（建议 `admin` 或你的用户名）
-- Email（可留空回车）
-- Password（输入两次，至少 8 位；当前 `AUTH_PASSWORD_VALIDATORS=[]` 不强制复杂度）
-
-预期：输出 `Superuser created successfully.`
-
-- [ ] **步骤 2：验证用户已落库**
-
-运行：
-
-```bash
-python manage.py shell -c "from django.contrib.auth import get_user_model; print(get_user_model().objects.values_list('id', 'username'))"
-```
-
-预期：输出形如 `<QuerySet [(1, 'admin')]>`，至少 1 条记录。
+否则跳过。
 
 ---
 
@@ -468,18 +521,16 @@ npm run serve
 
 预期：成功后浏览器跳转到 `/geely2`，页面显示凭据配置入口。
 
-- [ ] **步骤 5：保存 Jira 凭据**
+- [ ] **步骤 5：确认凭据状态（已存在则跳过填写）**
 
-在凭据表单中填写：
+刷新 `/geely2`，如果页面显示已配置（前端会调用 `GET /api/geely2/credential/` 拿到 `{"configured": true, ...}`），跳过填写、直接进入步骤 6。
+
+如果你登录的不是 user_id=3 这个账号，前端会显示需要配置——此时才填写：
 - Jira Base URL（默认 `https://boolbool.atlassian.net/`，按你实际环境修改）
 - Jira Username（你的 Jira 账号）
 - Jira Password（Jira API Token 或密码）
 
-点击保存。
-
-预期：
-- 接口 `PUT /api/geely2/credential/` 返回 200，响应体包含 `{"configured": true, ...}`
-- 数据库 `geely2_analyzer_jiracredentialbinding` 表新增一行；`encrypted_password` 字段以 `enc::` 开头（验证：`python manage.py shell -c "from geely2_analyzer.models import JiraCredentialBinding; print(JiraCredentialBinding.objects.values_list('encrypted_password', flat=True)[0][:7])"`，应输出 `enc::g` 或类似）
+点击保存，预期接口 `PUT /api/geely2/credential/` 返回 200，响应体含 `{"configured": true, ...}`。
 
 - [ ] **步骤 6：触发同步**
 
