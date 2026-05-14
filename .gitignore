@@ -1,0 +1,8 @@
+.worktrees/
+.codex
+.env.example
+.venv/
+__pycache__/
+.gitignore
+comment/
+.env.local
