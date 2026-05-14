@@ -3,6 +3,7 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-jira-analyzer-demo-key")
+JIRA_CREDENTIAL_ENCRYPTION_KEY = os.getenv("JIRA_CREDENTIAL_ENCRYPTION_KEY", "")
 DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
@@ -16,6 +17,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "analyzer",
+    "platform_accounts",
+    "geely2_analyzer",
 ]
 
 MIDDLEWARE = [
