@@ -15,8 +15,8 @@ MAP_CAR_ROLE = (
     # chery 8155 按照8255 的prompt去解决
     # chery 8155 项目
     {
-        # "jql":"project in (CHER, CHYT28) AND issuekey in updatedBy(DaiYungui_bosch) AND issue= CHER-142701",
-        "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT != T1L_FL1_8255 ORDER BY updated DESC",
+        "jql":"project in (CHER, CHYT28) AND issuekey in updatedBy(DaiYungui_bosch) AND issue= CHER-142701",
+        # "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT != T1L_FL1_8255 ORDER BY updated DESC",
         # chery-8155
         "expand": "changelog",
 

@@ -376,7 +376,7 @@ class Pipeline:
                 try:
                     text = path.read_text(encoding="utf-8", errors="ignore")
                 except Exception as e:
-                    logger.warning(f"[{issue_key}] 读取Android 日志失败： {path}, {e}")
+                    logger.warning(f"读取 Android 日志失败: {path}, {e}")
                     continue
                 parts.append(f"{text.rstrip()}\n")
         return parts
@@ -392,7 +392,7 @@ class Pipeline:
                 try:
                     text = path.read_text(encoding="utf-8", errors="ignore")
                 except Exception as e:
-                    logger.warning(f"[{issue_key}] 读取 qnx 日志失败: {path}, {e}")
+                    logger.warning(f"读取 qnx 日志失败: {path}, {e}")
                     continue
 
                     # f"\n===== QNX_LOG [{unzip_root.name}] KEY={kw} FILE={path.name} =====\n"
@@ -759,7 +759,12 @@ class Pipeline:
                         self._finalize_issue(issue_key, summary, "压缩包里没有cantrace ，请复测", cantrace_path)
                         return
                 else:
-                    latest_cantrace = download_result["can_files"][0]
+                    can_files = download_result.get("can_files") or []
+                    if not can_files:
+                        logger.warning(f"[{issue_key}] can_files 为空，下载未产出可用 cantrace")
+                        self._finalize_issue(issue_key, summary, "未下载到可用 cantrace 文件，请检查 Jira 附件后重试", cantrace_path)
+                        return
+                    latest_cantrace = can_files[0]
                     
                 if latest_cantrace=="":
                     logger.warning(f"latest_cantrace is null {latest_cantrace}  ")
@@ -798,7 +803,12 @@ class Pipeline:
                 logger.info(f"download_result : {download_result}")
                 logger.info(f"signals : {signals}")
                 self._update_progress('MODEL_INFERENCE', 70, f'{issue_key} 解析 CAN Trace 并绘图')
-                can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, download_result["can_files"][0])
+                can_files = download_result.get("can_files") or []
+                if not can_files:
+                    logger.warning(f"[{issue_key}] can_files 为空，无法进行 CAN Trace 分析")
+                    self._finalize_issue(issue_key, summary, "未下载到可用 cantrace 文件，请检查 Jira 附件后重试", cantrace_path)
+                    return
+                can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, can_files[0])
                 cantrace_path = can_trace_path
                 prop_signal_info = propid_text + group_text
                 merged = (

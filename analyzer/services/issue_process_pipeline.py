@@ -66,8 +66,9 @@ def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
             process_task.progress = 100
             process_task.stage = 'SAVING_RESULT'
             process_task.message = f'{issue_key} 处理完成'
+            process_task.error_message = ''
             process_task.finished_at = timezone.now()
-            process_task.save(update_fields=['status', 'progress', 'stage', 'message', 'finished_at', 'updated_at'])
+            process_task.save(update_fields=['status', 'progress', 'stage', 'message', 'error_message', 'finished_at', 'updated_at'])
             IssueProcessResult.objects.update_or_create(
                 process_task=process_task,
                 defaults={
