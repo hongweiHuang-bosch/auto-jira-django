@@ -1,4 +1,5 @@
 from datetime import timedelta
+from unittest.mock import patch
 
 from django.utils import timezone
 from rest_framework.test import APITestCase
@@ -12,10 +13,12 @@ from analyzer.models import (
 
 
 class FilterTaskApiTests(APITestCase):
-    def test_create_filter_task(self):
+    @patch('analyzer.views.submit_filter_task')
+    def test_create_filter_task(self, mock_submit_filter_task):
         response = self.client.post('/api/rule-groups/0/filter-tasks/', {'force_refresh': True}, format='json')
         self.assertEqual(response.status_code, 201)
         self.assertEqual(FilterTask.objects.count(), 1)
+        mock_submit_filter_task.assert_called_once_with(FilterTask.objects.get().id)
 
     def test_rule_group_list_returns_latest_filter_summary(self):
         task = FilterTask.objects.create(

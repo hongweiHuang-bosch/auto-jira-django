@@ -35,6 +35,8 @@ class AnalysisRunner:
                 server=jira_cfg['server'],
                 username=jira_cfg['username'],
                 password=jira_cfg['password'],
+                use_system_proxy=jira_cfg.get('use_system_proxy', True),
+                proxies=jira_cfg.get('proxies'),
             )
             ai = AIClient(
                 base_url=ai_cfg['base_url'],

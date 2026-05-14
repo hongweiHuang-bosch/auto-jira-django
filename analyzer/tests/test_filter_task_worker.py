@@ -18,6 +18,8 @@ class FilterTaskWorkerTests(TestCase):
                 'server': 'http://jira.example.com',
                 'username': 'tester',
                 'password': 'secret',
+                'use_system_proxy': False,
+                'proxies': None,
             }
         }
         mock_jira_cls.return_value.search_issues.return_value = [
@@ -39,6 +41,14 @@ class FilterTaskWorkerTests(TestCase):
         )
 
         call_command('run_task_worker', '--once')
+
+        mock_jira_cls.assert_called_once_with(
+            server='http://jira.example.com',
+            username='tester',
+            password='secret',
+            use_system_proxy=False,
+            proxies=None,
+        )
 
         task = FilterTask.objects.get()
         self.assertEqual(task.status, 'SUCCESS')

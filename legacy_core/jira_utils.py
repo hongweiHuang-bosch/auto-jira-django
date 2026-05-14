@@ -172,11 +172,25 @@ class JiraBrowserAuth:
         return self.storage_state_path
     
 class JiraClient:
-    def __init__(self, server: str, username: str, password: str):
+    def __init__(
+        self,
+        server: str,
+        username: str,
+        password: str,
+        use_system_proxy: bool = True,
+        proxies: Optional[dict[str, str]] = None,
+    ):
         self.server = server
         self.username = username
         self.password = password
-        self.client = JIRA(server=self.server, basic_auth=(self.username, self.password))
+        self.client = JIRA(
+            server=self.server,
+            basic_auth=(self.username, self.password),
+            get_server_info=False,
+            proxies=proxies,
+        )
+        if not use_system_proxy:
+            self.client._session.trust_env = False
 
     def get_issue(self, key: str):
         return self.client.issue(key)

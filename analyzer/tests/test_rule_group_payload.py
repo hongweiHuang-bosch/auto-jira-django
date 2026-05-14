@@ -10,6 +10,7 @@ from analyzer.models import (
     IssueProcessTask,
 )
 from analyzer.services.rule_group_payload import build_rule_group_detail
+from analyzer.services.rule_group_payload import build_rule_group_payload
 
 
 class RuleGroupPayloadTests(TestCase):
@@ -55,6 +56,12 @@ class RuleGroupPayloadTests(TestCase):
         self.assertEqual(payload['issues']['total'], 1)
         self.assertEqual(payload['issues']['items'][0]['latest_process_task']['id'], process_task.id)
         self.assertEqual(payload['issues']['items'][0]['next_action'], 'retry_process')
+
+    def test_build_rule_group_payload_includes_config_name(self):
+        payload = build_rule_group_payload()
+
+        self.assertIn('name', payload[0])
+        self.assertEqual(payload[0]['name'], payload[0]['role_label'])
 
     def test_build_rule_group_detail_uses_bounded_query_count(self):
         IssueProcessTask.objects.create(

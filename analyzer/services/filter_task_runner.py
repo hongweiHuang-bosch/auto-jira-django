@@ -27,6 +27,8 @@ def run_filter_task(task_id: int):
             server=jira_cfg['server'],
             username=jira_cfg['username'],
             password=jira_cfg['password'],
+            use_system_proxy=jira_cfg.get('use_system_proxy', True),
+            proxies=jira_cfg.get('proxies'),
         )
 
         issues = jira.search_issues(task.jql, expand='changelog')

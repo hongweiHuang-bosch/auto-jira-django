@@ -38,6 +38,8 @@ def run_issue_process_task(task_id: int):
             server=cfg['jira']['server'],
             username=cfg['jira']['username'],
             password=cfg['jira']['password'],
+            use_system_proxy=cfg['jira'].get('use_system_proxy', True),
+            proxies=cfg['jira'].get('proxies'),
         )
         ai = AIClient(
             base_url=cfg['ai']['base_url'],

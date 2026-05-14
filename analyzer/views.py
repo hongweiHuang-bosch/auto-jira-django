@@ -12,12 +12,16 @@ from rest_framework import status
 from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult
 from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer
 from .services.task_executor import submit_analysis_task
+from .services.filter_task_executor import submit_filter_task
 from .services.task_catalog import get_role_entry, get_role_label
 from .services.task_stream import build_group_payload, publish_groups_snapshot, stream_group_events
 from .services.rule_group_payload import build_rule_group_payload, get_latest_filter_task_detail, get_filter_task_issue_page
 from .services.rule_group_stream import publish_rule_group_snapshot, stream_rule_group_events
 from legacy_core.utils import load_config
 from legacy_core.jira_utils import JiraClient
+
+
+FILTER_TASK_STALE_TIMEOUT = timedelta(minutes=10)
 
 
 class IndexView(TemplateView):
@@ -124,6 +128,8 @@ class ResultCommentView(APIView):
             server=jira_cfg['server'],
             username=jira_cfg['username'],
             password=jira_cfg['password'],
+            use_system_proxy=jira_cfg.get('use_system_proxy', True),
+            proxies=jira_cfg.get('proxies'),
         )
         if result.can_trace_image:
             jira.add_comment_with_image(result.issue_key, result.reply_text, result.can_trace_image)
@@ -153,7 +159,7 @@ class FilterTaskCreateView(APIView):
 
         running = FilterTask.objects.filter(role_index=role_index, status__in=['PENDING', 'RUNNING']).first()
         if running:
-            if running.updated_at < timezone.now() - timedelta(seconds=30):
+            if running.updated_at < timezone.now() - FILTER_TASK_STALE_TIMEOUT:
                 running.status = 'EXPIRED'
                 running.message = '筛票超时，已被新任务替换'
                 running.save(update_fields=['status', 'message', 'updated_at'])
@@ -168,6 +174,7 @@ class FilterTaskCreateView(APIView):
             message='筛票任务已创建',
         )
         publish_rule_group_snapshot()
+        submit_filter_task(task.id)
         return Response(FilterTaskSerializer(task).data, status=status.HTTP_201_CREATED)
 
 
@@ -249,6 +256,8 @@ class IssueProcessResultCommentView(APIView):
             server=jira_cfg['server'],
             username=jira_cfg['username'],
             password=jira_cfg['password'],
+            use_system_proxy=jira_cfg.get('use_system_proxy', True),
+            proxies=jira_cfg.get('proxies'),
         )
         if result.can_trace_image:
             jira.add_comment_with_image(result.issue_key, result.reply_text, result.can_trace_image)
