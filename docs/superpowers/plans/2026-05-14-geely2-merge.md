@@ -54,13 +54,15 @@ git fetch
 运行：
 
 ```bash
-git stash push -u -m "wip: pipeline 调试，待合并 geely2 后恢复" \
+git stash push -m "wip: pipeline 调试，待合并 geely2 后恢复" \
     analyzer/services/issue_process_pipeline.py \
     legacy_core/pipeline.py
 git status --short
 ```
 
-预期：`git status` 不再列出 `analyzer/services/issue_process_pipeline.py` 与 `legacy_core/pipeline.py`；`?? .worktrees/`、`?? "config——chery/...txt"` 等仍在（未跟踪文件本来就不被 stash）。
+**关键：不带 `-u` 标志**。`-u` 会把所有未跟踪文件（包括 `.worktrees/geely2-minimal-backend/`）一起 stash，破坏 worktree 状态、导致后续 merge 无法引用 `feature/geely2-minimal-backend` 分支。`git stash push <pathspec>` 不带 `-u` 时只 stash pathspec 内的**跟踪**文件修改。
+
+预期：`git status` 不再列出 `analyzer/services/issue_process_pipeline.py` 与 `legacy_core/pipeline.py`；`?? .worktrees/`、`?? "config——chery/...txt"` 等**仍在**（关键：未跟踪文件没被动）。
 
 如果 stash 报错（例如本地无修改）：跳过此步，进入步骤 3。
 
