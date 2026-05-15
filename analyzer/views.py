@@ -239,8 +239,13 @@ class IssueProcessResultUpdateView(APIView):
         if not isinstance(reply_text, str):
             return Response({'detail': 'reply_text 必须是字符串'}, status=status.HTTP_400_BAD_REQUEST)
 
+        edited_after_fail = result.review_status == 'FAIL' and reply_text != result.reply_text
         result.reply_text = reply_text
-        result.save(update_fields=['reply_text', 'updated_at'])
+        if edited_after_fail:
+            result.review_status = 'PENDING'
+            result.review_reason = ''
+            result.manual_override_after_review = True
+        result.save(update_fields=['reply_text', 'review_status', 'review_reason', 'manual_override_after_review', 'updated_at'])
         publish_rule_group_snapshot()
         return Response(IssueProcessResultSerializer(result).data)
 
@@ -282,6 +287,10 @@ class IssueProcessResultCommentView(APIView):
         result = get_object_or_404(IssueProcessResult, pk=pk)
         if result.has_commented_to_jira:
             return Response({'detail': '该结果已回填 Jira'}, status=status.HTTP_200_OK)
+        if result.review_status == 'FAIL' and not result.manual_override_after_review:
+            return Response({'detail': '复核失败，请先人工修改分析结果并保存'}, status=status.HTTP_409_CONFLICT)
+        if result.review_status == 'PENDING' and not result.manual_override_after_review:
+            return Response({'detail': '请先完成复核'}, status=status.HTTP_409_CONFLICT)
 
         cfg = load_config('config.yaml')
         jira_cfg = cfg['jira']

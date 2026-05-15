@@ -153,6 +153,7 @@ class IssueProcessApiTests(APITestCase):
             issue_key=self.snapshot.issue_key,
             summary=self.snapshot.summary,
             reply_text='分析结论',
+            review_status='PASS',
         )
 
         response = self.client.post(f'/api/process-results/{result.id}/comment/')
@@ -236,3 +237,44 @@ class IssueProcessApiTests(APITestCase):
 
         args, _ = mock_review_issue_result.call_args
         self.assertEqual(len(args[1]), 3)
+
+    # ─── 任务 3：保存回复与 Jira 回填闸门 ─────────────────────────
+
+    def test_save_reply_after_fail_sets_manual_override_flag(self):
+        result = self._create_process_result(reply_text='原结论')
+        result.review_status = 'FAIL'
+        result.save(update_fields=['review_status', 'updated_at'])
+
+        response = self.client.patch(
+            f'/api/process-results/{result.id}/',
+            {'reply_text': '人工修正后的结论'},
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.review_status, 'PENDING')
+        self.assertTrue(result.manual_override_after_review)
+
+    @patch('analyzer.views.load_config')
+    @patch('analyzer.views.JiraClient')
+    def test_comment_requires_review_pass_or_manual_save_after_fail(self, mock_jira_cls, mock_load_config):
+        mock_load_config.return_value = {
+            'jira': {'server': 'http://jira.example.com', 'username': 'tester', 'password': 'secret'}
+        }
+        result = self._create_process_result(reply_text='原结论')
+        result.review_status = 'FAIL'
+        result.review_reason = '模型判断不可靠'
+        result.save(update_fields=['review_status', 'review_reason', 'updated_at'])
+
+        blocked = self.client.post(f'/api/process-results/{result.id}/comment/')
+        self.assertEqual(blocked.status_code, 409)
+
+        self.client.patch(
+            f'/api/process-results/{result.id}/',
+            {'reply_text': '人工修正后的结论'},
+            format='json',
+        )
+
+        allowed = self.client.post(f'/api/process-results/{result.id}/comment/')
+        self.assertEqual(allowed.status_code, 200)
