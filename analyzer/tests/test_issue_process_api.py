@@ -131,6 +131,145 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(latest['review_reason'], '')
         self.assertEqual(latest['manual_override_after_review'], False)
 
+    def test_manual_review_rejects_blank_error_reason(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+
+        response = self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {
+                'review_status': 'FAIL',
+                'error_reason': '',
+                'correct_result': '人工正确结果',
+            },
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('错误原因', response.data['detail'])
+
+    def test_manual_review_rejects_blank_correct_result(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+
+        response = self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {
+                'review_status': 'FAIL',
+                'error_reason': 'AI 忽略了 cantrace 输出',
+                'correct_result': '   ',
+            },
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('正确结果', response.data['detail'])
+
+    def test_manual_review_fail_persists_structured_feedback_and_sample(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+
+        response = self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {
+                'review_status': 'FAIL',
+                'error_reason': 'AI 忽略了 qnx android 日志',
+                'correct_result': '请转底层继续分析信号反馈',
+            },
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.review_status, 'FAIL')
+        self.assertTrue(result.manual_override_after_review)
+        self.assertEqual(result.manual_error_reason, 'AI 忽略了 qnx android 日志')
+        self.assertEqual(result.manual_correct_result, '请转底层继续分析信号反馈')
+        self.assertIsNotNone(result.manual_review_saved_at)
+        self.assertEqual(IssueReviewSample.objects.count(), 1)
+        sample = IssueReviewSample.objects.get()
+        self.assertEqual(sample.incorrect_conclusion, '原 AI 结论')
+        self.assertEqual(sample.error_reason, 'AI 忽略了 qnx android 日志')
+        self.assertEqual(sample.correct_conclusion, '请转底层继续分析信号反馈')
+
+    def test_manual_review_fail_can_be_edited_and_overwrites_existing_sample(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+        url = f'/api/process-results/{result.id}/manual-review/'
+
+        self.client.post(
+            url,
+            {
+                'review_status': 'FAIL',
+                'error_reason': '第一次原因',
+                'correct_result': '第一次正确结果',
+            },
+            format='json',
+        )
+        response = self.client.post(
+            url,
+            {
+                'review_status': 'FAIL',
+                'error_reason': '第二次原因',
+                'correct_result': '第二次正确结果',
+            },
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.manual_error_reason, '第二次原因')
+        self.assertEqual(result.manual_correct_result, '第二次正确结果')
+        self.assertEqual(IssueReviewSample.objects.count(), 1)
+        sample = IssueReviewSample.objects.get()
+        self.assertEqual(sample.error_reason, '第二次原因')
+        self.assertEqual(sample.correct_conclusion, '第二次正确结果')
+
+    def test_manual_review_pass_marks_result_ready_for_comment(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+        IssueReviewSample.objects.create(
+            role_index=self.filter_task.role_index,
+            issue_key=result.issue_key,
+            incorrect_conclusion='原 AI 结论',
+            correct_conclusion='旧人工正确结果',
+            error_reason='旧原因',
+        )
+
+        response = self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {'review_status': 'PASS'},
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.review_status, 'PASS')
+        self.assertFalse(result.manual_override_after_review)
+        self.assertEqual(IssueReviewSample.objects.count(), 0)
+
+    def test_processed_issue_detail_includes_manual_review_fields(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+        result.review_status = 'FAIL'
+        result.manual_override_after_review = True
+        result.manual_error_reason = '人工原因'
+        result.manual_correct_result = '人工正确结果'
+        result.manual_review_saved_at = timezone.now()
+        result.save(update_fields=[
+            'review_status',
+            'manual_override_after_review',
+            'manual_error_reason',
+            'manual_correct_result',
+            'manual_review_saved_at',
+            'updated_at',
+        ])
+
+        response = self.client.get(
+            f'/api/rule-groups/{self.filter_task.role_index}/processed-issues/{self.snapshot.issue_key}/'
+        )
+
+        self.assertEqual(response.status_code, 200)
+        latest = response.data['records'][0]['result']
+        self.assertEqual(latest['review_status'], 'FAIL')
+        self.assertEqual(latest['manual_error_reason'], '人工原因')
+        self.assertEqual(latest['manual_correct_result'], '人工正确结果')
+        self.assertIsNotNone(latest['manual_review_saved_at'])
+
     @patch('analyzer.views.load_config')
     @patch('analyzer.views.JiraClient')
     def test_comment_issue_process_result(self, mock_jira_cls, mock_load_config):
@@ -240,7 +379,7 @@ class IssueProcessApiTests(APITestCase):
 
     # ─── 任务 3：保存回复与 Jira 回填闸门 ─────────────────────────
 
-    def test_save_reply_after_fail_sets_manual_override_flag(self):
+    def test_save_reply_after_fail_does_not_unlock_jira_comment(self):
         result = self._create_process_result(reply_text='原结论')
         result.review_status = 'FAIL'
         result.save(update_fields=['review_status', 'updated_at'])
@@ -254,11 +393,11 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         result.refresh_from_db()
         self.assertEqual(result.review_status, 'PENDING')
-        self.assertTrue(result.manual_override_after_review)
+        self.assertFalse(result.manual_override_after_review)
 
     @patch('analyzer.views.load_config')
     @patch('analyzer.views.JiraClient')
-    def test_comment_requires_review_pass_or_manual_save_after_fail(self, mock_jira_cls, mock_load_config):
+    def test_comment_requires_review_pass_or_saved_manual_fail_review(self, mock_jira_cls, mock_load_config):
         mock_load_config.return_value = {
             'jira': {'server': 'http://jira.example.com', 'username': 'tester', 'password': 'secret'}
         }
@@ -270,11 +409,42 @@ class IssueProcessApiTests(APITestCase):
         blocked = self.client.post(f'/api/process-results/{result.id}/comment/')
         self.assertEqual(blocked.status_code, 409)
 
-        self.client.patch(
-            f'/api/process-results/{result.id}/',
-            {'reply_text': '人工修正后的结论'},
+        self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {
+                'review_status': 'FAIL',
+                'error_reason': 'AI 结论错误',
+                'correct_result': '人工修正后的结论',
+            },
             format='json',
         )
 
         allowed = self.client.post(f'/api/process-results/{result.id}/comment/')
         self.assertEqual(allowed.status_code, 200)
+
+    @patch('analyzer.views.load_config')
+    @patch('analyzer.views.JiraClient')
+    def test_comment_after_manual_fail_review_uses_manual_correct_result(self, mock_jira_cls, mock_load_config):
+        mock_load_config.return_value = {
+            'jira': {'server': 'http://jira.example.com', 'username': 'tester', 'password': 'secret'}
+        }
+        result = self._create_process_result(reply_text='原 AI 结论')
+        result.review_status = 'FAIL'
+        result.manual_override_after_review = True
+        result.manual_error_reason = 'AI 判断错了'
+        result.manual_correct_result = '人工修正后的正确结果'
+        result.save(update_fields=[
+            'review_status',
+            'manual_override_after_review',
+            'manual_error_reason',
+            'manual_correct_result',
+            'updated_at',
+        ])
+
+        response = self.client.post(f'/api/process-results/{result.id}/comment/')
+
+        self.assertEqual(response.status_code, 200)
+        mock_jira_cls.return_value.add_comment.assert_called_once_with(
+            result.issue_key,
+            '人工修正后的正确结果',
+        )

@@ -217,28 +217,33 @@ def extract_min_max_time_from_comments(comments_text: str) -> Tuple[Optional[str
     return min_dt.strftime("%Y-%m-%d %H:%M:%S"), max_dt.strftime("%Y-%m-%d %H:%M:%S")
 def analysize_signal_mapping(json_data, first_match_signals):
     json_mapping = json_data
-    upper_signals = [sig.upper() for sig in first_match_signals]
-    result : List[str] = []
+    upper_signals = {str(sig).upper() for sig in (first_match_signals or []) if sig}
+    result: List[str] = []
+    seen = set()
+
+    def append_signal(signal_name: str):
+        if signal_name and signal_name not in seen:
+            seen.add(signal_name)
+            result.append(signal_name)
 
     for item in json_mapping:
-        # prop_value = item.get("prop")
-        # if prop_value.upper() in upper_signals:
-        #     configs = item.get("config") or []
-        #     for cfg in configs:
-        #         for signal_name in cfg.get("setSignals") or []:
-        #             if signal_name in upper_signals:
-        #                 result.append(signal_name)
-        #         for signal_name in cfg.get("getSignals") or []:
-        #             if signal_name in upper_signals:
-        #                 result.append(signal_name)
+        prop_value = str(item.get("prop") or "")
         configs = item.get("config") or []
+
+        if prop_value.upper() in upper_signals:
+            for cfg in configs:
+                for signal_name in cfg.get("setSignals") or []:
+                    append_signal(signal_name)
+                for signal_name in cfg.get("getSignals") or []:
+                    append_signal(signal_name)
+
         for cfg in configs:
             for signal_name in cfg.get("setSignals") or []:
                 if signal_name.upper() in upper_signals:
-                    result.append(signal_name)
+                    append_signal(signal_name)
             for signal_name in cfg.get("getSignals") or []:
                 if signal_name.upper() in upper_signals:
-                    result.append(signal_name)
+                    append_signal(signal_name)
     return result
 
 # ------------------------------- Pipeline -------------------------------

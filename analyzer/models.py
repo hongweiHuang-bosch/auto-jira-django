@@ -162,6 +162,9 @@ class IssueProcessResult(models.Model):
     reviewed_at = models.DateTimeField(null=True, blank=True)
     review_model = models.CharField(max_length=100, blank=True, default='')
     manual_override_after_review = models.BooleanField(default=False)
+    manual_error_reason = models.TextField(blank=True, default='')
+    manual_correct_result = models.TextField(blank=True, default='')
+    manual_review_saved_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

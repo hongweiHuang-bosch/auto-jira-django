@@ -244,8 +244,20 @@ class IssueProcessResultUpdateView(APIView):
         if edited_after_fail:
             result.review_status = 'PENDING'
             result.review_reason = ''
-            result.manual_override_after_review = True
-        result.save(update_fields=['reply_text', 'review_status', 'review_reason', 'manual_override_after_review', 'updated_at'])
+            result.manual_override_after_review = False
+            result.manual_error_reason = ''
+            result.manual_correct_result = ''
+            result.manual_review_saved_at = None
+        result.save(update_fields=[
+            'reply_text',
+            'review_status',
+            'review_reason',
+            'manual_override_after_review',
+            'manual_error_reason',
+            'manual_correct_result',
+            'manual_review_saved_at',
+            'updated_at',
+        ])
         publish_rule_group_snapshot()
         return Response(IssueProcessResultSerializer(result).data)
 
@@ -282,14 +294,90 @@ class IssueProcessResultReviewView(APIView):
         return Response(review)
 
 
+class IssueProcessResultManualReviewView(APIView):
+    def post(self, request, pk: int):
+        result = get_object_or_404(IssueProcessResult, pk=pk)
+        review_status = request.data.get('review_status')
+        if review_status not in ('PASS', 'FAIL'):
+            return Response({'detail': 'review_status 必须是 PASS 或 FAIL'}, status=status.HTTP_400_BAD_REQUEST)
+
+        now = timezone.now()
+        if review_status == 'PASS':
+            result.review_status = 'PASS'
+            result.review_reason = ''
+            result.reviewed_at = now
+            result.review_model = ''
+            result.manual_override_after_review = False
+            result.manual_error_reason = ''
+            result.manual_correct_result = ''
+            result.manual_review_saved_at = None
+            result.save(update_fields=[
+                'review_status',
+                'review_reason',
+                'reviewed_at',
+                'review_model',
+                'manual_override_after_review',
+                'manual_error_reason',
+                'manual_correct_result',
+                'manual_review_saved_at',
+                'updated_at',
+            ])
+            IssueReviewSample.objects.filter(
+                role_index=result.process_task.filter_task.role_index,
+                issue_key=result.issue_key,
+            ).delete()
+            publish_rule_group_snapshot()
+            return Response(IssueProcessResultSerializer(result).data)
+
+        error_reason = request.data.get('error_reason')
+        correct_result = request.data.get('correct_result')
+        if not isinstance(error_reason, str) or not error_reason.strip():
+            return Response({'detail': '错误原因不能为空'}, status=status.HTTP_400_BAD_REQUEST)
+        if not isinstance(correct_result, str) or not correct_result.strip():
+            return Response({'detail': '正确结果不能为空'}, status=status.HTTP_400_BAD_REQUEST)
+
+        error_reason = error_reason.strip()
+        correct_result = correct_result.strip()
+        result.review_status = 'FAIL'
+        result.review_reason = error_reason
+        result.reviewed_at = now
+        result.review_model = ''
+        result.manual_override_after_review = True
+        result.manual_error_reason = error_reason
+        result.manual_correct_result = correct_result
+        result.manual_review_saved_at = now
+        result.save(update_fields=[
+            'review_status',
+            'review_reason',
+            'reviewed_at',
+            'review_model',
+            'manual_override_after_review',
+            'manual_error_reason',
+            'manual_correct_result',
+            'manual_review_saved_at',
+            'updated_at',
+        ])
+        IssueReviewSample.objects.update_or_create(
+            role_index=result.process_task.filter_task.role_index,
+            issue_key=result.issue_key,
+            defaults={
+                'incorrect_conclusion': result.reply_text,
+                'correct_conclusion': correct_result,
+                'error_reason': error_reason,
+            },
+        )
+        publish_rule_group_snapshot()
+        return Response(IssueProcessResultSerializer(result).data)
+
+
 class IssueProcessResultCommentView(APIView):
     def post(self, request, pk: int):
         result = get_object_or_404(IssueProcessResult, pk=pk)
         if result.has_commented_to_jira:
             return Response({'detail': '该结果已回填 Jira'}, status=status.HTTP_200_OK)
-        if result.review_status == 'FAIL' and not result.manual_override_after_review:
+        if result.review_status == 'FAIL' and not (result.manual_override_after_review and result.manual_correct_result.strip()):
             return Response({'detail': '复核失败，请先人工修改分析结果并保存'}, status=status.HTTP_409_CONFLICT)
-        if result.review_status == 'PENDING' and not result.manual_override_after_review:
+        if result.review_status == 'PENDING':
             return Response({'detail': '请先完成复核'}, status=status.HTTP_409_CONFLICT)
 
         cfg = load_config('config.yaml')
@@ -301,10 +389,11 @@ class IssueProcessResultCommentView(APIView):
             use_system_proxy=jira_cfg.get('use_system_proxy', True),
             proxies=jira_cfg.get('proxies'),
         )
+        comment_text = result.manual_correct_result if result.review_status == 'FAIL' else result.reply_text
         if result.can_trace_image:
-            jira.add_comment_with_image(result.issue_key, result.reply_text, result.can_trace_image)
+            jira.add_comment_with_image(result.issue_key, comment_text, result.can_trace_image)
         else:
-            jira.add_comment(result.issue_key, result.reply_text)
+            jira.add_comment(result.issue_key, comment_text)
         result.has_commented_to_jira = True
         result.commented_at = timezone.now()
         result.save(update_fields=['has_commented_to_jira', 'commented_at', 'updated_at'])
