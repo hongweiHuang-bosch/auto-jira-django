@@ -192,7 +192,9 @@ class JiraClient:
         if not use_system_proxy:
             self.client._session.trust_env = False
 
-    def get_issue(self, key: str):
+    def get_issue(self, key: str, expand: str | None = None):
+        if expand:
+            return self.client.issue(key, expand=expand)
         return self.client.issue(key)
 
     def search_issues(self, jql: str, expand: str = "changelog"):
@@ -203,6 +205,27 @@ class JiraClient:
 
     def add_comment(self, issue_key: str, content: str):
         return self.client.add_comment(issue_key, content)
+
+    def get_comments(self, issue_key: str):
+        issue = self.get_issue(issue_key, expand='comment')
+        comments = getattr(getattr(getattr(issue, 'fields', None), 'comment', None), 'comments', []) or []
+        return [_serialize_jira_comment(comment) for comment in comments]
+
+    def get_transitions(self, issue_key: str):
+        transitions = self.client.transitions(issue_key)
+        return [
+            {
+                'id': str(transition.get('id', '')),
+                'name': transition.get('name', ''),
+            }
+            for transition in transitions
+        ]
+
+    def transition_issue(self, issue_key: str, transition_id: str):
+        return self.client.transition_issue(issue_key, transition=transition_id)
+
+    def assign_issue(self, issue_key: str, assignee: str):
+        return self.client.assign_issue(issue_key, assignee)
 
     def add_attachment(self, issue_key: str, attachment_path: str):
         # python-jira: add_attachment(issue=<Issue|key>, attachment=<file|path>)
@@ -249,6 +272,25 @@ def get_jira_comments(issue) -> str:
         comments_text += "-" * 40 + "\n"
     comments_text += "</问题描述> \n"
     return comments_text
+
+
+def _serialize_jira_user(user):
+    if not user:
+        return None
+    return {
+        'account_id': getattr(user, 'accountId', '') or '',
+        'name': getattr(user, 'name', '') or '',
+        'display_name': getattr(user, 'displayName', '') or '',
+    }
+
+
+def _serialize_jira_comment(comment):
+    return {
+        'author': _serialize_jira_user(getattr(comment, 'author', None)),
+        'body': getattr(comment, 'body', '') or '',
+        'created': getattr(comment, 'created', '') or '',
+        'updated': getattr(comment, 'updated', '') or '',
+    }
 
 def _get_uploader_id(att) -> str:
     """
