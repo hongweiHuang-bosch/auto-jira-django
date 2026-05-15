@@ -1,0 +1,19 @@
+{
+    "car_list": [
+		{
+            "cartype": "T1J-FL3",
+            "cartype_id": "37",
+            "dbc": [
+                "car_T1J_FL3.dbc",
+            ],
+            "config_path": "",
+            "conf_json": [
+                "config_T1J_FL3.json"
+            ],
+            "proto": "com.bosch.cm.platform.vehicle.proto"
+        },
+    ],
+    "version": "001",
+    "release_date": "2024-09-04",
+    "schema_version": "02"
+}

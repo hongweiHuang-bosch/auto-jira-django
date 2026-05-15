@@ -616,11 +616,18 @@ class Pipeline:
             query = (
                 f"<车型>{model}</车型>"
                 f"<标题>{summary}</标题>"
-                f"{p_extract}",
-                f"{comments_text}"
+                f"{p_extract}"
+                f"\n{comments_text}"
             )
             self._update_progress('PARSING', 35, f'{issue_key} AI 提取信号')
-            ai_extract = self.ai.query_signal_by_rag(query, txt_path)
+
+            query_signal_nums = (
+                "请提取与车控车设相关的信号的个数，没有信号就返回0，有信号只返回个数，不要返回其他任何无关内容\n"
+            )
+            signal_nums = self.ai.chat_by_langchain(query_signal_nums, comments_text + ai_extract_requirement)
+            logger.info(f"[{issue_key}] signal_nums:\n{signal_nums}\n" + "-" * 80)
+
+            ai_extract = self.ai.query_signal_by_rag(query, txt_path, signal_nums)
             
             if not ai_extract:
                 # 没提取到
@@ -630,6 +637,7 @@ class Pipeline:
                 # 模型明确告诉“无法提取”
                 logger.info(f"[{issue_key}] 无法提取:\n{ai_extract}\n" + "-" * 80)
                 return
+            logger.info(f"[{issue_key}] 匹配结果:ai_extract: {ai_extract}\n " + "-" * 80)
             
             #  成功提取到配置 JSON，直接用
             first_match_signals = ai_extract.get("signals")

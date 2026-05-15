@@ -1,0 +1,541 @@
+VERSION "FL_IC2_CANFD"
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: DDMA FLZCU ICC
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ FLZCU_9_PowerMode : 0|2@0+ (1,0) [0|3] "" Vector__XXX
+ SG_ FLZCU_9_FuelVehPowerMode : 0|3@0+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 582 APA_246h: 48 FLZCU
+ SG_ APA_FOLDistance_246h : 23|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FMLDistance_246h : 26|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FMRDistance_246h : 45|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FORDistance_246h : 48|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_ROLDistance_246h : 83|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_RMLDistance_246h : 102|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_RMRDistance_246h : 105|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_RORDistance_246h : 151|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_LSFDistance_246h : 154|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FKPLSFMDistance_246h : 173|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FKPLSRMDistance_246h : 176|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_LSRDistance_246h : 211|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_RSFDistance_246h : 230|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FKPRSFMDistance_246h : 233|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_FKPRSRMDistance_246h : 279|9@0+ (1,0) [0|250] "cm"  ICC
+ SG_ APA_RSRDistance_246h : 282|9@0+ (1,0) [0|250] "cm"  ICC
+
+BO_ 593 AWD_251h: 16 FLZCU
+ SG_ EstimatedCouplingTorq_251h : 31|14@0+ (0.25,0) [0|3000] ""  ICC
+
+BO_ 594 AWD_252h: 16 FLZCU
+ SG_ CouplingThermalFailsafe_252h : 19|1@0+ (1,0) [0|1] ""  ICC
+ SG_ AWDoutserviceDispRq_252h : 22|2@0+ (1,0) [0|3] "Enum"  ICC
+ SG_ StopPumpSts_252h : 23|1@0+ (1,0) [0|1] ""  ICC
+
+BO_ 595 ELSD_253h: 16 FLZCU
+ SG_ CouplingFaultStatus_253h : 16|2@0+ (1,0) [0|3] ""  ICC
+ SG_ CouplingThermalFailsafe_253h : 30|1@0+ (1,0) [0|1] "Bool"  ICC
+ SG_ EstimatedTorque_253h : 39|16@0+ (0.25,0) [0|3000] "Nm"  ICC
+
+BO_ 1025 DDMA_401h: 8 DDMA
+ SG_ DeviationangleStsFed_401h : 20|5@0+ (1,-1) [-1|30] "°"  ICC
+ SG_ IntelligentOrientStsFed_401h : 23|3@0+ (1,0) [0|7] ""  ICC
+ SG_ CntrlCtrlScrnOrientStsFed_401h : 26|3@0+ (1,0) [0|7] ""  ICC
+ SG_ DeviationDirectionStsFed_401h : 29|2@0+ (1,0) [0|3] ""  ICC
+ SG_ CalibrationStsFed_401h : 31|2@0+ (1,0) [0|3] ""  ICC
+
+BO_ 1415 ICC_IC2_587h: 8 ICC
+ SG_ DeviationangleSet_587h : 20|5@0+ (1,-1) [-1|30] "°"  DDMA
+ SG_ IntelligentOrientSet_587h : 23|3@0+ (1,0) [0|7] ""  DDMA
+ SG_ CntrlCtrlScreenOrientSet_587h : 26|3@0+ (1,0) [0|7] ""  DDMA
+ SG_ DeviationDirectionSet_587h : 29|2@0+ (1,0) [0|3] ""  DDMA
+ SG_ CalibrationSet_587h : 31|2@0+ (1,0) [0|3] ""  DDMA
+ SG_ TenMinuteModeSignal_587h : 33|2@0+ (1,0) [0|3] ""  DDMA
+
+BO_ 1649 NMm_ICC2: 8 ICC
+ SG_ srcNodeID_ICC2 : 7|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ RMR_ICC2 : 8|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Wakeup_Poweron : 16|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Wakeup_NM : 17|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Wakeup_PowerComfortable : 20|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Awake_Poweron : 40|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Awake_NM : 41|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ ICC2_Awake_PowerComfortable : 45|1@0+ (1,0) [0|1] "" Vector__XXX
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 FLZCU_9_PowerMode "低压电源状态
+源头FRZCU_9_PowerMode";
+CM_ SG_ 3221225472 FLZCU_9_FuelVehPowerMode "ICE燃油车型低压电源状态
+源头FLZCU_2_FuelVehPowerMode";
+CM_ SG_ 582 APA_FOLDistance_246h "Front Outter Left sensor zone distance
+FOL倒车雷达距离";
+CM_ SG_ 582 APA_FMLDistance_246h "Front Middle Left sensor zone distance
+FIL倒车雷达距离";
+CM_ SG_ 582 APA_FMRDistance_246h "Front Middle Right sensor zone distance
+FMR倒车雷达距离";
+CM_ SG_ 582 APA_FORDistance_246h "Front Outter Right sensor zone distance
+FOR倒车雷达边距离";
+CM_ SG_ 582 APA_ROLDistance_246h "Rear Outter Left sensor zone distance
+ROL倒车雷达距离";
+CM_ SG_ 582 APA_RMLDistance_246h "Rear Middle Left sensor zone distance
+RIL倒车雷达距离";
+CM_ SG_ 582 APA_RMRDistance_246h "Rear Middle Right sensor zone distance
+RMR倒车雷达距离";
+CM_ SG_ 582 APA_RORDistance_246h "Rear Outter Right sensor zone distance
+ROR倒车雷达边距离";
+CM_ SG_ 582 APA_LSFDistance_246h "Left Side Front sensor zone distance
+左前边倒车雷达距离";
+CM_ SG_ 582 APA_FKPLSFMDistance_246h "Left Front Side Middle flank zone distance
+左前边中间区域距离";
+CM_ SG_ 582 APA_FKPLSRMDistance_246h "Left Rear Side Middle flank zone distance
+左后边中间区域距离";
+CM_ SG_ 582 APA_LSRDistance_246h "Left Side Rear sensor zone distance
+左后边倒车雷达距离";
+CM_ SG_ 582 APA_RSFDistance_246h "Right Side Front sensor zone distance
+右前边倒车雷达距离";
+CM_ SG_ 582 APA_FKPRSFMDistance_246h "Right Front Side Middle flank zone distance
+右前边中间区域距离";
+CM_ SG_ 582 APA_FKPRSRMDistance_246h "Right Rear Side Middle flank zone distance
+右后边中间区域距离";
+CM_ SG_ 582 APA_RSRDistance_246h "Right Side Rear sensor zone distance
+右后边倒车雷达距离";
+CM_ SG_ 593 EstimatedCouplingTorq_251h "Estimated Coupling Torque（ESP收）
+AWD作用后，计算的扭矩";
+CM_ SG_ 594 AWDoutserviceDispRq_252h "0x0: 四驱系统无故障
+0x1: 四驱系统临时故障，故障可恢复
+0x2: 四驱系统永久故障，故障不可恢复
+0x3: 预留位";
+CM_ SG_ 595 CouplingFaultStatus_253h "0x1_Reduced_Functionality_-四驱系统有部分功能适用受限，多发生于通信类故障
+0x2_Temporary_Failure_-_四驱系统功能临时失效，多发生于四驱系统过热情况
+0x3_Permanent_Failure_-_四驱系统永久失效，多发生于四驱执行器故障，软硬件/EEPROM不兼容，电压超出正常范围类的故障。
+不建议其他节点接收此信号，如有需求，与BW协商。";
+CM_ SG_ 595 CouplingThermalFailsafe_253h "四驱系统发生过热保护时置位，仪表可以接收用于过热提示";
+CM_ SG_ 595 EstimatedTorque_253h "四驱估算扭矩，非精确值，仅用于表示四驱粗略计算的扭矩，仪表节点可以用来做粗略扭矩显示";
+CM_ BO_ 1025 "捷途ID新增";
+CM_ SG_ 1025 DeviationangleStsFed_401h "当前偏转角度
+0x0:Not active
+0x1:0°
+0x2:1°
+0x3:2°
+0x4:3°
+0x5:4°
+0x6:5°
+0x7:6°
+0x8:7°
+0x9:8°
+0xA:9°
+0xB:10°
+0xC:11°
+0xD:12°
+0xE:13°
+0xF:14°
+0x10:15°
+0x11~0x1F:Reserved";
+CM_ SG_ 1025 IntelligentOrientStsFed_401h "智能朝向状态";
+CM_ SG_ 1025 CntrlCtrlScrnOrientStsFed_401h "中控屏朝向状态";
+CM_ SG_ 1025 DeviationDirectionStsFed_401h "当前偏转方向";
+CM_ SG_ 1025 CalibrationStsFed_401h "偏转机构标定状态";
+CM_ SG_ 1415 DeviationangleSet_587h "偏转角度设置
+0x0:Not active
+0x1:0°
+0x2:1°
+0x3:2°
+0x4:3°
+0x5:4°
+0x6:5°
+0x7:6°
+0x8:7°
+0x9:8°
+0xA:9°
+0xB:10°
+0xC:11°
+0xD:12°
+0xE:13°
+0xF:14°
+0x10:15°
+0x11~0x1F:Reserved";
+CM_ SG_ 1415 IntelligentOrientSet_587h "智能朝向设置";
+CM_ SG_ 1415 CntrlCtrlScreenOrientSet_587h "中控屏朝向设置";
+CM_ SG_ 1415 DeviationDirectionSet_587h "偏转方向设置";
+CM_ SG_ 1415 CalibrationSet_587h "偏转机构标定开关";
+CM_ SG_ 1415 TenMinuteModeSignal_587h "十分钟状态信号";
+CM_ SG_ 1649 srcNodeID_ICC2 "The srcNodeID of IHU is 0x71";
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_ BU_  "ILused" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmNode" ENUM  "No","Yes";
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_  "Baudrate" INT 0 1000000;
+BA_DEF_  "BaudrateCANFD" INT 1000000 10000000;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "GRC_Net_History" STRING ;
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "NmBaseAddress" HEX 1536 1663;
+BA_DEF_  "NmMessageCount" INT 0 255;
+BA_DEF_  "ProtocolType" STRING ;
+BA_DEF_ SG_  "ASIL" ENUM  "QM","A","B","C","D";
+BA_DEF_ SG_  "E2EDataId" INT 0 65535;
+BA_DEF_ SG_  "E2EDataLength" INT 0 65535;
+BA_DEF_ SG_  "E2EProfile" STRING ;
+BA_DEF_ SG_  "GenSigDataID" INT 0 65535;
+BA_DEF_ SG_  "GenSigInactiveValue" HEX 0 80000000;
+BA_DEF_ SG_  "GenSigInvalidValue" HEX 0 281474976710655;
+BA_DEF_ SG_  "GenSigStartValue" HEX 0 80000000;
+BA_DEF_ SG_  "GenSigTimeoutValue" INT 0 2147483647;
+BA_DEF_ SG_  "sigTimeoutTime" INT 0 2147483647;
+BA_DEF_ SG_  "AlternateValue" STRING ;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ SG_  "GenSigTimeoutTime" INT 0 65535;
+BA_DEF_ BO_  "CANFD_BRS" ENUM  "0","1";
+BA_DEF_ BO_  "DiagConnection" INT 0 65535;
+BA_DEF_ BO_  "DiagMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagUudtResponse" ENUM  "True","False";
+BA_DEF_ BO_  "GRC_History" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgCycleTimeActive" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTimeFast" INT 0 65535;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgNrOfRepetition" INT 0 255;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","IfActive","CE","CA","NoMsgSendType";
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_ BO_  "MsgType" ENUM  "IL","NM","DIAG","APPL";
+BA_DEF_ BO_  "Msg_ASIL" ENUM  "vector_leerstring","QM","A","B","C","D";
+BA_DEF_ BO_  "NmAsrMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmMessage" ENUM  "No","Yes";
+BA_DEF_ BO_  "SCP_AuthInfoTxLength" INT 9 512;
+BA_DEF_ BO_  "SCP_DataID" INT 0 65535;
+BA_DEF_ BO_  "SCP_FreshnessValueId" INT 0 65535;
+BA_DEF_ BO_  "SCP_FreshnessValueLength" INT 0 512;
+BA_DEF_ BO_  "SCP_FreshnessValueTxLength" INT 0 512;
+BA_DEF_ BO_  "SC_Message" ENUM  "No","Yes";
+BA_DEF_ BO_  "TpTxIndex" INT 0 2147483647;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_ BO_  "msgFastOnStart" INT 0 2147483647;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_DEF_DEF_  "ILused" "Yes";
+BA_DEF_DEF_  "NmNode" "No";
+BA_DEF_DEF_  "NodeLayerModules" "CANoeILNLSPA.dll";
+BA_DEF_DEF_  "Baudrate" 500000;
+BA_DEF_DEF_  "BaudrateCANFD" 2000000;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "DBName" "CAN";
+BA_DEF_DEF_  "GRC_Net_History" "";
+BA_DEF_DEF_  "Manufacturer" "";
+BA_DEF_DEF_  "NmBaseAddress" 1536;
+BA_DEF_DEF_  "NmMessageCount" 128;
+BA_DEF_DEF_  "ProtocolType" "CAN";
+BA_DEF_DEF_  "ASIL" "QM";
+BA_DEF_DEF_  "E2EDataId" 0;
+BA_DEF_DEF_  "E2EDataLength" 64;
+BA_DEF_DEF_  "E2EProfile" "";
+BA_DEF_DEF_  "GenSigDataID" 0;
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigInvalidValue" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigTimeoutValue" 0;
+BA_DEF_DEF_  "sigTimeoutTime" 0;
+BA_DEF_DEF_  "AlternateValue" "";
+BA_DEF_DEF_  "GenSigSendType" "NoSigSendType";
+BA_DEF_DEF_  "GenSigTimeoutTime" 0;
+BA_DEF_DEF_  "CANFD_BRS" "1";
+BA_DEF_DEF_  "DiagConnection" 0;
+BA_DEF_DEF_  "DiagMessage" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "DiagUudtResponse" "True";
+BA_DEF_DEF_  "GRC_History" "";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeActive" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeFast" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "MsgType" "IL";
+BA_DEF_DEF_  "Msg_ASIL" "";
+BA_DEF_DEF_  "NmAsrMessage" "No";
+BA_DEF_DEF_  "NmMessage" "No";
+BA_DEF_DEF_  "SCP_AuthInfoTxLength" 28;
+BA_DEF_DEF_  "SCP_DataID" 0;
+BA_DEF_DEF_  "SCP_FreshnessValueId" 0;
+BA_DEF_DEF_  "SCP_FreshnessValueLength" 48;
+BA_DEF_DEF_  "SCP_FreshnessValueTxLength" 4;
+BA_DEF_DEF_  "SC_Message" "No";
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_DEF_DEF_  "msgFastOnStart" 0;
+BA_ "Baudrate" 500000;
+BA_ "ProtocolType" "CAN";
+BA_ "BusType" "CAN FD";
+BA_ "BaudrateCANFD" 2000000;
+BA_ "DBName" "FL_IC2_CANFD";
+BA_ "ILused" BU_ DDMA 0;
+BA_ "ILused" BU_ FLZCU 0;
+BA_ "ILused" BU_ ICC 0;
+BA_ "GenMsgSendType" BO_ 582 0;
+BA_ "NmAsrMessage" BO_ 582 0;
+BA_ "MsgType" BO_ 582 0;
+BA_ "CANFD_BRS" BO_ 582 1;
+BA_ "GenMsgCycleTimeFast" BO_ 582 0;
+BA_ "GenMsgDelayTime" BO_ 582 0;
+BA_ "GenMsgCycleTime" BO_ 582 20;
+BA_ "GenMsgNrOfRepetition" BO_ 582 0;
+BA_ "VFrameFormat" BO_ 582 14;
+BA_ "GenMsgSendType" BO_ 593 0;
+BA_ "NmAsrMessage" BO_ 593 0;
+BA_ "MsgType" BO_ 593 0;
+BA_ "CANFD_BRS" BO_ 593 1;
+BA_ "GenMsgCycleTime" BO_ 593 20;
+BA_ "VFrameFormat" BO_ 593 14;
+BA_ "GenMsgSendType" BO_ 594 0;
+BA_ "NmAsrMessage" BO_ 594 0;
+BA_ "MsgType" BO_ 594 0;
+BA_ "CANFD_BRS" BO_ 594 1;
+BA_ "GenMsgCycleTime" BO_ 594 20;
+BA_ "VFrameFormat" BO_ 594 14;
+BA_ "GenMsgSendType" BO_ 595 0;
+BA_ "NmAsrMessage" BO_ 595 0;
+BA_ "MsgType" BO_ 595 0;
+BA_ "CANFD_BRS" BO_ 595 1;
+BA_ "GenMsgCycleTime" BO_ 595 20;
+BA_ "VFrameFormat" BO_ 595 14;
+BA_ "GenMsgSendType" BO_ 1025 0;
+BA_ "NmAsrMessage" BO_ 1025 0;
+BA_ "MsgType" BO_ 1025 0;
+BA_ "CANFD_BRS" BO_ 1025 1;
+BA_ "GenMsgCycleTimeFast" BO_ 1025 0;
+BA_ "GenMsgDelayTime" BO_ 1025 0;
+BA_ "GenMsgCycleTime" BO_ 1025 100;
+BA_ "GenMsgNrOfRepetition" BO_ 1025 0;
+BA_ "VFrameFormat" BO_ 1025 14;
+BA_ "GenMsgSendType" BO_ 1415 3;
+BA_ "MsgType" BO_ 1415 0;
+BA_ "CANFD_BRS" BO_ 1415 1;
+BA_ "GenMsgCycleTimeFast" BO_ 1415 100;
+BA_ "GenMsgDelayTime" BO_ 1415 5;
+BA_ "GenMsgCycleTime" BO_ 1415 500;
+BA_ "GenMsgNrOfRepetition" BO_ 1415 3;
+BA_ "VFrameFormat" BO_ 1415 14;
+BA_ "VFrameFormat" BO_ 1649 0;
+BA_ "GenMsgSendType" BO_ 1649 0;
+BA_ "MsgType" BO_ 1649 1;
+BA_ "GenMsgCycleTime" BO_ 1649 1000;
+BA_ "GenSigSendType" SG_ 3221225472 FLZCU_9_PowerMode 0;
+BA_ "GenSigInactiveValue" SG_ 3221225472 FLZCU_9_PowerMode 0;
+BA_ "GenSigStartValue" SG_ 3221225472 FLZCU_9_PowerMode 0;
+BA_ "GenSigSendType" SG_ 3221225472 FLZCU_9_FuelVehPowerMode 0;
+BA_ "GenSigInactiveValue" SG_ 3221225472 FLZCU_9_FuelVehPowerMode 0;
+BA_ "GenSigStartValue" SG_ 3221225472 FLZCU_9_FuelVehPowerMode 0;
+BA_ "GenSigSendType" SG_ 582 APA_FOLDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FOLDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FOLDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FOLDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FMLDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FMLDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FMLDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FMLDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FMRDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FMRDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FMRDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FMRDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FORDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FORDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FORDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FORDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_ROLDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_ROLDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_ROLDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_ROLDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_RMLDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_RMLDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_RMLDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_RMLDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_RMRDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_RMRDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_RMRDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_RMRDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_RORDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_RORDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_RORDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_RORDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_LSFDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_LSFDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_LSFDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_LSFDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FKPLSFMDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FKPLSFMDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FKPLSFMDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FKPLSFMDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FKPLSRMDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FKPLSRMDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FKPLSRMDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FKPLSRMDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_LSRDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_LSRDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_LSRDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_LSRDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_RSFDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_RSFDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_RSFDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_RSFDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FKPRSFMDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FKPRSFMDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FKPRSFMDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FKPRSFMDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_FKPRSRMDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_FKPRSRMDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_FKPRSRMDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_FKPRSRMDistance_246h 511;
+BA_ "GenSigSendType" SG_ 582 APA_RSRDistance_246h 0;
+BA_ "GenSigInactiveValue" SG_ 582 APA_RSRDistance_246h 0;
+BA_ "GenSigStartValue" SG_ 582 APA_RSRDistance_246h 251;
+BA_ "GenSigInvalidValue" SG_ 582 APA_RSRDistance_246h 511;
+BA_ "GenSigSendType" SG_ 593 EstimatedCouplingTorq_251h 0;
+BA_ "GenSigStartValue" SG_ 593 EstimatedCouplingTorq_251h 0;
+BA_ "GenSigInvalidValue" SG_ 593 EstimatedCouplingTorq_251h 16383;
+BA_ "GenSigSendType" SG_ 594 CouplingThermalFailsafe_252h 0;
+BA_ "GenSigStartValue" SG_ 594 CouplingThermalFailsafe_252h 0;
+BA_ "GenSigSendType" SG_ 594 AWDoutserviceDispRq_252h 0;
+BA_ "GenSigStartValue" SG_ 594 AWDoutserviceDispRq_252h 0;
+BA_ "GenSigSendType" SG_ 594 StopPumpSts_252h 0;
+BA_ "GenSigStartValue" SG_ 594 StopPumpSts_252h 0;
+BA_ "GenSigInvalidValue" SG_ 594 StopPumpSts_252h 0;
+BA_ "GenSigSendType" SG_ 595 CouplingFaultStatus_253h 0;
+BA_ "GenSigStartValue" SG_ 595 CouplingFaultStatus_253h 0;
+BA_ "GenSigSendType" SG_ 595 CouplingThermalFailsafe_253h 0;
+BA_ "GenSigStartValue" SG_ 595 CouplingThermalFailsafe_253h 0;
+BA_ "GenSigSendType" SG_ 595 EstimatedTorque_253h 0;
+BA_ "GenSigStartValue" SG_ 595 EstimatedTorque_253h 0;
+BA_ "GenSigSendType" SG_ 1025 DeviationangleStsFed_401h 0;
+BA_ "GenSigStartValue" SG_ 1025 DeviationangleStsFed_401h 0;
+BA_ "GenSigInvalidValue" SG_ 1025 DeviationangleStsFed_401h 0;
+BA_ "GenSigSendType" SG_ 1025 IntelligentOrientStsFed_401h 0;
+BA_ "GenSigStartValue" SG_ 1025 IntelligentOrientStsFed_401h 0;
+BA_ "GenSigInvalidValue" SG_ 1025 IntelligentOrientStsFed_401h 0;
+BA_ "GenSigSendType" SG_ 1025 CntrlCtrlScrnOrientStsFed_401h 0;
+BA_ "GenSigStartValue" SG_ 1025 CntrlCtrlScrnOrientStsFed_401h 0;
+BA_ "GenSigInvalidValue" SG_ 1025 CntrlCtrlScrnOrientStsFed_401h 0;
+BA_ "GenSigSendType" SG_ 1025 DeviationDirectionStsFed_401h 0;
+BA_ "GenSigStartValue" SG_ 1025 DeviationDirectionStsFed_401h 0;
+BA_ "GenSigInvalidValue" SG_ 1025 DeviationDirectionStsFed_401h 0;
+BA_ "GenSigSendType" SG_ 1025 CalibrationStsFed_401h 0;
+BA_ "GenSigStartValue" SG_ 1025 CalibrationStsFed_401h 0;
+BA_ "GenSigInvalidValue" SG_ 1025 CalibrationStsFed_401h 3;
+BA_ "GenSigSendType" SG_ 1415 DeviationangleSet_587h 2;
+BA_ "GenSigStartValue" SG_ 1415 DeviationangleSet_587h 0;
+BA_ "GenSigSendType" SG_ 1415 IntelligentOrientSet_587h 2;
+BA_ "GenSigStartValue" SG_ 1415 IntelligentOrientSet_587h 0;
+BA_ "GenSigSendType" SG_ 1415 CntrlCtrlScreenOrientSet_587h 2;
+BA_ "GenSigStartValue" SG_ 1415 CntrlCtrlScreenOrientSet_587h 0;
+BA_ "GenSigSendType" SG_ 1415 DeviationDirectionSet_587h 2;
+BA_ "GenSigStartValue" SG_ 1415 DeviationDirectionSet_587h 0;
+BA_ "GenSigSendType" SG_ 1415 CalibrationSet_587h 2;
+BA_ "GenSigStartValue" SG_ 1415 CalibrationSet_587h 0;
+BA_ "GenSigSendType" SG_ 1415 TenMinuteModeSignal_587h 0;
+BA_ "GenSigStartValue" SG_ 1415 TenMinuteModeSignal_587h 0;
+BA_ "GenSigInvalidValue" SG_ 1415 TenMinuteModeSignal_587h 3;
+BA_ "GenSigSendType" SG_ 1649 srcNodeID_ICC2 0;
+BA_ "GenSigStartValue" SG_ 1649 srcNodeID_ICC2 113;
+BA_ "GenSigSendType" SG_ 1649 RMR_ICC2 0;
+BA_ "GenSigStartValue" SG_ 1649 RMR_ICC2 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Wakeup_Poweron 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Wakeup_Poweron 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Wakeup_NM 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Wakeup_NM 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Wakeup_PowerComfortable 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Wakeup_PowerComfortable 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Awake_Poweron 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Awake_Poweron 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Awake_NM 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Awake_NM 0;
+BA_ "GenSigSendType" SG_ 1649 ICC2_Awake_PowerComfortable 0;
+BA_ "GenSigStartValue" SG_ 1649 ICC2_Awake_PowerComfortable 0;
+VAL_ 3221225472 FLZCU_9_PowerMode 0 "Off" 1 "Comfortable" 2 "ON" 3 "Reserved" ;
+VAL_ 3221225472 FLZCU_9_FuelVehPowerMode 0 "Off" 1 "ACC" 2 "ON" 3 "Crank" 4 "Running" 5 "Reserve" 6 "Reserve" 7 "Reserve" ;
+VAL_ 582 APA_FOLDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FMLDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FMRDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FORDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_ROLDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_RMLDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_RMRDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_RORDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_LSFDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FKPLSFMDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FKPLSRMDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_LSRDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_RSFDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FKPRSFMDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_FKPRSRMDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 582 APA_RSRDistance_246h 251 "No object" 511 "Invalid" ;
+VAL_ 594 CouplingThermalFailsafe_252h 0 "False(CouplingTherma is not being Failsafe)" 1 "True(CouplingTherma is  being Failsafe)" ;
+VAL_ 594 AWDoutserviceDispRq_252h 0 "Not Active" 1 "Temporary out service" 2 "Permanent out service" ;
+VAL_ 594 StopPumpSts_252h 0 "Running" 1 "Stopped" ;
+VAL_ 595 CouplingFaultStatus_253h 0 "Normal Operating Mode" 1 "Reduced coupling functionality" 2 "Temporary coupling failure" 3 "Permanent coupling failure" ;
+VAL_ 595 CouplingThermalFailsafe_253h 0 "Coupling not overheated" 1 "Coupling is overheated" ;
+VAL_ 595 EstimatedTorque_253h 65535 "Invalid" ;
+VAL_ 1025 IntelligentOrientStsFed_401h 0 "Not active" 1 "Manual priority" 2 "Driver priority" 3 "Intelligent rotation" 4 "Reserved" 5 "Reserved" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1025 CntrlCtrlScrnOrientStsFed_401h 0 "Not active" 1 "Main driver" 2 "Centered" 3 "Co pilot" 4 "user-defined" 5 "Reserved" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1025 DeviationDirectionStsFed_401h 0 "Not active" 1 "Left" 2 "right" 3 "Reserved" ;
+VAL_ 1025 CalibrationStsFed_401h 0 "Not active" 1 "On" 2 "Off" 3 "Reserved" ;
+VAL_ 1415 IntelligentOrientSet_587h 0 "Not active" 1 "Manual priority" 2 "Driver priority" 3 "Intelligent rotation" 4 "Reserved" 5 "Reserved" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1415 CntrlCtrlScreenOrientSet_587h 0 "Not active" 1 "Main driver" 2 "Centered" 3 "Co pilot" 4 "user-defined" 5 "Reserved" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1415 DeviationDirectionSet_587h 0 "Not active" 1 "Left" 2 "right" 3 "Reserved" ;
+VAL_ 1415 CalibrationSet_587h 0 "Not active" 1 "On" 2 "Off" 3 "Reserved" ;
+VAL_ 1415 TenMinuteModeSignal_587h 0 "OFF_Startup" 1 "ON" 2 "Reserved" 3 "Invalid" ;
+VAL_ 1649 RMR_ICC2 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Wakeup_Poweron 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Wakeup_NM 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Wakeup_PowerComfortable 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Awake_Poweron 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Awake_NM 0 "Inactive" 1 "Active" ;
+VAL_ 1649 ICC2_Awake_PowerComfortable 0 "Inactive" 1 "Active" ;
+

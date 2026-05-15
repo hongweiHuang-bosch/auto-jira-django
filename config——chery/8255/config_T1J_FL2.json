@@ -15463,7 +15463,7 @@
     "prop": "IMMO_TEACH_VCC_47D",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "BYTES",
     "config": [
@@ -17618,6 +17618,32 @@
     ]
   },
   {
+    "prop": "RHRTIREPRESSURE_524",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [0.0],
+        "maxValue": [350.115],
+        "factor": [1.373],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1316,
+        "getMsgName": "FRZCU_6",
+        "getSignals": ["RHRTirePressure"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "RHRTIRETEMPERATURE_524",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -17899,32 +17925,6 @@
         "getMsgId": 1403,
         "getMsgName": "RMCU_1_G",
         "getSignals": ["RMCU_ErrLvlDis"],
-        "options": [""]
-      }
-    ]
-  },
-  {
-    "prop": "RRCR_1_BSDWARN_447",
-    "access": "READ",
-    "changeMode": "ON_CHANGE",
-    "useArea": "Android_QNX",
-    "liteSnapshot": "DEFAULT_SNAPSHOT",
-    "dataType": "FLOAT",
-    "config": [
-      {
-        "area": "0",
-        "initValue": [0.0],
-        "minValue": [0.0],
-        "maxValue": [350.115],
-        "factor": [1.373],
-        "offset": [0.0],
-        "flow": "BUS_CH01",
-        "setMsgId": null,
-        "setMsgName": null,
-        "setSignals": [],
-        "getMsgId": 1316,
-        "getMsgName": "FRZCU_6",
-        "getSignals": ["RHRTirePressure"],
         "options": [""]
       }
     ]
@@ -22249,7 +22249,7 @@
     "prop": "VCC_TEACH_IMMO_47F",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "BYTES",
     "config": [

@@ -10128,6 +10128,102 @@
     ]
   },
   {
+    "prop": "IHU_14_GROUP_T1K_SUB1",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0],
+        "maxValue": [4.0, 2.0, 3.0],
+        "factor": [1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1400,
+        "setMsgName": "IHU_14",
+        "setSignals": ["IHU_14_SET_Lightcontrol", "IHU_14_SET_Rearfoglight", "IHU_14_Set_FrontFogLights"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_14_GROUP_T1K_SUB2",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0],
+        "maxValue": [4.0, 2.0],
+        "factor": [1.0, 1.0],
+        "offset": [0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1400,
+        "setMsgName": "IHU_14",
+        "setSignals": ["IHU_14_SET_Lightcontrol", "IHU_14_SET_Rearfoglight"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_14_GROUP_T1K_SUB3",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0],
+        "maxValue": [4.0, 3.0],
+        "factor": [1.0, 1.0],
+        "offset": [0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1400,
+        "setMsgName": "IHU_14",
+        "setSignals": ["IHU_14_SET_Lightcontrol", "IHU_14_Set_FrontFogLights"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_14_GROUP_T1K_SUB4",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0],
+        "maxValue": [2.0, 3.0],
+        "factor": [1.0, 1.0],
+        "offset": [0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1400,
+        "setMsgName": "IHU_14",
+        "setSignals": ["IHU_14_SET_Rearfoglight", "IHU_14_Set_FrontFogLights"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "IHU_15_GROUP",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -10384,6 +10480,30 @@
         "setMsgId": 1416,
         "setMsgName": "IHU_24",
         "setSignals": ["IHU_24_Reservation_SentinelReq", "IHU_24_TimeToStopSentinelMinuteS", "IHU_24_TimeToStopSentinelHourSet", "IHU_24_TimeToStartSentinelMinute", "IHU_24_TimeToStartSentinelHourSe", "IHU_24_TimeToStartSentinelDaySet", "IHU_24_SentinelMode_SensitivityR", "IHU_24_SentinelModeSwitchReq", "IHU_24_Sentinel_RemoteLockFeedba", "FollowingTrackToReverse", "RPASwitch", "Ready2GoSwitch", "IESSwtSet", "IHU_11_TSISwtSet", "ELK_Switch", "DCLC_Switch", "RCW_OnOffSt", "RCTB_OnOffSt"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_GROUP_TIME_TO_START_SENTINEL",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0],
+        "maxValue": [63.0, 31.0, 3.0],
+        "factor": [1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_TimeToStartSentinelMinute", "IHU_24_TimeToStartSentinelHourSe", "IHU_24_TimeToStartSentinelDaySet"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -12423,7 +12543,7 @@
         "flow": "BUS_CH01",
         "setMsgId": 1400,
         "setMsgName": "IHU_14",
-        "setSignals": ["SET_Lightcontrol"],
+        "setSignals": ["IHU_14_SET_Lightcontrol"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -13071,7 +13191,7 @@
         "flow": "BUS_CH01",
         "setMsgId": 1400,
         "setMsgName": "IHU_14",
-        "setSignals": ["SET_Rearfoglight"],
+        "setSignals": ["IHU_14_SET_Rearfoglight"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -15264,6 +15384,30 @@
     ]
   },
   {
+    "prop": "VC_VENDOR_AUTO_LIGHT_SW_READ",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 913,
+        "getMsgName": "CGW_CEM_BCM_1",
+        "getSignals": ["CEM_1_AutoLightSW"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "VC_VENDOR_AVH_READ",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -15984,6 +16128,30 @@
     ]
   },
   {
+    "prop": "VC_VENDOR_EBS_ENGINESTS_READ",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 640,
+        "getMsgName": "CGW_EMS_G",
+        "getSignals": ["EMS_EngineSts_Actual"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "VC_VENDOR_EBS_SOC_READ",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -16003,6 +16171,30 @@
         "getMsgId": 936,
         "getMsgName": "CGW_CEM_BCM_13_Reserved",
         "getSignals": ["BCM_13_EBS_SOC"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "VC_VENDOR_EBS_VOLTAGE_READ",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [3.0],
+        "maxValue": [18.0],
+        "factor": [0.0009765625],
+        "offset": [3.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 934,
+        "getMsgName": "CEM_BCM_12",
+        "getSignals": ["BCM_12_EBS_Voltage"],
         "options": [""]
       }
     ]
@@ -18571,6 +18763,54 @@
         "getMsgId": 1535,
         "getMsgName": "CGW_CEM_BCM_3",
         "getSignals": ["CEM_3_Windows_Inhibit_SW"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "VC_VENDOR_WIND_SCREEN_HEAT_READ",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1340,
+        "getMsgName": "CGW_RBCM_1",
+        "getSignals": ["RBCM_FGHeat_Request_CommandFB"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "VC_VENDOR_WIND_SCREEN_HEAT_WRITE",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1322,
+        "setMsgName": "IHU_RBCM",
+        "setSignals": ["SET_FrontWindscreenHeatiReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
         "options": [""]
       }
     ]

@@ -50,10 +50,11 @@
             "proto": "com.bosch.cm.platform.vehicle.proto"
         },
 		{
-            "cartype": "T1JFL3",
+            "cartype": "T1J-FL3",
             "cartype_id": "37",
             "dbc": [
                 "car_T1J_FL3.dbc",
+				"car_T1L_FL1_INF.dbc"
             ],
             "config_path": "",
             "conf_json": [

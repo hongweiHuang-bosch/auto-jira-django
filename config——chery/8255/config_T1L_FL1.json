@@ -29,7 +29,7 @@
     "prop": "ABSFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -809,7 +809,7 @@
     "prop": "AVHFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -5073,7 +5073,7 @@
     "prop": "CEM_PEPS_SMARTSYSTEMWARNING_5_1_480",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -5619,7 +5619,7 @@
     "prop": "EBDFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -5879,7 +5879,7 @@
     "prop": "EMS_1_G_ENGINECOOLANTTEMPERTURE_280",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "FLOAT",
     "config": [
@@ -6503,7 +6503,7 @@
     "prop": "EPSSTEERINGANGLECALIBRATIONSTS_381",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -6555,7 +6555,7 @@
     "prop": "EPS_1_EPSFAILSTS_381",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -6607,7 +6607,7 @@
     "prop": "EPS_1_RECOVERABLEFAULT_380",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -6893,7 +6893,7 @@
     "prop": "ESP_G_ABSFAILSTS_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -6945,7 +6945,7 @@
     "prop": "ESP_G_AVHAVAILABLE_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -7049,7 +7049,7 @@
     "prop": "ESP_G_EBDFAILSTS_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -7127,7 +7127,7 @@
     "prop": "ESP_G_HDCFAILSTS_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -7179,7 +7179,7 @@
     "prop": "ESP_G_TCSFAILSTS_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -7231,7 +7231,7 @@
     "prop": "ESP_G_VDCFAILSTS_2C0",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -8765,7 +8765,7 @@
     "prop": "HDCFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -9066,6 +9066,32 @@
         "setMsgId": 1276,
         "setMsgName": "IHU_11",
         "setSignals": ["IHU_11_HMASwtSet"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_13_GROUP_T1L",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 15.0, 15.0, 7.0, 7.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 7.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1401,
+        "setMsgName": "IHU_13",
+        "setSignals": ["SET_Welcome_Seat", "SET_MFS_Shake", "SET_MFS_Heat", "SET_UnderVoltage", "SET_RearWiper_Switch", "SET_Wiper_Maintenance", "SET_Abat_VentCMD", "SET_PSRFCMD", "SET_Massagemode", "SET_Vibrationmode", "SET_Passenger_Massage", "SET_PLG_Control", "SET_Doorkonbmode", "SET_Doorkonb_time", "SET_Driver_unlockmode", "SET_Smart_LowBeam", "SET_LowBeam_Adjust"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -9924,6 +9950,32 @@
         "setMsgId": 1069,
         "setMsgName": "IHU_20",
         "setSignals": ["IHU_17_SetChrgnFctMem", "IHU_TimeToStartChargeHourSet", "IHU_TimeToStartChargeMinuteSet", "IHU_TimeToStopChargeHourSet", "IHU_TimeToStopChargeMinuteSet", "IHU_ChargeModeSet", "IHU_SetSocManage", "Set_AVASFuntion"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_20_GROUP_T1L",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 3.0, 59.0, 23.0, 59.0, 23.0, 3.0, 7.0, 3.0, 7.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1069,
+        "setMsgName": "IHU_20",
+        "setSignals": ["IHU_20_RgnSet", "IHU_17_SetChrgnFctMem", "IHU_TimeToStopChargeMinuteSet", "IHU_TimeToStopChargeHourSet", "IHU_TimeToStartChargeMinuteSet", "IHU_TimeToStartChargeHourSet", "IHU_ChargeModeSet", "IHU_SetSocManage", "Set_AVASFuntion", "IHU_SetSOC"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -11076,6 +11128,32 @@
     ]
   },
   {
+    "prop": "IHU_8_GROUP_T1L",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1309,
+        "setMsgName": "IHU_8",
+        "setSignals": ["SET_PAS_Switch", "Child_Safety_Lock", "ESCOFF_ON_OFF", "HDC_ON_OFF", "AVH_ON_OFF", "IHU_8_HMAOnOffReq", "IHU_8_CCOSwtReq", "IHU_8_CGW_Set_CSTFunctionSts", "IHU8Curvedeceleration_ON_OFF_Sts", "IHU_CGW_BrakepedalfeelModeSetReq", "CGW_DVDSET_IPBAssociateDriveMode", "CGW_CST_SensitivityReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "IHU_8_GROUP_T1L_FL1",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -11729,7 +11807,7 @@
     "prop": "IPB_BRAKEFLUIDSTS_497",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -11937,7 +12015,7 @@
     "prop": "IPB_SYSTEM_STATUS_497",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -16305,7 +16383,7 @@
     "prop": "TCSFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -16383,7 +16461,7 @@
     "prop": "TCU_G_GBFAULTSTATUS_301",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -16695,7 +16773,7 @@
     "prop": "VDCFAILSTS_501",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [

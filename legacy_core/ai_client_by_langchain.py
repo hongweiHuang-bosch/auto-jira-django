@@ -351,7 +351,7 @@ class AIClient:
         return reranked
     
     #  JSON结构输出
-    def generate(self, query: str, chunks: List[str], top_k: int = 8) -> Dict[str, Any]:
+    def generate(self, query: str, chunks: List[str], top_k: int = 8, expected_signal_count: int = 0) -> Dict[str, Any]:
         """
         使用 top_k 个 chunk，构造限长上下文，调用 LLM。
         输出为结构化 JSON（dict），schema 为：
@@ -368,7 +368,18 @@ class AIClient:
         # 2）限制上下文长度
         context = build_context(selected_chunks, max_chars=20000)
 
-        # 3）强约束 JSON 的 prompt（英文， 没有使用中文embedding模型）
+        # 3）信号数量约束提示
+        signal_count_hint = ""
+        if expected_signal_count > 0:
+            signal_count_hint = (
+                f"\n    IMPORTANT: The user question mentions approximately {expected_signal_count} signals. "
+                f"You MUST extract ALL signal names that explicitly appear in the user question text "
+                f"(both request/set signals like IHU_*_SET_* and feedback/status signals like CEM_*). "
+                f"Do NOT omit any signal that is directly mentioned in the question. "
+                f"The 'signals' array should contain at least {expected_signal_count} items."
+            )
+
+        # 4）强约束 JSON 的 prompt
         prompt = f"""
     You are a CAN / vehicle signal analysis assistant.
 
@@ -383,10 +394,11 @@ class AIClient:
     "confidence": number
     }}
 
-    - "signals": signals mentioned in the user question or relevant CAN/VHAL/CAN trace signals.
+    - "signals": ALL signal names explicitly mentioned in the user question AND relevant CAN/VHAL signals from the context. Include both request signals and feedback signals.
     - "analysis": detailed reasoning and findings based on the context.
     - "suggested_owner": which module/team should investigate (e.g. ABM, IHU, Gateway, Network).
     - "confidence": a number between 0 and 1.
+    {signal_count_hint}
 
     User question:
     {query}
@@ -404,7 +416,11 @@ class AIClient:
         return result
 
 
-    def query_signal_by_rag(self, query: str, car_type_json_path: str)->str:
+    def query_signal_by_rag(self, query: str, car_type_json_path: str, signal_nums: str)->str:
+        # 0）确保 query 是单个字符串（防止调用方误传 tuple）
+        if not isinstance(query, str):
+            query = " ".join(str(q) for q in query) if isinstance(query, (list, tuple)) else str(query)
+
         # 1）加载文档并分块
         doc_path = car_type_json_path  
         chunks = split_into_chunks(doc_path)
@@ -413,17 +429,20 @@ class AIClient:
         embeddings = [self.embed_chunk(chunk) for chunk in chunks]
         self.save_embeddings(chunks, embeddings)
 
-        # 3） query prompt写死
-        # query = (
-        #     "请从用户提供的{问题描述}中提取评论中出现的所有信号名称，比如：CEM_IPM_FrontOFFSts，Queen_bed_mode_Swt，若无匹配项则输出'无法提取'"
-        #     f"{comment}"
-        # )
-        # 4）检索 + 重排
-        retrieved_chunks = self.retrieve(query, top_k=3)
-        reranked_chunks = self.rerank(query, retrieved_chunks, top_k=2)
+        # 3）安全解析信号数量
+        try:
+            n_signals = max(int(signal_nums), 1)
+        except (ValueError, TypeError):
+            n_signals = 5
 
-        # 5）生成结构化 JSON 答案
-        answer = self.generate(query, reranked_chunks)
+        # 4）检索 + 重排 — 使用更宽裕的 top_k，避免遗漏相关 chunk
+        retrieve_k = max(n_signals * 3, 10)
+        rerank_k = max(n_signals * 2, 8)
+        retrieved_chunks = self.retrieve(query, top_k=retrieve_k)
+        reranked_chunks = self.rerank(query, retrieved_chunks, top_k=rerank_k)
+
+        # 5）生成结构化 JSON 答案，传入期望信号数量
+        answer = self.generate(query, reranked_chunks, expected_signal_count=n_signals)
         return answer
 
     def _post(self, url: str, payload: dict) -> requests.Response:

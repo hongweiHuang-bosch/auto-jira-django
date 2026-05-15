@@ -110,7 +110,11 @@ MAP_CAR_ROLE = (
                 "dbc":   ["car_T1L_OVERSEA_Body.dbc","car_T1L_OVERSEA_INF.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
-            
+            "T1L FL2": {
+                "json":  "config_T1L_FL1.json",
+                "dbc":   ["car_T1L_FL1_Body.dbc","car_T1L_FL1_INF.dbc"],
+                "proto": "com.bosch.cm.platform.vehicle.proto"
+            },
         },
 
         # 可选兜底：当票名里没有【车型】或车型不在映射表时使用
@@ -446,6 +450,11 @@ MAP_CAR_ROLE = (
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
             "T1LFL1": {
+                "json":  "config_T1L_FL1.json",
+                "dbc":   ["car_T1L_FL1_Body.dbc","car_T1L_FL1_INF.dbc"],
+                "proto": "com.bosch.cm.platform.vehicle.proto"
+            },
+            "T1L FL2": {
                 "json":  "config_T1L_FL1.json",
                 "dbc":   ["car_T1L_FL1_Body.dbc","car_T1L_FL1_INF.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"

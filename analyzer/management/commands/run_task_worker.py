@@ -9,6 +9,7 @@ from analyzer.services.task_claims import (
     claim_pending_issue_process_task,
     recover_stale_issue_process_tasks,
 )
+from legacy_core.utils import setup_logging
 
 
 class Command(BaseCommand):
@@ -31,6 +32,8 @@ class Command(BaseCommand):
             run_issue_process_task(process_task_id)
 
     def handle(self, *args, **options):
+        setup_logging()
+
         if options['once']:
             self._run_once()
             return
