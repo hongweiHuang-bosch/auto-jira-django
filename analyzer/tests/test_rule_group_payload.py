@@ -222,3 +222,26 @@ class RuleGroupPayloadTests(TestCase):
         payload = build_processed_issue_detail(role_index=0, issue_key='CHER-500')
 
         self.assertEqual(payload['jira_url'], 'https://jira.example.com/browse/CHER-500')
+
+    def test_build_processed_issue_detail_exposes_review_fields(self):
+        process_task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='SUCCESS',
+        )
+        IssueProcessResult.objects.create(
+            process_task=process_task,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            reply_text='处理正文',
+            review_status='FAIL',
+            review_reason='评论与结论冲突',
+            manual_override_after_review=False,
+        )
+
+        payload = build_processed_issue_detail(role_index=0, issue_key='CHER-500')
+
+        self.assertEqual(payload['records'][0]['result']['review_status'], 'FAIL')
+        self.assertEqual(payload['records'][0]['result']['review_reason'], '评论与结论冲突')
