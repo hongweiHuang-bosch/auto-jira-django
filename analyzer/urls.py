@@ -6,6 +6,7 @@ from .views import (
     FilterTaskCreateView,
     IssueProcessTaskCreateView, IssueProcessTaskDetailView,
     IssueProcessResultUpdateView, IssueProcessResultCommentView,
+    IssueProcessResultReviewView,
 )
 from .views_rule_groups import (
     FilterTaskIssueListView,
@@ -42,4 +43,5 @@ urlpatterns = [
     path('process-tasks/<int:pk>/', IssueProcessTaskDetailView.as_view(), name='issue-process-task-detail'),
     path('process-results/<int:pk>/', IssueProcessResultUpdateView.as_view(), name='issue-process-result-update'),
     path('process-results/<int:pk>/comment/', IssueProcessResultCommentView.as_view(), name='issue-process-result-comment'),
+    path('process-results/<int:pk>/review/', IssueProcessResultReviewView.as_view(), name='issue-process-result-review'),
 ]

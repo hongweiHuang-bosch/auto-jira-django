@@ -4,7 +4,7 @@ from unittest.mock import patch
 from django.utils import timezone
 from rest_framework.test import APITestCase
 
-from analyzer.models import FilterTask, FilteredIssueSnapshot, IssueProcessResult, IssueProcessTask
+from analyzer.models import FilterTask, FilteredIssueSnapshot, IssueProcessResult, IssueProcessTask, IssueReviewSample
 
 
 class IssueProcessApiTests(APITestCase):
@@ -159,3 +159,80 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         result.refresh_from_db()
         self.assertTrue(result.has_commented_to_jira)
+
+    # ─── 辅助方法 ───────────────────────────────────────────────────
+
+    def _create_process_result(self, reply_text='分析结论'):
+        process_task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='SUCCESS',
+        )
+        return IssueProcessResult.objects.create(
+            process_task=process_task,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            reply_text=reply_text,
+        )
+
+    # ─── 任务 2：复核接口 ───────────────────────────────────────────
+
+    @patch('analyzer.views.review_issue_result')
+    def test_review_endpoint_marks_result_pass(self, mock_review_issue_result):
+        mock_review_issue_result.return_value = {
+            'review_status': 'PASS',
+            'review_reason': '结论一致',
+            'few_shot_count': 3,
+            'review_model': 'Qwen3-32B-FP16',
+        }
+        result = self._create_process_result(reply_text='分析结论')
+
+        response = self.client.post(f'/api/process-results/{result.id}/review/', {}, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.review_status, 'PASS')
+        self.assertFalse(result.manual_override_after_review)
+
+    @patch('analyzer.views.review_issue_result')
+    def test_review_endpoint_marks_result_fail_and_creates_sample(self, mock_review_issue_result):
+        mock_review_issue_result.return_value = {
+            'review_status': 'FAIL',
+            'review_reason': '评论与结论冲突',
+            'few_shot_count': 2,
+            'review_model': 'Qwen3-32B-FP16',
+            'correct_conclusion': '建议人工检查 FLZCU 反馈链路',
+        }
+        result = self._create_process_result(reply_text='错误结论')
+
+        response = self.client.post(f'/api/process-results/{result.id}/review/', {}, format='json')
+
+        self.assertEqual(response.status_code, 200)
+        result.refresh_from_db()
+        self.assertEqual(result.review_status, 'FAIL')
+        self.assertEqual(IssueReviewSample.objects.count(), 1)
+
+    @patch('analyzer.views.review_issue_result')
+    def test_review_endpoint_uses_at_most_three_samples(self, mock_review_issue_result):
+        mock_review_issue_result.return_value = {
+            'review_status': 'PASS',
+            'review_reason': '结论一致',
+            'few_shot_count': 3,
+            'review_model': 'Qwen3-32B-FP16',
+        }
+        for index in range(5):
+            IssueReviewSample.objects.create(
+                role_index=self.filter_task.role_index,
+                issue_key=f'CHER-{index}',
+                incorrect_conclusion=f'错误结论 {index}',
+                correct_conclusion=f'正确结论 {index}',
+                error_reason='历史错例',
+            )
+        result = self._create_process_result(reply_text='待复核结论')
+
+        self.client.post(f'/api/process-results/{result.id}/review/', {}, format='json')
+
+        args, _ = mock_review_issue_result.call_args
+        self.assertEqual(len(args[1]), 3)

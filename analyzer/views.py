@@ -9,8 +9,9 @@ from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult
+from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult, IssueReviewSample
 from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer
+from .services.issue_review_service import review_issue_result
 from .services.task_executor import submit_analysis_task
 from .services.filter_task_executor import submit_filter_task
 from .services.task_catalog import get_role_entry, get_role_label
@@ -242,6 +243,38 @@ class IssueProcessResultUpdateView(APIView):
         result.save(update_fields=['reply_text', 'updated_at'])
         publish_rule_group_snapshot()
         return Response(IssueProcessResultSerializer(result).data)
+
+
+class IssueProcessResultReviewView(APIView):
+    def post(self, request, pk: int):
+        result = get_object_or_404(IssueProcessResult, pk=pk)
+        process_task = result.process_task
+        samples = list(
+            IssueReviewSample.objects.filter(role_index=process_task.filter_task.role_index)
+            .order_by('-updated_at', '-id')[:3]
+        )
+        review = review_issue_result(result, samples)
+
+        result.review_status = review['review_status']
+        result.review_reason = review['review_reason']
+        result.review_model = review['review_model']
+        result.reviewed_at = timezone.now()
+        result.manual_override_after_review = False
+        result.save(update_fields=[
+            'review_status', 'review_reason', 'review_model',
+            'reviewed_at', 'manual_override_after_review', 'updated_at',
+        ])
+
+        if review['review_status'] == 'FAIL':
+            IssueReviewSample.objects.create(
+                role_index=process_task.filter_task.role_index,
+                issue_key=result.issue_key,
+                incorrect_conclusion=result.reply_text,
+                correct_conclusion=review.get('correct_conclusion', ''),
+                error_reason=review['review_reason'],
+            )
+
+        return Response(review)
 
 
 class IssueProcessResultCommentView(APIView):

@@ -1775,3 +1775,12 @@ MAP_CAR_ROLE = (
     },
 
 )
+
+# ─── 复核 prompt ───────────────────────────────────────────────────────────────
+ISSUE_REVIEW_SYSTEM = """
+你将收到 Jira 评论、信号摘要、当前模型结论，以及至多 3 条历史错例。
+请判断当前结论是否可信。
+如果可信，输出 JSON: {"review_status":"PASS","review_reason":"..."}
+如果不可信，输出 JSON: {"review_status":"FAIL","review_reason":"...","correct_conclusion":"..."}
+只输出 JSON，不要输出任何其他内容。
+"""
