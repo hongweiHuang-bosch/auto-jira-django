@@ -106,6 +106,31 @@ class IssueProcessApiTests(APITestCase):
         result.refresh_from_db()
         self.assertEqual(result.reply_text, '新内容')
 
+    def test_processed_issue_detail_includes_review_fields(self):
+        process_task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='SUCCESS',
+        )
+        IssueProcessResult.objects.create(
+            process_task=process_task,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            reply_text='分析结论',
+        )
+
+        response = self.client.get(
+            f'/api/rule-groups/{self.filter_task.role_index}/processed-issues/{self.snapshot.issue_key}/'
+        )
+
+        self.assertEqual(response.status_code, 200)
+        latest = response.data['records'][0]['result']
+        self.assertEqual(latest['review_status'], 'PENDING')
+        self.assertEqual(latest['review_reason'], '')
+        self.assertEqual(latest['manual_override_after_review'], False)
+
     @patch('analyzer.views.load_config')
     @patch('analyzer.views.JiraClient')
     def test_comment_issue_process_result(self, mock_jira_cls, mock_load_config):

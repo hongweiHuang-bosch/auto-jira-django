@@ -139,6 +139,11 @@ class IssueProcessResult(models.Model):
         ('FAILED', 'FAILED'),
         ('MANUAL', 'MANUAL'),
     ]
+    REVIEW_STATUS_CHOICES = [
+        ('PENDING', 'PENDING'),
+        ('PASS', 'PASS'),
+        ('FAIL', 'FAIL'),
+    ]
 
     process_task = models.OneToOneField(IssueProcessTask, on_delete=models.CASCADE, related_name='result')
     issue_key = models.CharField(max_length=64)
@@ -152,8 +157,26 @@ class IssueProcessResult(models.Model):
     has_commented_to_jira = models.BooleanField(default=False)
     commented_at = models.DateTimeField(null=True, blank=True)
     error_message = models.TextField(blank=True, default='')
+    review_status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='PENDING')
+    review_reason = models.TextField(blank=True, default='')
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    review_model = models.CharField(max_length=100, blank=True, default='')
+    manual_override_after_review = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']
+
+
+class IssueReviewSample(models.Model):
+    role_index = models.PositiveIntegerField(db_index=True)
+    issue_key = models.CharField(max_length=64)
+    incorrect_conclusion = models.TextField()
+    correct_conclusion = models.TextField()
+    error_reason = models.TextField(blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated_at', '-id']
