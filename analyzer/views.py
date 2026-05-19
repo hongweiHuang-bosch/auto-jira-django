@@ -9,8 +9,8 @@ from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult, IssueReviewSample
-from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer
+from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult, IssueReviewSample, IssueValidationRun
+from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer, IssueValidationRunSerializer
 from .services.issue_review_service import review_issue_result
 from .services.learning_memory_service import delete_learning_memory, persist_learning_memory
 from .services.task_executor import submit_analysis_task
@@ -371,6 +371,61 @@ class IssueProcessResultManualReviewView(APIView):
         persist_learning_memory(result)
         publish_rule_group_snapshot()
         return Response(IssueProcessResultSerializer(result).data)
+
+
+class IssueProcessResultValidationRunCreateView(APIView):
+    def post(self, request, pk: int):
+        result = get_object_or_404(IssueProcessResult, pk=pk)
+        run = IssueValidationRun.objects.create(process_result=result, status='PENDING')
+        return Response(
+            {'validation_run_id': run.id, 'status': run.status},
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class IssueProcessResultLatestValidationRunView(APIView):
+    def get(self, request, pk: int):
+        result = get_object_or_404(IssueProcessResult, pk=pk)
+        run = result.validation_runs.order_by('-created_at').first()
+        if run is None:
+            return Response({'detail': '暂无校验记录'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(IssueValidationRunSerializer(run).data)
+
+
+class IssueValidationRunDetailView(APIView):
+    def get(self, request, pk: int):
+        run = get_object_or_404(IssueValidationRun, pk=pk)
+        return Response(IssueValidationRunSerializer(run).data)
+
+
+class IssueValidationRunOverrideView(APIView):
+    def patch(self, request, pk: int):
+        run = get_object_or_404(IssueValidationRun, pk=pk)
+        manual_verdict = request.data.get('manual_verdict')
+        manual_reason = request.data.get('manual_reason')
+        manual_note = request.data.get('manual_note')
+        if manual_verdict not in ('PASS', 'FAIL', 'WARNING', 'UNKNOWN'):
+            return Response({'detail': 'manual_verdict 必须是 PASS/FAIL/WARNING/UNKNOWN'}, status=status.HTTP_400_BAD_REQUEST)
+        if not isinstance(manual_reason, str) or not manual_reason.strip():
+            return Response({'detail': 'manual_reason 不能为空'}, status=status.HTTP_400_BAD_REQUEST)
+        if not isinstance(manual_note, str) or not manual_note.strip():
+            return Response({'detail': 'manual_note 不能为空'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = request.user
+        run.manual_verdict = manual_verdict
+        run.manual_reason = manual_reason.strip()
+        run.manual_note = manual_note.strip()
+        run.manual_operator = user.username if user.is_authenticated else 'anonymous'
+        run.manual_saved_at = timezone.now()
+        run.save(update_fields=[
+            'manual_verdict',
+            'manual_reason',
+            'manual_note',
+            'manual_operator',
+            'manual_saved_at',
+            'updated_at',
+        ])
+        return Response(IssueValidationRunSerializer(run).data)
 
 
 class IssueProcessResultCommentView(APIView):

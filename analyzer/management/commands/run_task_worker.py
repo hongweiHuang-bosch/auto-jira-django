@@ -4,9 +4,11 @@ from django.core.management.base import BaseCommand
 
 from analyzer.services.filter_task_runner import run_filter_task
 from analyzer.services.issue_analysis_service import run_issue_process_task
+from analyzer.services.issue_validation_runner import run_issue_validation_run
 from analyzer.services.task_claims import (
     claim_pending_filter_task,
     claim_pending_issue_process_task,
+    claim_pending_issue_validation_run,
     recover_stale_issue_process_tasks,
 )
 from legacy_core.utils import setup_logging
@@ -30,6 +32,11 @@ class Command(BaseCommand):
         process_task_id = claim_pending_issue_process_task()
         if process_task_id is not None:
             run_issue_process_task(process_task_id)
+            return
+
+        validation_run_id = claim_pending_issue_validation_run()
+        if validation_run_id is not None:
+            run_issue_validation_run(validation_run_id)
 
     def handle(self, *args, **options):
         setup_logging()

@@ -8,6 +8,10 @@ from .views import (
     IssueProcessResultUpdateView, IssueProcessResultCommentView,
     IssueProcessResultReviewView,
     IssueProcessResultManualReviewView,
+    IssueProcessResultValidationRunCreateView,
+    IssueProcessResultLatestValidationRunView,
+    IssueValidationRunDetailView,
+    IssueValidationRunOverrideView,
 )
 from .views_rule_groups import (
     FilterTaskIssueListView,
@@ -46,4 +50,8 @@ urlpatterns = [
     path('process-results/<int:pk>/comment/', IssueProcessResultCommentView.as_view(), name='issue-process-result-comment'),
     path('process-results/<int:pk>/review/', IssueProcessResultReviewView.as_view(), name='issue-process-result-review'),
     path('process-results/<int:pk>/manual-review/', IssueProcessResultManualReviewView.as_view(), name='issue-process-result-manual-review'),
+    path('process-results/<int:pk>/validation-runs/', IssueProcessResultValidationRunCreateView.as_view(), name='issue-process-result-validation-run-create'),
+    path('process-results/<int:pk>/validation-runs/latest/', IssueProcessResultLatestValidationRunView.as_view(), name='issue-process-result-latest-validation-run'),
+    path('validation-runs/<int:pk>/', IssueValidationRunDetailView.as_view(), name='issue-validation-run-detail'),
+    path('validation-runs/<int:pk>/override/', IssueValidationRunOverrideView.as_view(), name='issue-validation-run-override'),
 ]

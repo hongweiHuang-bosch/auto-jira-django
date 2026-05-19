@@ -6,7 +6,7 @@ from datetime import timedelta
 from django.db import transaction
 from django.utils import timezone
 
-from analyzer.models import FilterTask, IssueProcessTask
+from analyzer.models import FilterTask, IssueProcessTask, IssueValidationRun
 from analyzer.services.rule_group_stream import publish_rule_group_snapshot
 
 logger = logging.getLogger('jira_analyzer_worker')
@@ -57,6 +57,24 @@ def claim_pending_issue_process_task(now=None):
             },
         )
         return task.id
+
+
+def claim_pending_issue_validation_run(now=None):
+    current = now or timezone.now()
+    with transaction.atomic():
+        run = (
+            IssueValidationRun.objects.select_for_update(skip_locked=True)
+            .filter(status='PENDING')
+            .order_by('created_at')
+            .first()
+        )
+        if run is None:
+            return None
+        run.status = 'RUNNING'
+        run.started_at = current
+        run.save(update_fields=['status', 'started_at', 'updated_at'])
+        logger.info('claimed validation run', extra={'validation_run_id': run.id})
+        return run.id
 
 
 def recover_stale_issue_process_tasks(timeout_minutes=30, now=None):
