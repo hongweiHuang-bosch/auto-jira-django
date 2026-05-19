@@ -89,3 +89,17 @@ def recover_stale_issue_process_tasks(timeout_minutes=30, now=None):
     if recovered:
         logger.warning('recovered stale process tasks', extra={'count': recovered})
     return recovered
+
+
+def recover_stale_issue_validation_runs(timeout_minutes=30, now=None):
+    current = now or timezone.now()
+    cutoff = current - timedelta(minutes=timeout_minutes)
+    stale_qs = IssueValidationRun.objects.filter(status='RUNNING', updated_at__lt=cutoff)
+    recovered = stale_qs.update(
+        status='FAILED',
+        error_message=f'校验任务超过 {timeout_minutes} 分钟无进展，已由 worker 标记失败',
+        finished_at=current,
+    )
+    if recovered:
+        logger.warning('recovered stale validation runs', extra={'count': recovered})
+    return recovered

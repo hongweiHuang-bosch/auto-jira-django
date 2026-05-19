@@ -10,6 +10,7 @@ from analyzer.services.task_claims import (
     claim_pending_issue_process_task,
     claim_pending_issue_validation_run,
     recover_stale_issue_process_tasks,
+    recover_stale_issue_validation_runs,
 )
 from legacy_core.utils import setup_logging
 
@@ -23,6 +24,7 @@ class Command(BaseCommand):
 
     def _run_once(self):
         recover_stale_issue_process_tasks(timeout_minutes=30)
+        recover_stale_issue_validation_runs(timeout_minutes=30)
 
         filter_task_id = claim_pending_filter_task()
         if filter_task_id is not None:

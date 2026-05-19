@@ -12,7 +12,10 @@ from analyzer.models import (
     IssueValidationRun,
 )
 from analyzer.services.issue_validation_runner import run_issue_validation_run
-from analyzer.services.task_claims import claim_pending_issue_validation_run
+from analyzer.services.task_claims import (
+    claim_pending_issue_validation_run,
+    recover_stale_issue_validation_runs,
+)
 
 
 class IssueValidationApiTests(APITestCase):
@@ -141,7 +144,9 @@ class IssueValidationApiTests(APITestCase):
         self.assertEqual(note_response.status_code, 400)
 
     def test_worker_claim_and_runner_persists_success_payload(self):
-        result = self._create_process_result(raw_signals='BCM_DriverDoorAjar')
+        result = self._create_process_result(
+            raw_signals='{"signals": [{"name": "BCM_DriverDoorAjar", "at": "12:01:08", "from": "0", "to": "1"}]}',
+        )
         run = IssueValidationRun.objects.create(process_result=result, status='PENDING')
 
         claimed_id = claim_pending_issue_validation_run()
@@ -163,6 +168,39 @@ class IssueValidationApiTests(APITestCase):
         check = run.checks.get()
         self.assertEqual(check.check_type, 'AI_RESULT_VS_CANTRACE')
         self.assertTrue(check.evidence_payload)
+
+    def test_runner_treats_free_form_raw_signals_as_missing_cantrace(self):
+        result = self._create_process_result(raw_signals='BCM_DriverDoorAjar')
+        run = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+
+        run_issue_validation_run(run.id)
+
+        run.refresh_from_db()
+        self.assertEqual(run.status, 'SUCCESS')
+        self.assertEqual(run.system_verdict, 'UNKNOWN')
+        self.assertIn('缺少可用 cantrace 数据', run.summary_reason)
+        self.assertEqual(run.evidence_payload['table_rows'], [])
+        self.assertEqual(run.checks.get().status, 'UNKNOWN')
+
+    def test_recover_stale_issue_validation_runs_marks_running_rows_failed(self):
+        result = self._create_process_result()
+        stale = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+        fresh = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+        current = timezone.now()
+        IssueValidationRun.objects.filter(pk=stale.pk).update(
+            updated_at=current - timezone.timedelta(minutes=31)
+        )
+
+        recovered = recover_stale_issue_validation_runs(timeout_minutes=30, now=current)
+
+        self.assertEqual(recovered, 1)
+        stale.refresh_from_db()
+        fresh.refresh_from_db()
+        self.assertEqual(stale.status, 'FAILED')
+        self.assertEqual(stale.error_message, '校验任务超过 30 分钟无进展，已由 worker 标记失败')
+        self.assertEqual(stale.finished_at, current)
+        self.assertEqual(fresh.status, 'RUNNING')
+        self.assertIsNone(fresh.finished_at)
 
     def test_runner_marks_failed_when_validation_service_raises(self):
         result = self._create_process_result()

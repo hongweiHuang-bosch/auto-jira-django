@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 
 from django.utils import timezone
@@ -63,16 +64,19 @@ def run_issue_validation_run(run_id: int):
 def _load_cantrace_payload(result) -> dict | None:
     if not result.raw_signals:
         return None
-    return {
-        'signals': [
-            {
-                'name': result.raw_signals,
-                'at': '',
-                'from': '',
-                'to': '',
-            }
-        ]
-    }
+    try:
+        payload = json.loads(result.raw_signals)
+    except (TypeError, ValueError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+
+    signals = payload.get('signals')
+    if not isinstance(signals, list):
+        return None
+    if not all(isinstance(signal, dict) and signal.get('at') for signal in signals):
+        return None
+    return payload
 
 
 def _load_upper_requirement_text(result) -> str:
