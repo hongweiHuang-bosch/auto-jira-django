@@ -7,6 +7,8 @@ from .models import (
     IssueAnalysisResult,
     IssueProcessResult,
     IssueProcessTask,
+    IssueValidationCheck,
+    IssueValidationRun,
 )
 
 
@@ -35,6 +37,20 @@ class IssueProcessTaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = IssueProcessTask
+        fields = '__all__'
+
+
+class IssueValidationCheckSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IssueValidationCheck
+        fields = '__all__'
+
+
+class IssueValidationRunSerializer(serializers.ModelSerializer):
+    checks = IssueValidationCheckSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = IssueValidationRun
         fields = '__all__'
 
 
