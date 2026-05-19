@@ -24,6 +24,7 @@ from .transfer_json import transfer_json_to_txt
 
 logger = logging.getLogger("CAN-AI-JIRA")
 _PROCESSED_FILE = Path("processed_issues.json")
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 import tkinter as tk
 from tkinter import scrolledtext
@@ -183,7 +184,12 @@ def _join_dir_and_files(base_dir: str, files: Any) -> List[str]:
     if not files:
         return []
     names = files if isinstance(files, list) else [files]
-    return [os.path.join(base_dir, name) for name in names]
+    base_path = Path(base_dir)
+    parts = base_path.parts
+    if "config——chery" in parts:
+        config_index = parts.index("config——chery")
+        base_path = _PROJECT_ROOT.joinpath(*parts[config_index:])
+    return [str(base_path / name) for name in names]
 
 def extract_min_max_time_from_comments(comments_text: str) -> Tuple[Optional[str], Optional[str]]:
     """
@@ -642,16 +648,16 @@ class Pipeline:
                 # 模型明确告诉“无法提取”
                 logger.info(f"[{issue_key}] 无法提取:\n{ai_extract}\n" + "-" * 80)
                 return
-            logger.info(f"[{issue_key}] 匹配结果:ai_extract: {ai_extract}\n " + "-" * 80)
+            logger.info(f"[{issue_key}] 原始提取结果:ai_extract: {ai_extract}\n " + "-" * 80)
             
             #  成功提取到配置 JSON，直接用
             first_match_signals = ai_extract.get("signals")
             analysis = ai_extract.get("analysis", [])
-            logger.info(f"[{issue_key}] 提取结果:\signals: {first_match_signals}\n analysis:\n{analysis}\n" + "-" * 80)
+            logger.info(f"[{issue_key}] 原始提取信号/prop: {first_match_signals}\n analysis:\n{analysis}\n" + "-" * 80)
             write_model_issue_text_file(f"{model_str}", f"{issue_key}_signals.txt", f"{issue_key}", str(first_match_signals))
 
             signals = analysize_signal_mapping(json_data, first_match_signals)
-            logger.info(f"[{issue_key}] 匹配结果:signals: {signals}\n " + "-" * 80)
+            logger.info(f"[{issue_key}] 归一化后的配置信号: {signals}\n " + "-" * 80)
 
             '''
                 <信号映射关系> 

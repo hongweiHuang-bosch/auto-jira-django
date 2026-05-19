@@ -1470,7 +1470,8 @@ MAP_CAR_ROLE = (
 # chery 8255 T1J_FL3
     {   
         "name":"chery T1J_FL3-8255",
-        "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DPINT-2941", #
+        # "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DPINT-2941", #
+        "jql": "project in (CHERY-T1J-FL3-8255) AND issue =FL3-300",
         # "jql": "project in (CHERY-T1J-FL3-8255) AND assignee = currentUser() order by updated DESC",
         "expand": "changelog",
 

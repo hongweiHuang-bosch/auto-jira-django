@@ -82,6 +82,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "comment"
+LEARNING_MEMORY_ROOT = Path(os.getenv("LEARNING_MEMORY_ROOT", str(BASE_DIR / "learning_memories")))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {

@@ -1,14 +1,28 @@
+import json
 from datetime import timedelta
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from django.utils import timezone
+from django.test import override_settings
 from rest_framework.test import APITestCase
 
-from analyzer.models import FilterTask, FilteredIssueSnapshot, IssueProcessResult, IssueProcessTask, IssueReviewSample
+from analyzer.models import (
+    FilterTask,
+    FilteredIssueSnapshot,
+    IssueLearningMemory,
+    IssueProcessResult,
+    IssueProcessTask,
+    IssueReviewSample,
+)
 
 
 class IssueProcessApiTests(APITestCase):
     def setUp(self):
+        self.learning_memory_dir = TemporaryDirectory()
+        self.learning_memory_override = override_settings(LEARNING_MEMORY_ROOT=self.learning_memory_dir.name)
+        self.learning_memory_override.enable()
         self.filter_task = FilterTask.objects.create(
             role_index=0,
             role_label='规则组 1',
@@ -22,6 +36,11 @@ class IssueProcessApiTests(APITestCase):
             summary='倒车影像异常',
             assignee='alice',
         )
+
+    def tearDown(self):
+        self.learning_memory_override.disable()
+        self.learning_memory_dir.cleanup()
+        super().tearDown()
 
     def test_create_issue_process_task(self):
         response = self.client.post(
@@ -189,6 +208,46 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(sample.error_reason, 'AI 忽略了 qnx android 日志')
         self.assertEqual(sample.correct_conclusion, '请转底层继续分析信号反馈')
 
+    def test_manual_review_fail_persists_learning_memory_index_and_file(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+        result.raw_signals = 'SIG_A, SIG_B'
+        result.save(update_fields=['raw_signals', 'updated_at'])
+
+        response = self.client.post(
+            f'/api/process-results/{result.id}/manual-review/',
+            {
+                'review_status': 'FAIL',
+                'error_reason': 'AI 忽略了 SIG_A 的变化',
+                'correct_result': '请转 Bosch 继续确认 SIG_A 链路',
+            },
+            format='json',
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(IssueLearningMemory.objects.count(), 1)
+        memory = IssueLearningMemory.objects.get()
+        self.assertEqual(memory.role_index, self.filter_task.role_index)
+        self.assertEqual(memory.issue_key, result.issue_key)
+        self.assertEqual(memory.review_status, 'FAIL')
+        self.assertEqual(memory.incorrect_conclusion, '原 AI 结论')
+        self.assertEqual(memory.correct_conclusion, '请转 Bosch 继续确认 SIG_A 链路')
+        self.assertEqual(memory.error_reason, 'AI 忽略了 SIG_A 的变化')
+        self.assertEqual(memory.signal_summary, 'SIG_A, SIG_B')
+        self.assertTrue(memory.memory_content_hash)
+
+        memory_path = Path(memory.memory_file_path)
+        self.assertTrue(memory_path.exists())
+        payload = json.loads(memory_path.read_text(encoding='utf-8'))
+        self.assertEqual(payload['role_index'], self.filter_task.role_index)
+        self.assertEqual(payload['issue_key'], result.issue_key)
+        self.assertEqual(payload['signal_summary'], 'SIG_A, SIG_B')
+        self.assertEqual(payload['incorrect_conclusion'], '原 AI 结论')
+        self.assertEqual(payload['error_reason'], 'AI 忽略了 SIG_A 的变化')
+        self.assertEqual(payload['correct_result'], '请转 Bosch 继续确认 SIG_A 链路')
+        self.assertEqual(payload['requirements'], '')
+        self.assertEqual(payload['comment'], '')
+        self.assertEqual(payload['qnx_android_logs'], '')
+        self.assertEqual(payload['cantrace_output'], '')
+
     def test_manual_review_fail_can_be_edited_and_overwrites_existing_sample(self):
         result = self._create_process_result(reply_text='原 AI 结论')
         url = f'/api/process-results/{result.id}/manual-review/'
@@ -220,6 +279,47 @@ class IssueProcessApiTests(APITestCase):
         sample = IssueReviewSample.objects.get()
         self.assertEqual(sample.error_reason, '第二次原因')
         self.assertEqual(sample.correct_conclusion, '第二次正确结果')
+
+    def test_manual_review_fail_overwrites_existing_learning_memory(self):
+        result = self._create_process_result(reply_text='原 AI 结论')
+        result.raw_signals = 'SIG_A'
+        result.save(update_fields=['raw_signals', 'updated_at'])
+        url = f'/api/process-results/{result.id}/manual-review/'
+
+        first = self.client.post(
+            url,
+            {
+                'review_status': 'FAIL',
+                'error_reason': '第一次原因',
+                'correct_result': '第一次正确结果',
+            },
+            format='json',
+        )
+        self.assertEqual(first.status_code, 200)
+        first_memory = IssueLearningMemory.objects.get()
+        first_hash = first_memory.memory_content_hash
+        first_path = Path(first_memory.memory_file_path)
+        first_payload = json.loads(first_path.read_text(encoding='utf-8'))
+        self.assertEqual(first_payload['correct_result'], '第一次正确结果')
+
+        second = self.client.post(
+            url,
+            {
+                'review_status': 'FAIL',
+                'error_reason': '第二次原因',
+                'correct_result': '第二次正确结果',
+            },
+            format='json',
+        )
+
+        self.assertEqual(second.status_code, 200)
+        self.assertEqual(IssueLearningMemory.objects.count(), 1)
+        memory = IssueLearningMemory.objects.get()
+        self.assertEqual(memory.memory_file_path, str(first_path))
+        self.assertNotEqual(memory.memory_content_hash, first_hash)
+        payload = json.loads(first_path.read_text(encoding='utf-8'))
+        self.assertEqual(payload['error_reason'], '第二次原因')
+        self.assertEqual(payload['correct_result'], '第二次正确结果')
 
     def test_manual_review_pass_marks_result_ready_for_comment(self):
         result = self._create_process_result(reply_text='原 AI 结论')

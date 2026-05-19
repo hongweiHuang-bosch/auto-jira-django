@@ -12,6 +12,7 @@ from rest_framework import status
 from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult, IssueReviewSample
 from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer
 from .services.issue_review_service import review_issue_result
+from .services.learning_memory_service import delete_learning_memory, persist_learning_memory
 from .services.task_executor import submit_analysis_task
 from .services.filter_task_executor import submit_filter_task
 from .services.task_catalog import get_role_entry, get_role_label
@@ -326,6 +327,7 @@ class IssueProcessResultManualReviewView(APIView):
                 role_index=result.process_task.filter_task.role_index,
                 issue_key=result.issue_key,
             ).delete()
+            delete_learning_memory(result.process_task.filter_task.role_index, result.issue_key)
             publish_rule_group_snapshot()
             return Response(IssueProcessResultSerializer(result).data)
 
@@ -366,6 +368,7 @@ class IssueProcessResultManualReviewView(APIView):
                 'error_reason': error_reason,
             },
         )
+        persist_learning_memory(result)
         publish_rule_group_snapshot()
         return Response(IssueProcessResultSerializer(result).data)
 

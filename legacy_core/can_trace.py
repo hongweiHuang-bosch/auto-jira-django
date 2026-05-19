@@ -25,6 +25,7 @@ from datetime import  timezone
 
 logger = logging.getLogger("CAN-TRACE")
 
+
 # ASC 清洗（过滤远程帧/异常帧）
 @contextmanager
 def _maybe_sanitized_asc(path: str):
@@ -353,13 +354,11 @@ def _parse_trace_with_retry(messages, sigs, log_path, db) -> Tuple[Dict[str, Any
     """
     suffix = os.path.splitext(log_path)[-1].lower()
 
-    # 非 ASC，直接解析
-    # if suffix != ".asc":
-    #     return _parse_trace_core(messages, sigs, log_path, db)
+    if suffix != ".asc":
+        return _parse_trace_core(messages, sigs, log_path, db)
 
-    # ASC：一律先清洗再读
-    # with _maybe_sanitized_asc(log_path) as cleaned:
-    return _parse_trace_core(messages, sigs, log_path, db)
+    with _maybe_sanitized_asc(log_path) as cleaned:
+        return _parse_trace_core(messages, sigs, cleaned, db)
 
 def _fmt_ts(t):
     # 已经是 datetime
@@ -538,6 +537,8 @@ def plot_signals(signals:List[str],
         if not msgname:
             continue
         sigs.setdefault(msgname, []).append(signal)
+    logger.info(f"[plot_signals:signal_to_msg] {signal_to_info}")
+    logger.info(f"[plot_signals:msg_to_signals] {sigs}")
     # 没有任何有效 msgname，直接返回
     if not sigs:
         return "", ""

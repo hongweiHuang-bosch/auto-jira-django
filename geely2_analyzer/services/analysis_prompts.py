@@ -8,7 +8,9 @@ EXTRACT_UPPER_REQUIREMENTS_PROMPT = (
 )
 
 FINAL_ANALYSIS_PROMPT = (
-    '你将收到上层需求摘要和按 cycle 分组的 Bosch 日志，请输出一个 JSON 对象，字段为 '
+    '你将收到上层需求摘要、按 cycle 分组的 Bosch 日志，以及历史纠错记忆，请输出一个 JSON 对象，字段为 '
     'analysis_summary、reply_text、confidence、risk_notes。\n\n'
-    '需求摘要：{requirements}\n\n日志：{grouped_logs}'
+    '需求摘要：{requirements}\n\n'
+    '日志：{grouped_logs}\n\n'
+    '历史纠错记忆：\n{learning_memories}'
 )

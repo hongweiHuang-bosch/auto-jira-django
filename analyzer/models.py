@@ -183,3 +183,21 @@ class IssueReviewSample(models.Model):
 
     class Meta:
         ordering = ['-updated_at', '-id']
+
+
+class IssueLearningMemory(models.Model):
+    role_index = models.PositiveIntegerField(db_index=True)
+    issue_key = models.CharField(max_length=64)
+    review_status = models.CharField(max_length=20, blank=True, default='')
+    incorrect_conclusion = models.TextField(blank=True, default='')
+    correct_conclusion = models.TextField(blank=True, default='')
+    error_reason = models.TextField(blank=True, default='')
+    signal_summary = models.TextField(blank=True, default='')
+    memory_file_path = models.CharField(max_length=500, blank=True, default='')
+    memory_content_hash = models.CharField(max_length=64, blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-updated_at', '-id']
+        unique_together = ('role_index', 'issue_key')

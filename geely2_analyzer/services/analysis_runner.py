@@ -5,6 +5,10 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 
+from analyzer.services.learning_memory_service import (
+    build_learning_memories_for_prompt,
+    retrieve_learning_memories,
+)
 from geely2_analyzer.models import Geely2AnalysisResult, Geely2AnalysisTask
 from geely2_analyzer.services.analysis_prompts import (
     EXTRACT_RELATED_SIGNALS_PROMPT,
@@ -102,11 +106,22 @@ def run_analysis_task(task_id):
             '', EXTRACT_UPPER_REQUIREMENTS_PROMPT.format(comments=comments_text),
         )
 
+        learning_memories = retrieve_learning_memories(
+            role_index=None,
+            summary=getattr(issue.fields, 'summary', '') or task.issue_snapshot.summary,
+            comment=comments_text,
+            requirements=requirements_summary,
+            signal_summary=', '.join(signal_list),
+            max_count=3,
+        )
+        learning_memories_prompt = build_learning_memories_for_prompt(learning_memories)
+
         _update_task(task, stage='AI_ANALYZE', progress=95, message='正在生成最终结论')
         final_raw = ai_client.chat_by_langchain(
             '', FINAL_ANALYSIS_PROMPT.format(
                 requirements=requirements_summary,
                 grouped_logs=json.dumps(grouped_logs, ensure_ascii=False),
+                learning_memories=learning_memories_prompt,
             ),
         )
         final_payload = safe_parse_json(final_raw)

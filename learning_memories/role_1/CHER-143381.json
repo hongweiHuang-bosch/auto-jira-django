@@ -1,0 +1,15 @@
+{
+    "cantrace_output": "",
+    "comment": "",
+    "correct_result": "通过查看cantrace日志，信号IHU_CHARGEMODESET_42D已经正常下设3，信号TBOX_CHARGEMODESTS_358的值为2 没有变化，vehicle已经透传，请按需求确认原因并转对应模块分析，谢谢",
+    "created_at": "2026-05-18T09:06:16.929633+00:00",
+    "error_reason": "信号TBOX_CHARGEMODESTS_358反馈3（延迟约43.7秒），这种延迟超过5秒的反馈，可以认为就是值没有变化",
+    "incorrect_conclusion": "通过查看cantrace日志，信号IHU_CHARGEMODESET_42D已经正常下设3，信号TBOX_CHARGEMODESTS_358反馈3（延迟约43.7秒），vehicle已经透传，请按需求确认原因并转对应模块分析，谢谢",
+    "issue_key": "CHER-143381",
+    "qnx_android_logs": "",
+    "requirements": "",
+    "review_status": "FAIL",
+    "role_index": 1,
+    "signal_summary": "",
+    "updated_at": "2026-05-18T09:06:16.929633+00:00"
+}
