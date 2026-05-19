@@ -74,7 +74,7 @@ def _load_cantrace_payload(result) -> dict | None:
     signals = payload.get('signals')
     if not isinstance(signals, list):
         return None
-    if not all(isinstance(signal, dict) and signal.get('at') for signal in signals):
+    if not all(isinstance(signal, dict) for signal in signals):
         return None
     return payload
 

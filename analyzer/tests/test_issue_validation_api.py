@@ -182,6 +182,21 @@ class IssueValidationApiTests(APITestCase):
         self.assertEqual(run.evidence_payload['table_rows'], [])
         self.assertEqual(run.checks.get().status, 'UNKNOWN')
 
+    def test_runner_preserves_structured_raw_signals_with_missing_timestamp(self):
+        result = self._create_process_result(
+            raw_signals='{"signals": [{"name": "BCM_DriverDoorAjar", "from": "0", "to": "1"}]}',
+        )
+        run = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+
+        run_issue_validation_run(run.id)
+
+        run.refresh_from_db()
+        self.assertEqual(run.status, 'SUCCESS')
+        self.assertEqual(run.system_verdict, 'FAIL')
+        self.assertIn('缺少信号时间点', run.summary_reason)
+        self.assertEqual(run.evidence_payload['table_rows'][0]['cantrace_time'], '')
+        self.assertEqual(run.checks.get().status, 'FAIL')
+
     def test_recover_stale_issue_validation_runs_marks_running_rows_failed(self):
         result = self._create_process_result()
         stale = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
