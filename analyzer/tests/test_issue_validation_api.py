@@ -1,5 +1,7 @@
+from pathlib import Path
 from unittest.mock import patch
 
+from django.test import override_settings
 from django.utils import timezone
 from rest_framework.test import APITestCase
 
@@ -196,6 +198,56 @@ class IssueValidationApiTests(APITestCase):
         self.assertIn('缺少信号时间点', run.summary_reason)
         self.assertEqual(run.evidence_payload['table_rows'][0]['cantrace_time'], '')
         self.assertEqual(run.checks.get().status, 'FAIL')
+
+    def test_runner_loads_cantrace_text_from_image_directory(self):
+        result = self._create_process_result(
+            raw_signals='',
+            reply_text='通过查看cantrace日志，信号ICC_PM25SWITCH_4D6已经正常下设2和0',
+        )
+        with override_settings(BASE_DIR=Path('/tmp/issue-validation-test-root')):
+            cantrace_dir = Path('/tmp/issue-validation-test-root/comment/T1J_FL3/FL3-265')
+            cantrace_dir.mkdir(parents=True, exist_ok=True)
+            (cantrace_dir / 'FL3-265_can_trace.txt').write_text(
+                'ICC_PM25Switch值为 2 持续了 4 帧，从时间 2026-05-14 15:31:05.430 到 2026-05-14 15:31:05.542\n',
+                encoding='utf-8',
+            )
+            result.can_trace_image = 'comment/T1J_FL3/FL3-265/can_20260514153042.png'
+            result.save(update_fields=['can_trace_image', 'updated_at'])
+            run = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+
+            run_issue_validation_run(run.id)
+
+        run.refresh_from_db()
+        self.assertEqual(run.status, 'SUCCESS')
+        self.assertEqual(run.system_verdict, 'WARNING')
+        self.assertIn('AI 结果缺少明确时间', run.summary_reason)
+        self.assertEqual(run.evidence_payload['table_rows'][0]['signal_name'], 'ICC_PM25Switch')
+        self.assertEqual(run.evidence_payload['table_rows'][0]['cantrace_time'], '15:31:05')
+
+    def test_runner_loads_cantrace_text_from_media_url_directory(self):
+        result = self._create_process_result(
+            raw_signals='',
+            reply_text='通过查看cantrace日志，信号ICC_PM25SWITCH_4D6已经正常下设2和0',
+        )
+        with override_settings(MEDIA_ROOT=Path('/tmp/issue-validation-media-root')):
+            cantrace_dir = Path('/tmp/issue-validation-media-root/T1J_FL3/FL3-265')
+            cantrace_dir.mkdir(parents=True, exist_ok=True)
+            (cantrace_dir / 'FL3-265_can_trace.txt').write_text(
+                'ICC_PM25Switch值为 0 持续了 1220 帧，从时间 2026-05-14 15:31:05.560 到结束\n',
+                encoding='utf-8',
+            )
+            result.can_trace_image = ''
+            result.can_trace_image_url = '/media/T1J_FL3/FL3-265/can_20260514153042.png'
+            result.save(update_fields=['can_trace_image', 'can_trace_image_url', 'updated_at'])
+            run = IssueValidationRun.objects.create(process_result=result, status='RUNNING')
+
+            run_issue_validation_run(run.id)
+
+        run.refresh_from_db()
+        self.assertEqual(run.status, 'SUCCESS')
+        self.assertEqual(run.system_verdict, 'WARNING')
+        self.assertEqual(run.evidence_payload['table_rows'][0]['signal_name'], 'ICC_PM25Switch')
+        self.assertEqual(run.evidence_payload['table_rows'][0]['cantrace_time'], '15:31:05')
 
     def test_recover_stale_issue_validation_runs_marks_running_rows_failed(self):
         result = self._create_process_result()

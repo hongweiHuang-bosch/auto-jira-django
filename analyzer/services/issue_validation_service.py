@@ -42,6 +42,9 @@ def build_validation_payload(
     if has_missing_time:
         verdict = 'FAIL'
         reason = '缺少信号时间点'
+    elif not ai_time:
+        verdict = 'WARNING'
+        reason = 'AI 结果缺少明确时间，已加载 cantrace 证据但无法做时间一致性校验'
     elif has_mismatch:
         verdict = 'FAIL'
         reason = '时间点不匹配'
@@ -118,6 +121,12 @@ def _extract_ai_time(reply_text: str) -> str:
 def _build_signal_table_row(signal: dict[str, Any], ai_time: str) -> dict:
     cantrace_time = str(signal.get('at') or '')
     matched = bool(ai_time and cantrace_time and ai_time == cantrace_time)
+    if not cantrace_time:
+        status = 'FAIL'
+    elif not ai_time:
+        status = 'WARNING'
+    else:
+        status = 'PASS' if matched else 'FAIL'
     return {
         'signal_name': str(signal.get('name') or ''),
         'ai_time': ai_time,
@@ -125,7 +134,7 @@ def _build_signal_table_row(signal: dict[str, Any], ai_time: str) -> dict:
         'from': str(signal.get('from') or ''),
         'to': str(signal.get('to') or ''),
         'matched': matched,
-        'status': 'PASS' if matched else 'FAIL',
+        'status': status,
     }
 
 

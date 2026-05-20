@@ -95,3 +95,18 @@ class IssueValidationServiceTests(SimpleTestCase):
         self.assertEqual(payload['table_rows'][0]['status'], 'FAIL')
         self.assertEqual(payload['table_rows'][0]['cantrace_time'], '')
         self.assertEqual(payload['checks'][0]['evidence_payload']['table_rows'], payload['table_rows'])
+
+    def test_cantrace_evidence_without_ai_time_warns_instead_of_missing(self):
+        payload = build_validation_payload(
+            reply_text='通过查看cantrace日志，信号ICC_PM25SWITCH_4D6已经正常下设2和0',
+            cantrace_payload={
+                'signals': [
+                    {'name': 'ICC_PM25Switch', 'at': '15:31:05', 'from': '', 'to': '2'},
+                ]
+            },
+            upper_requirement_text='ION负离子净化开关关闭时需求三帧',
+        )
+
+        self.assertEqual(payload['system_verdict'], 'WARNING')
+        self.assertIn('AI 结果缺少明确时间', payload['summary_reason'])
+        self.assertEqual(payload['table_rows'][0]['status'], 'WARNING')
