@@ -151,6 +151,7 @@ class IssueProcessResult(models.Model):
     model = models.CharField(max_length=100, blank=True, default='')
     result_status = models.CharField(max_length=20, choices=RESULT_STATUS_CHOICES, default='SUCCESS')
     reply_text = models.TextField(blank=True, default='')
+    upper_comment = models.TextField(blank=True, null=True, default='')
     can_trace_image = models.CharField(max_length=500, blank=True, default='')
     can_trace_image_url = models.CharField(max_length=500, blank=True, default='')
     raw_signals = models.TextField(blank=True, default='')

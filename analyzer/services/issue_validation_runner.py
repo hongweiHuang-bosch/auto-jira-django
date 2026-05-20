@@ -2,19 +2,16 @@ from __future__ import annotations
 
 import json
 import logging
-import re
 from pathlib import Path
 
 from django.conf import settings
 from django.utils import timezone
 
 from analyzer.models import IssueValidationCheck, IssueValidationRun
+from analyzer.services.cantrace_payload import parse_cantrace_summary
 from analyzer.services.issue_validation_service import build_validation_payload
 
 logger = logging.getLogger('jira_analyzer_worker')
-CANTRACE_LINE_PATTERN = re.compile(
-    r'^(?P<name>.+?)值为\s*(?P<to>\S+).*?从时间\s*(?:\d{4}-\d{2}-\d{2}\s+)?(?P<at>\d{2}:\d{2}:\d{2})'
-)
 
 
 def run_issue_validation_run(run_id: int):
@@ -25,6 +22,7 @@ def run_issue_validation_run(run_id: int):
             reply_text=result.reply_text,
             cantrace_payload=_load_cantrace_payload(result),
             upper_requirement_text=_load_upper_requirement_text(result),
+            upper_comment_text=result.upper_comment or '',
         )
 
         run.status = 'SUCCESS'
@@ -70,7 +68,13 @@ def run_issue_validation_run(run_id: int):
 def _load_cantrace_payload(result) -> dict | None:
     payload = _load_cantrace_payload_from_raw_signals(result.raw_signals)
     if payload is not None:
+        logger.info(
+            'loaded cantrace payload from raw_signals issue=%s signal_count=%s',
+            result.issue_key,
+            len(payload.get('signals', [])),
+        )
         return payload
+    logger.warning('raw_signals unavailable for issue=%s, falling back to cantrace text file', result.issue_key)
     return _load_cantrace_payload_from_text_file(result)
 
 
@@ -95,13 +99,21 @@ def _load_cantrace_payload_from_raw_signals(raw_signals: str) -> dict | None:
 def _load_cantrace_payload_from_text_file(result) -> dict | None:
     directory = _resolve_cantrace_directory(result)
     if directory is None or not directory.exists():
+        logger.warning('cantrace directory missing for issue=%s directory=%s', result.issue_key, directory)
         return None
 
     candidates = sorted(directory.glob('*_can_trace.txt'))
     if not candidates:
+        logger.warning('no *_can_trace.txt found for issue=%s directory=%s', result.issue_key, directory)
         return None
 
     signals = _parse_cantrace_text(candidates[0])
+    logger.info(
+        'loaded cantrace payload from text file issue=%s path=%s signal_count=%s',
+        result.issue_key,
+        candidates[0],
+        len(signals),
+    )
     return {'signals': signals} if signals else None
 
 
@@ -122,18 +134,7 @@ def _resolve_cantrace_directory(result) -> Path | None:
 
 
 def _parse_cantrace_text(path: Path) -> list[dict]:
-    signals = []
-    for line in path.read_text(encoding='utf-8', errors='ignore').splitlines():
-        match = CANTRACE_LINE_PATTERN.search(line.strip())
-        if not match:
-            continue
-        signals.append({
-            'name': match.group('name').strip(),
-            'at': match.group('at'),
-            'from': '',
-            'to': match.group('to').strip(),
-        })
-    return signals
+    return parse_cantrace_summary(path.read_text(encoding='utf-8', errors='ignore'))
 
 
 def _load_upper_requirement_text(result) -> str:

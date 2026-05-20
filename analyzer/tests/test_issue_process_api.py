@@ -67,6 +67,34 @@ class IssueProcessApiTests(APITestCase):
         )
         self.assertEqual(response.status_code, 409)
 
+    def test_create_issue_process_task_allows_reprocess_after_success_result(self):
+        old_task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='SUCCESS',
+        )
+        IssueProcessResult.objects.create(
+            process_task=old_task,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            reply_text='旧处理结果',
+            result_status='SUCCESS',
+        )
+
+        response = self.client.post(
+            f'/api/filter-tasks/{self.filter_task.id}/issues/{self.snapshot.issue_key}/process-tasks/',
+            {},
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(IssueProcessTask.objects.filter(issue_key=self.snapshot.issue_key).count(), 2)
+        new_task = IssueProcessTask.objects.latest('id')
+        self.assertEqual(new_task.status, 'PENDING')
+        self.assertEqual(new_task.snapshot, self.snapshot)
+
     def test_create_issue_process_task_keeps_stale_running_task_as_conflict_until_worker_recovers(self):
         task = IssueProcessTask.objects.create(
             filter_task=self.filter_task,
@@ -125,6 +153,33 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(response.status_code, 200)
         result.refresh_from_db()
         self.assertEqual(result.reply_text, '新内容')
+
+    def test_finalize_issue_persists_cantrace_summary_to_raw_signals(self):
+        process_task = IssueProcessTask.objects.create(
+            filter_task=self.filter_task,
+            snapshot=self.snapshot,
+            issue_key=self.snapshot.issue_key,
+            summary=self.snapshot.summary,
+            status='RUNNING',
+        )
+        from analyzer.services.issue_process_pipeline import create_issue_process_pipeline
+
+        pipeline = create_issue_process_pipeline(None, None, '', {}, process_task_id=process_task.id)
+        pipeline._finalize_issue(
+            self.snapshot.issue_key,
+            self.snapshot.summary,
+            '分析结论',
+            'comment/T1J_FL3/FL3-501/can_20260519172141.png',
+            'ICC_SetCLMOn值为 2 持续了 4 帧，从时间 2026-05-19 17:23:58.778 到 2026-05-19 17:23:58.905',
+            '<问题描述>\n评论正文\n</问题描述>',
+        )
+
+        result = IssueProcessResult.objects.get(process_task=process_task)
+        payload = json.loads(result.raw_signals)
+        self.assertEqual(payload['signals'][0]['name'], 'ICC_SetCLMOn')
+        self.assertEqual(payload['signals'][0]['to'], '2')
+        self.assertEqual(payload['signals'][0]['at'], '17:23:58')
+        self.assertEqual(result.upper_comment, '<问题描述>\n评论正文\n</问题描述>')
 
     def test_processed_issue_detail_includes_review_fields(self):
         process_task = IssueProcessTask.objects.create(

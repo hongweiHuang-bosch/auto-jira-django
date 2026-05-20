@@ -16,8 +16,8 @@ MAP_CAR_ROLE = (
     # chery 8155 项目
     {
         "name":"chery-8155-others",
-        "jql":"project in (CHER, CHYT28) AND issuekey in updatedBy(DaiYungui_bosch) AND issue= CHER-142701",
-        # "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT != T1L_FL1_8255 ORDER BY updated DESC",
+        # "jql":"project in (CHER, CHYT28) AND issuekey in updatedBy(DaiYungui_bosch) AND issue= CHER-142701",
+        "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT != T1L_FL1_8255 ORDER BY updated DESC",
         # chery-8155
         "expand": "changelog",
 
@@ -416,8 +416,8 @@ MAP_CAR_ROLE = (
     # chery 8255 T1L_FL1_8255
     {
         "name":"chery-8155-T1L_FL1_8255",
-        "jql": "project in (CHER, CHYT28) AND issue=CHER-143381",
-        # "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT = T1L_FL1_8255 ORDER BY updated DESC",
+        # "jql": "project in (CHER, CHYT28) AND issue=CHER-143381",
+        "jql": "project in (CHER, CHYT28) AND assignee = currentUser() AND CHERY_PROJECT = T1L_FL1_8255 ORDER BY updated DESC",
         "expand": "changelog",
 
         "base_paths": {
@@ -758,8 +758,8 @@ MAP_CAR_ROLE = (
     # chery 8255 T1J-FL2-8255
     {
         "name":"chery T1J-FL2-8255",
-        "jql":"project in (CHERY-T1J-FL2-8255) AND issue =FL2-16789",#
-        # "jql": "project in (CHERY-T1J-FL2-8255) AND assignee in (currentUser()) ORDER BY updated DESC",
+        # "jql":"project in (CHERY-T1J-FL2-8255) AND issue =FL2-16789",#
+        "jql": "project in (CHERY-T1J-FL2-8255) AND assignee in (currentUser()) ORDER BY updated DESC",
         "expand": "changelog",
 
         "base_paths": {
@@ -1097,8 +1097,8 @@ MAP_CAR_ROLE = (
     # chery 8255 D01系列
     {   
         "name":"chery D01-8255",
-        "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DP-5055", #
-        # "jql": "project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND assignee = currentUser() AND resolution = Unresolved order by updated DESC",
+        # "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DP-5055", #
+        "jql": "project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND assignee = currentUser() AND resolution = Unresolved order by updated DESC",
         "expand": "changelog",
 
         "base_paths": {
@@ -1471,8 +1471,8 @@ MAP_CAR_ROLE = (
     {   
         "name":"chery T1J_FL3-8255",
         # "jql":"project in (D01, CHERY-D01_INT, CHERY-D01-P, CHERY-D01-P-INT, CHERY-D01_HWADS) AND issue =DPINT-2941", #
-        "jql": "project in (CHERY-T1J-FL3-8255) AND issue =FL3-300",
-        # "jql": "project in (CHERY-T1J-FL3-8255) AND assignee = currentUser() order by updated DESC",
+        # "jql": "project in (CHERY-T1J-FL3-8255) AND issue =FL3-300",
+        "jql": "project in (CHERY-T1J-FL3-8255) AND assignee = currentUser() order by updated DESC",
         "expand": "changelog",
 
         "base_paths": {

@@ -148,6 +148,7 @@ class IssueValidationApiTests(APITestCase):
     def test_worker_claim_and_runner_persists_success_payload(self):
         result = self._create_process_result(
             raw_signals='{"signals": [{"name": "BCM_DriverDoorAjar", "at": "12:01:08", "from": "0", "to": "1"}]}',
+            upper_comment='<问题描述>上层评论</问题描述>',
         )
         run = IssueValidationRun.objects.create(process_result=result, status='PENDING')
 
@@ -170,6 +171,7 @@ class IssueValidationApiTests(APITestCase):
         check = run.checks.get()
         self.assertEqual(check.check_type, 'AI_RESULT_VS_CANTRACE')
         self.assertTrue(check.evidence_payload)
+        self.assertEqual(check.evidence_payload['upper_comment_text'], '<问题描述>上层评论</问题描述>')
 
     def test_runner_treats_free_form_raw_signals_as_missing_cantrace(self):
         result = self._create_process_result(raw_signals='BCM_DriverDoorAjar')

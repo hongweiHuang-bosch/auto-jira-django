@@ -356,7 +356,15 @@ class Pipeline:
             with open("cal_False.txt", "a", encoding="utf-8") as f:
                 f.write(f"\n{issue_key}: 结果错误")
     # 每张处理完的票 都要执行的人工流程
-    def _finalize_issue(self, issue_key: str, summary: str, reply_text: str, can_img_path: str):
+    def _finalize_issue(
+        self,
+        issue_key: str,
+        summary: str,
+        reply_text: str,
+        can_img_path: str,
+        can_trace_outputs: str = '',
+        upper_comment: str = '',
+    ):
         """
         每张票处理完的统一出口：
         - 弹窗展示结果
@@ -682,6 +690,7 @@ class Pipeline:
             # 如果有png 添加png comment
             ai_res = ""
             cantrace_path = ""
+            can_trace_outputs = ""
             if download_result["mode"] == "both" or download_result["mode"] == "can_in_zip":
                 # 下载 最近的一张png图片，作为comment的最后
                 png_path = download_latest_png(issue, download_dir = s_download_dir, self_uploader_id = self.jira.username)
@@ -858,4 +867,4 @@ class Pipeline:
                 if idx != -1:
                     final_res = ai_res[idx + len(key):].strip()
             self._update_progress('SAVING_RESULT', 95, f'{issue_key} 正在保存结果')
-            self._finalize_issue(issue_key, summary, final_res or ai_res, cantrace_path)
+            self._finalize_issue(issue_key, summary, final_res or ai_res, cantrace_path, can_trace_outputs, comments_text)

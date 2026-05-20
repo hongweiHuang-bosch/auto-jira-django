@@ -1,11 +1,14 @@
 
 from __future__ import annotations
+import logging
 from pathlib import Path
 from django.conf import settings
 from analyzer.models import AnalysisTask, IssueAnalysisResult
+from analyzer.services.cantrace_payload import build_raw_signals_json
 from .task_stream import publish_groups_snapshot
 from legacy_core.pipeline import Pipeline
 
+logger = logging.getLogger('jira_analyzer_worker')
 
 class WebPipeline(Pipeline):
     def __init__(self, *args, task_id: int, **kwargs):
@@ -50,10 +53,25 @@ class WebPipeline(Pipeline):
                 return model_dir.name
         return ''
 
-    def _finalize_issue(self, issue_key: str, summary: str, reply_text: str, can_img_path: str):
+    def _finalize_issue(
+        self,
+        issue_key: str,
+        summary: str,
+        reply_text: str,
+        can_img_path: str,
+        can_trace_outputs: str = '',
+        upper_comment: str = '',
+    ):
         task = AnalysisTask.objects.get(pk=self.task_id)
         task.message = f'已完成 {issue_key}'
         task.save(update_fields=['message', 'updated_at'])
+        raw_signals = build_raw_signals_json(can_trace_outputs)
+        logger.info(
+            'saving analysis result issue=%s raw_signals_present=%s upper_comment_len=%s',
+            issue_key,
+            bool(raw_signals),
+            len(upper_comment or ''),
+        )
         IssueAnalysisResult.objects.update_or_create(
             task_id=self.task_id,
             issue_key=issue_key,
@@ -64,6 +82,7 @@ class WebPipeline(Pipeline):
                 'reply_text': reply_text,
                 'can_trace_image': can_img_path or '',
                 'can_trace_image_url': self._to_media_url(can_img_path),
+                'raw_signals': raw_signals,
                 'error_message': '',
             }
         )

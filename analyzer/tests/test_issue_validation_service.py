@@ -105,8 +105,13 @@ class IssueValidationServiceTests(SimpleTestCase):
                 ]
             },
             upper_requirement_text='ION负离子净化开关关闭时需求三帧',
+            upper_comment_text='<问题描述>评论原文</问题描述>',
         )
 
         self.assertEqual(payload['system_verdict'], 'WARNING')
         self.assertIn('AI 结果缺少明确时间', payload['summary_reason'])
         self.assertEqual(payload['table_rows'][0]['status'], 'WARNING')
+        self.assertEqual(
+            payload['checks'][0]['evidence_payload']['upper_comment_text'],
+            '<问题描述>评论原文</问题描述>',
+        )

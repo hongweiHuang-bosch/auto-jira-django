@@ -13,6 +13,7 @@ def build_validation_payload(
     reply_text: str,
     cantrace_payload: dict | None,
     upper_requirement_text: str,
+    upper_comment_text: str = '',
 ) -> dict:
     signals = _extract_signals(cantrace_payload)
     if not signals:
@@ -29,6 +30,7 @@ def build_validation_payload(
             evidence={
                 'ai_time': _extract_ai_time(reply_text),
                 'upper_requirement_text': upper_requirement_text,
+                'upper_comment_text': upper_comment_text,
                 'signals': [],
             },
         )
@@ -62,6 +64,7 @@ def build_validation_payload(
         evidence={
             'ai_time': ai_time,
             'upper_requirement_text': upper_requirement_text,
+            'upper_comment_text': upper_comment_text,
             'signals': signals,
         },
     )

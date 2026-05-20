@@ -79,3 +79,34 @@ class TaskDomainModelTests(TestCase):
                 issue_key='CHER-2',
                 summary='重复结果',
             )
+
+    def test_process_result_allows_missing_upper_comment(self):
+        filter_task = FilterTask.objects.create(
+            role_index=0,
+            role_label='规则组 1',
+            jql='project = CHER',
+            status='SUCCESS',
+            expires_at=timezone.now() + timedelta(hours=24),
+        )
+        snapshot = FilteredIssueSnapshot.objects.create(
+            filter_task=filter_task,
+            issue_key='CHER-3',
+            summary='评论缺失问题',
+            assignee='carol',
+        )
+        process_task = IssueProcessTask.objects.create(
+            filter_task=filter_task,
+            snapshot=snapshot,
+            issue_key='CHER-3',
+            summary='评论缺失问题',
+            status='SUCCESS',
+        )
+
+        result = IssueProcessResult.objects.create(
+            process_task=process_task,
+            issue_key='CHER-3',
+            summary='评论缺失问题',
+            upper_comment=None,
+        )
+
+        self.assertIsNone(result.upper_comment)

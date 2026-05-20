@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 from pathlib import Path
+import logging
 
 from django.conf import settings
 from django.utils import timezone
 
 from analyzer.models import IssueProcessResult, IssueProcessTask
+from analyzer.services.cantrace_payload import build_raw_signals_json
 from analyzer.services.rule_group_stream import publish_rule_group_snapshot
 
+logger = logging.getLogger('jira_analyzer_worker')
 
 def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
     """Lazy factory to avoid importing Pipeline (and its ML deps) at module load time."""
@@ -60,7 +63,15 @@ def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
             )
             publish_rule_group_snapshot()
 
-        def _finalize_issue(self, issue_key: str, summary: str, reply_text: str, can_img_path: str):
+        def _finalize_issue(
+            self,
+            issue_key: str,
+            summary: str,
+            reply_text: str,
+            can_img_path: str,
+            can_trace_outputs: str = '',
+            upper_comment: str = '',
+        ):
             process_task = IssueProcessTask.objects.get(pk=self.process_task_id)
             process_task.status = 'SUCCESS'
             process_task.progress = 100
@@ -69,6 +80,13 @@ def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
             process_task.error_message = ''
             process_task.finished_at = timezone.now()
             process_task.save(update_fields=['status', 'progress', 'stage', 'message', 'error_message', 'finished_at', 'updated_at'])
+            raw_signals = build_raw_signals_json(can_trace_outputs)
+            logger.info(
+                'saving process result issue=%s raw_signals_present=%s upper_comment_len=%s',
+                issue_key,
+                bool(raw_signals),
+                len(upper_comment or ''),
+            )
             IssueProcessResult.objects.update_or_create(
                 process_task=process_task,
                 defaults={
@@ -76,8 +94,10 @@ def create_issue_process_pipeline(*args, process_task_id: int, **kwargs):
                     'summary': summary,
                     'result_status': 'SUCCESS',
                     'reply_text': reply_text,
+                    'upper_comment': upper_comment,
                     'can_trace_image': can_img_path or '',
                     'can_trace_image_url': self._to_media_url(can_img_path),
+                    'raw_signals': raw_signals,
                     'error_message': '',
                 },
             )
