@@ -8,6 +8,7 @@ from analyzer.serializers import (
     FilteredIssueSnapshotSerializer,
     IssueProcessTaskSerializer,
     IssueProcessResultSerializer,
+    IssueValidationRunSerializer,
 )
 from analyzer.services.jira_issue_payload import build_jira_url
 from .task_catalog import list_role_options
@@ -179,6 +180,15 @@ def _serialize_processed_issue(task, process_count):
     }
 
 
+def _serialize_result_with_latest_validation(result):
+    data = IssueProcessResultSerializer(result).data
+    latest_validation = result.validation_runs.order_by('-created_at', '-id').first()
+    data['latest_validation'] = (
+        IssueValidationRunSerializer(latest_validation).data if latest_validation else None
+    )
+    return data
+
+
 def build_processed_issue_page(role_index, page=1, page_size=20, query='', status=''):
     qs = (
         IssueProcessTask.objects.filter(filter_task__role_index=role_index)
@@ -251,7 +261,7 @@ def build_processed_issue_detail(role_index, issue_key):
                 'updated_at': task.snapshot.updated_at,
             },
             'process_task': IssueProcessTaskSerializer(task).data,
-            'result': IssueProcessResultSerializer(result).data if result else None,
+            'result': _serialize_result_with_latest_validation(result) if result else None,
         })
 
     return {

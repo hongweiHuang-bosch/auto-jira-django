@@ -15,6 +15,7 @@ from analyzer.models import (
     IssueProcessResult,
     IssueProcessTask,
     IssueReviewSample,
+    IssueValidationRun,
 )
 
 
@@ -149,6 +150,31 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(latest['review_status'], 'PENDING')
         self.assertEqual(latest['review_reason'], '')
         self.assertEqual(latest['manual_override_after_review'], False)
+
+    def test_processed_issue_detail_includes_latest_validation_summary(self):
+        result = self._create_process_result(reply_text='分析结论')
+        IssueValidationRun.objects.create(
+            process_result=result,
+            status='SUCCESS',
+            system_verdict='PASS',
+            summary_reason='校验通过',
+        )
+        latest_validation = IssueValidationRun.objects.create(
+            process_result=result,
+            status='SUCCESS',
+            system_verdict='FAIL',
+            summary_reason='时间点不匹配',
+        )
+
+        response = self.client.get(
+            f'/api/rule-groups/{self.filter_task.role_index}/processed-issues/{self.snapshot.issue_key}/'
+        )
+
+        self.assertEqual(response.status_code, 200)
+        latest = response.data['records'][0]['result']
+        self.assertEqual(latest['latest_validation']['id'], latest_validation.id)
+        self.assertEqual(latest['latest_validation']['system_verdict'], 'FAIL')
+        self.assertEqual(latest['latest_validation']['summary_reason'], '时间点不匹配')
 
     def test_manual_review_rejects_blank_error_reason(self):
         result = self._create_process_result(reply_text='原 AI 结论')
