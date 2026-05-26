@@ -13,6 +13,7 @@ from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssue
 from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer, IssueValidationRunSerializer
 from .services.issue_review_service import review_issue_result
 from .services.learning_memory_service import delete_learning_memory, persist_learning_memory
+from .services.bulk_task_actions import create_bulk_filter_tasks, create_bulk_issue_process_tasks, prepare_filter_task, prepare_issue_process_task
 from .services.task_executor import submit_analysis_task
 from .services.filter_task_executor import submit_filter_task
 from .services.task_catalog import get_role_entry, get_role_label
@@ -154,30 +155,27 @@ class RuleGroupListView(APIView):
 
 class FilterTaskCreateView(APIView):
     def post(self, request, role_index: int):
-        try:
-            role_entry = get_role_entry(role_index)
-        except (IndexError, ValueError):
+        outcome = prepare_filter_task(role_index)
+        if outcome['status'] == 'failed':
             return Response({'detail': '无效的规则组索引'}, status=status.HTTP_400_BAD_REQUEST)
 
-        running = FilterTask.objects.filter(role_index=role_index, status__in=['PENDING', 'RUNNING']).first()
-        if running:
-            if running.updated_at < timezone.now() - FILTER_TASK_STALE_TIMEOUT:
-                running.status = 'EXPIRED'
-                running.message = '筛票超时，已被新任务替换'
-                running.save(update_fields=['status', 'message', 'updated_at'])
-            else:
-                return Response({'detail': '该规则组已有进行中的筛票任务', 'filter_task_id': running.id}, status=status.HTTP_409_CONFLICT)
+        task = outcome['task']
+        if outcome['status'] == 'conflict':
+            return Response({'detail': outcome['detail'], 'filter_task_id': task.id}, status=status.HTTP_409_CONFLICT)
 
-        task = FilterTask.objects.create(
-            role_index=role_index,
-            role_label=get_role_label(role_index, role_entry),
-            jql=role_entry.get('jql', ''),
-            status='PENDING',
-            message='筛票任务已创建',
-        )
         publish_rule_group_snapshot()
         submit_filter_task(task.id)
         return Response(FilterTaskSerializer(task).data, status=status.HTTP_201_CREATED)
+
+
+class BulkFilterTaskCreateView(APIView):
+    def post(self, request):
+        payload, created_task_ids = create_bulk_filter_tasks()
+        if created_task_ids:
+            publish_rule_group_snapshot()
+            for task_id in created_task_ids:
+                submit_filter_task(task_id)
+        return Response(payload, status=status.HTTP_201_CREATED)
 
 
 class LatestFilterTaskView(APIView):
@@ -210,21 +208,21 @@ class IssueProcessTaskCreateView(APIView):
         filter_task = get_object_or_404(FilterTask, pk=filter_task_id)
         snapshot = get_object_or_404(FilteredIssueSnapshot, filter_task=filter_task, issue_key=issue_key)
 
-        running = IssueProcessTask.objects.filter(issue_key=issue_key, status__in=['PENDING', 'RUNNING']).order_by('-created_at').first()
-        if running is not None:
-            return Response({'detail': '当前票已有进行中的处理任务', 'process_task_id': running.id}, status=status.HTTP_409_CONFLICT)
+        outcome = prepare_issue_process_task(filter_task, snapshot)
+        process_task = outcome['task']
+        if outcome['status'] == 'conflict':
+            return Response({'detail': outcome['detail'], 'process_task_id': process_task.id}, status=status.HTTP_409_CONFLICT)
 
-        process_task = IssueProcessTask.objects.create(
-            filter_task=filter_task,
-            snapshot=snapshot,
-            issue_key=snapshot.issue_key,
-            summary=snapshot.summary,
-            status='PENDING',
-            stage='PREPARING',
-            message='单票处理任务已创建',
-        )
         publish_rule_group_snapshot()
         return Response(IssueProcessTaskSerializer(process_task).data, status=status.HTTP_201_CREATED)
+
+
+class BulkIssueProcessTaskCreateView(APIView):
+    def post(self, request):
+        payload, created_any = create_bulk_issue_process_tasks()
+        if created_any:
+            publish_rule_group_snapshot()
+        return Response(payload, status=status.HTTP_201_CREATED)
 
 
 class IssueProcessTaskDetailView(APIView):

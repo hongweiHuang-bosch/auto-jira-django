@@ -52,6 +52,46 @@ class IssueProcessApiTests(APITestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(IssueProcessTask.objects.count(), 1)
 
+    @patch(
+        'analyzer.services.task_catalog._get_map_car_role',
+        return_value=(
+            {'name': '规则组 1', 'jql': 'project = CHER-1'},
+            {'name': '规则组 2', 'jql': 'project = CHER-2'},
+        ),
+    )
+    def test_bulk_create_issue_process_tasks_returns_summary(self, _mock_map_car_role):
+        second_filter_task = FilterTask.objects.create(
+            role_index=1,
+            role_label='规则组 2',
+            jql='project = CHER-2',
+            status='SUCCESS',
+            expires_at=timezone.now() + timedelta(hours=24),
+        )
+        second_snapshot = FilteredIssueSnapshot.objects.create(
+            filter_task=second_filter_task,
+            issue_key='CHER-201',
+            summary='蓝牙异常',
+            assignee='bob',
+        )
+        IssueProcessTask.objects.create(
+            filter_task=second_filter_task,
+            snapshot=second_snapshot,
+            issue_key=second_snapshot.issue_key,
+            summary=second_snapshot.summary,
+            status='RUNNING',
+        )
+
+        response = self.client.post('/api/rule-groups/process-tasks/bulk/', {}, format='json')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data['summary']['total_groups'], 2)
+        self.assertEqual(response.data['summary']['groups_with_filter'], 2)
+        self.assertEqual(response.data['summary']['created'], 1)
+        self.assertEqual(response.data['summary']['skipped_conflict'], 1)
+        self.assertEqual(response.data['summary']['skipped_without_filter'], 0)
+        self.assertEqual(response.data['summary']['failed'], 0)
+        self.assertEqual(IssueProcessTask.objects.filter(issue_key=self.snapshot.issue_key).count(), 1)
+
     def test_create_issue_process_task_conflicts_when_active_task_exists(self):
         IssueProcessTask.objects.create(
             filter_task=self.filter_task,

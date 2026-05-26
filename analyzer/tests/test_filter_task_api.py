@@ -21,6 +21,33 @@ class FilterTaskApiTests(APITestCase):
         self.assertEqual(FilterTask.objects.count(), 1)
         mock_submit_filter_task.assert_called_once_with(FilterTask.objects.get().id)
 
+    @patch(
+        'analyzer.services.task_catalog._get_map_car_role',
+        return_value=(
+            {'name': '规则组 1', 'jql': 'project = CHER-1'},
+            {'name': '规则组 2', 'jql': 'project = CHER-2'},
+        ),
+    )
+    @patch('analyzer.views.submit_filter_task')
+    def test_bulk_create_filter_tasks_returns_summary(self, mock_submit_filter_task, _mock_map_car_role):
+        FilterTask.objects.create(
+            role_index=1,
+            role_label='规则组 2',
+            jql='project = CHER-2',
+            status='RUNNING',
+        )
+
+        response = self.client.post('/api/rule-groups/filter-tasks/bulk/', {}, format='json')
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data['summary']['total_groups'], 2)
+        self.assertEqual(response.data['summary']['created'], 1)
+        self.assertEqual(response.data['summary']['skipped_conflict'], 1)
+        self.assertEqual(response.data['summary']['failed'], 0)
+        self.assertEqual(len(response.data['items']), 2)
+        self.assertTrue(FilterTask.objects.filter(role_index=0, status='PENDING').exists())
+        mock_submit_filter_task.assert_called_once()
+
     def test_rule_group_list_returns_latest_filter_summary(self):
         task = FilterTask.objects.create(
             role_index=0,

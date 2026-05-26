@@ -1486,24 +1486,29 @@ MAP_CAR_ROLE = (
         "model_to_files": {
             "T1J_FL3_8255": {
                 "json":  ["config_T1J_FL3.json"],
-                "dbc":   ["car_T1J_FL3.dbc"],
+                "dbc":   ["car_T1J_FL3.dbc", "car_T1J_FL3_IC2.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
             "T1J-FL3-8255": {
                 "json":  ["config_T1J_FL3.json"],
-                "dbc":   ["car_T1J_FL3.dbc"],
+                "dbc":   ["car_T1J_FL3.dbc", "car_T1J_FL3_IC2.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
             "T1J_FL3": {
                 "json":  ["config_T1J_FL3.json"],
-                "dbc":   ["car_T1J_FL3.dbc"],
+                "dbc":   ["car_T1J_FL3.dbc", "car_T1J_FL3_IC2.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
             "T1J-FL3": {
                 "json":  ["config_T1J_FL3.json"],
-                "dbc":   ["car_T1J_FL3.dbc"],
+                "dbc":   ["car_T1J_FL3.dbc", "car_T1J_FL3_IC2.dbc"],
                 "proto": "com.bosch.cm.platform.vehicle.proto"
             },
+            "T1J-FL3-PHEV": {
+                "json":  ["config_T1J_FL3.json"],
+                "dbc":   ["car_T1J_FL3.dbc", "car_T1J_FL3_IC2.dbc"],
+                "proto": "com.bosch.cm.platform.vehicle.proto"
+            }
         },
 
         # 可选兜底：当票名里没有【车型】或车型不在映射表时使用
