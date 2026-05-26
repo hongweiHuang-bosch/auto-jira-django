@@ -10,7 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import AnalysisTask, IssueAnalysisResult, FilterTask, FilteredIssueSnapshot, IssueProcessTask, IssueProcessResult, IssueReviewSample, IssueValidationRun
-from .serializers import AnalysisTaskSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer, IssueValidationRunSerializer
+from .serializers import AnalysisTaskSerializer, AutoCycleStateSerializer, IssueAnalysisResultSerializer, FilterTaskSerializer, IssueProcessTaskSerializer, IssueProcessResultSerializer, IssueValidationRunSerializer
+from .services.auto_cycle_service import get_auto_cycle_state, start_auto_cycle, stop_auto_cycle
 from .services.issue_review_service import review_issue_result
 from .services.learning_memory_service import delete_learning_memory, persist_learning_memory
 from .services.bulk_task_actions import create_bulk_filter_tasks, create_bulk_issue_process_tasks, prepare_filter_task, prepare_issue_process_task
@@ -29,6 +30,26 @@ FILTER_TASK_STALE_TIMEOUT = timedelta(minutes=10)
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+
+class AutoCycleStateView(APIView):
+    def get(self, request):
+        return Response(AutoCycleStateSerializer(get_auto_cycle_state()).data)
+
+
+class AutoCycleStartView(APIView):
+    def post(self, request):
+        try:
+            interval_minutes = int(request.data.get('interval_minutes', 30))
+            state = start_auto_cycle(interval_minutes)
+        except (TypeError, ValueError):
+            return Response({'detail': 'interval_minutes 必须是大于 0 的整数'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(AutoCycleStateSerializer(state).data)
+
+
+class AutoCycleStopView(APIView):
+    def post(self, request):
+        return Response(AutoCycleStateSerializer(stop_auto_cycle()).data)
 
 
 # 开始分析按钮后端请求

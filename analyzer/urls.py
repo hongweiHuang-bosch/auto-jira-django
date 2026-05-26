@@ -1,6 +1,7 @@
 
 from django.urls import path
 from .views import (
+    AutoCycleStartView, AutoCycleStateView, AutoCycleStopView,
     TaskGroupListView, TaskGroupStreamView, TaskStartView, TaskDetailView,
     ResultListView, ResultUpdateView, ResultCommentView,
     FilterTaskCreateView,
@@ -28,6 +29,9 @@ from .views_rule_groups import (
 )
 
 urlpatterns = [
+    path('auto-cycle/', AutoCycleStateView.as_view(), name='auto-cycle-state'),
+    path('auto-cycle/start/', AutoCycleStartView.as_view(), name='auto-cycle-start'),
+    path('auto-cycle/stop/', AutoCycleStopView.as_view(), name='auto-cycle-stop'),
     path('tasks/groups/', TaskGroupListView.as_view(), name='task-groups'),
     path('tasks/stream/', TaskGroupStreamView.as_view(), name='task-stream'),
     path('tasks/start/', TaskStartView.as_view(), name='task-start'),

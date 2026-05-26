@@ -22,3 +22,5 @@ ai:
 runtime:
   download_root: "/path/to/downloads"
   tesseract_exe: "/usr/bin/tesseract"
+  
+feishu.webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/1d3da1a9-ee8e-49ac-82db-765c9fbc4dd2"

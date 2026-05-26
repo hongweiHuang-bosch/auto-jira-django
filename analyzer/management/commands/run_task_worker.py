@@ -3,6 +3,7 @@ import time
 from django.core.management.base import BaseCommand
 
 from analyzer.services.filter_task_runner import run_filter_task
+from analyzer.services.auto_cycle_service import run_auto_cycle_once, notify_finished_process_tasks
 from analyzer.services.issue_analysis_service import run_issue_process_task
 from analyzer.services.issue_validation_runner import run_issue_validation_run
 from analyzer.services.task_claims import (
@@ -25,6 +26,8 @@ class Command(BaseCommand):
     def _run_once(self):
         recover_stale_issue_process_tasks(timeout_minutes=30)
         recover_stale_issue_validation_runs(timeout_minutes=30)
+        notify_finished_process_tasks()
+        run_auto_cycle_once()
 
         filter_task_id = claim_pending_filter_task()
         if filter_task_id is not None:

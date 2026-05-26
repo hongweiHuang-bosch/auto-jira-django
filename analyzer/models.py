@@ -126,11 +126,37 @@ class IssueProcessTask(models.Model):
     error_message = models.TextField(blank=True, default='')
     started_at = models.DateTimeField(null=True, blank=True)
     finished_at = models.DateTimeField(null=True, blank=True)
+    feishu_notified_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']
+
+
+class AutoCycleState(models.Model):
+    STAGE_CHOICES = [
+        ('STOPPED', 'STOPPED'),
+        ('IDLE', 'IDLE'),
+        ('FILTERING', 'FILTERING'),
+        ('PROCESSING', 'PROCESSING'),
+        ('NOTIFYING', 'NOTIFYING'),
+        ('ERROR', 'ERROR'),
+    ]
+
+    is_running = models.BooleanField(default=False)
+    interval_minutes = models.PositiveIntegerField(default=30)
+    stage = models.CharField(max_length=20, choices=STAGE_CHOICES, default='STOPPED')
+    stop_requested = models.BooleanField(default=False)
+    last_started_at = models.DateTimeField(null=True, blank=True)
+    last_finished_at = models.DateTimeField(null=True, blank=True)
+    next_run_at = models.DateTimeField(null=True, blank=True)
+    last_error = models.TextField(blank=True, default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['id']
 
 
 class IssueProcessResult(models.Model):

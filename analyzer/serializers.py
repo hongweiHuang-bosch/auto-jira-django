@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from .models import (
     AnalysisTask,
+    AutoCycleState,
     FilterTask,
     FilteredIssueSnapshot,
     IssueAnalysisResult,
@@ -10,6 +11,12 @@ from .models import (
     IssueValidationCheck,
     IssueValidationRun,
 )
+
+
+class AutoCycleStateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoCycleState
+        fields = '__all__'
 
 
 class IssueAnalysisResultSerializer(serializers.ModelSerializer):
