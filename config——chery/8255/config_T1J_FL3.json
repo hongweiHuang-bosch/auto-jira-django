@@ -442,6 +442,84 @@
     ]
   },
   {
+    "prop": "ADC_MDCSENTRYALARMMOD_411H_411",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1041,
+        "getMsgName": "ADS_HW_411h",
+        "getSignals": ["ADC_MdcSentryAlarmMod_411h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_1_APARPASTS_30F",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 783,
+        "getMsgName": "ADS_COM_1",
+        "getSignals": ["ADS_1_APARPASts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_1_HPASTS_30F",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 783,
+        "getMsgName": "ADS_COM_1",
+        "getSignals": ["ADS_1_HPASts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_2_AEBSTATUS_314",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -515,6 +593,32 @@
         "getMsgId": 794,
         "getMsgName": "ADS_COM_3",
         "getSignals": ["ADS_3_ACCSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_3_AESSTATUS_31A",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 794,
+        "getMsgName": "ADS_COM_3",
+        "getSignals": ["ADS_3_AESStatus"],
         "options": [""]
       }
     ]
@@ -780,6 +884,84 @@
     ]
   },
   {
+    "prop": "ADS_4_ACCOBJHOZDSTY_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-50.0],
+        "maxValue": [50.0],
+        "factor": [0.1],
+        "offset": [-50.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_ACCObjHozDstY"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_ACCOBJLGTDSTX_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [0.0],
+        "maxValue": [127.0],
+        "factor": [0.5],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_ACCObjLgtDstX"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_ACCOBJTYP_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_ACCObjTyp"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_4_ACCTEXTMESSAGE_333",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -853,6 +1035,32 @@
         "getMsgId": 819,
         "getMsgName": "ADS_4",
         "getSignals": ["ADS_4_AEBStatus"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_CRUISEACCELERATESTS_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_CruiseAccelerateSts"],
         "options": [""]
       }
     ]
@@ -962,6 +1170,84 @@
     ]
   },
   {
+    "prop": "ADS_4_LEOBJHOZDSTY_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-50.0],
+        "maxValue": [50.0],
+        "factor": [0.1],
+        "offset": [-50.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_LeObjHozDstY"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_LEOBJLGTDSTX_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [0.0],
+        "maxValue": [127.0],
+        "factor": [0.5],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_LeObjLgtDstX"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_LEOBJTYP_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_LeObjTyp"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_4_LONGITAKEOVERREQ_333",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -1009,6 +1295,84 @@
         "getMsgId": 819,
         "getMsgName": "ADS_4",
         "getSignals": ["ADS_4_Radar_textinfo"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_RIOBJHOZDSTY_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-50.0],
+        "maxValue": [50.0],
+        "factor": [0.1],
+        "offset": [-50.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_RiObjHozDstY"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_RIOBJLGTDSTX_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [0.0],
+        "maxValue": [127.0],
+        "factor": [0.5],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_RiObjLgtDstX"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_4_RIOBJTYP_333",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 819,
+        "getMsgName": "ADS_4",
+        "getSignals": ["ADS_4_RiObjTyp"],
         "options": [""]
       }
     ]
@@ -1087,6 +1451,214 @@
         "getMsgId": 819,
         "getMsgName": "ADS_4",
         "getSignals": ["ADS_4_TimeGapSet"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGOLEFTLINEHEATGAG_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-1.02],
+        "maxValue": [1.02],
+        "factor": [0.004],
+        "offset": [-1.02],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoLeftLineHeatgAg"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGOLELINECRVT_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-0.0156],
+        "maxValue": [0.0156],
+        "factor": [6e-05],
+        "offset": [-0.0156],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoLeLineCrvt"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGOLELINEHOZLDST_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-25.0],
+        "maxValue": [25.0],
+        "factor": [0.1],
+        "offset": [-25.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoLeLineHozlDst"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGOLELINEID_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoLeLineID"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGOLELINETYP_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoLeLineTyp"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGORILINEHOZLDST_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-25.0],
+        "maxValue": [25.0],
+        "factor": [0.1],
+        "offset": [-25.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoRiLineHozlDst"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGORILINEID_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoRiLineID"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_EGORILINETYP_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_EgoRiLineTyp"],
         "options": [""]
       }
     ]
@@ -1217,6 +1789,32 @@
         "getMsgId": 821,
         "getMsgName": "ADS_5",
         "getSignals": ["ADS_5_IHCSettingSt"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_ILOASTS_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_ILOASts"],
         "options": [""]
       }
     ]
@@ -1404,6 +2002,162 @@
     ]
   },
   {
+    "prop": "ADS_5_NEBORLELINEHOZLDST_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-25.0],
+        "maxValue": [25.0],
+        "factor": [0.1],
+        "offset": [-25.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborLeLineHozlDst"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_NEBORLELINEID_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborLeLineID"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_NEBORLELINETYP_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborLeLineTyp"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_NEBORRILINEHOZLDST_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [-25.0],
+        "maxValue": [25.0],
+        "factor": [0.1],
+        "offset": [-25.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborRiLineHozlDst"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_NEBORRILINEID_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborRiLineID"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_5_NEBORRILINETYP_335",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 821,
+        "getMsgName": "ADS_5",
+        "getSignals": ["ADS_5_NeborRiLineTyp"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_6_CUSTOMIZE_BUTTONSFB_20C",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -1425,6 +2179,32 @@
         "getMsgId": 524,
         "getMsgName": "ADS_6",
         "getSignals": ["ADS_6_Customize_buttonsFB"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_6_PAS_AUDIOTONE_20C",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 524,
+        "getMsgName": "ADS_6",
+        "getSignals": ["ADS_6_PAS_AudioTone"],
         "options": [""]
       }
     ]
@@ -1477,6 +2257,32 @@
         "getMsgId": 514,
         "getMsgName": "ADS_HW_202h",
         "getSignals": ["ADS_AdsFault_202h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_ADSFUCNTIONNOTACTIVE_301H_301",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 769,
+        "getMsgName": "ADS_HW_301h",
+        "getSignals": ["ADS_AdsFucntionNotActive_301h"],
         "options": [""]
       }
     ]
@@ -1898,6 +2704,32 @@
     ]
   },
   {
+    "prop": "ADS_HNOPSTS_31A",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 794,
+        "getMsgName": "ADS_COM_3",
+        "getSignals": ["ADS_HNOPSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_LCCNCAFUNCTIONSTATUS_301H_301",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -2075,6 +2907,32 @@
         "getMsgId": 769,
         "getMsgName": "ADS_HW_301h",
         "getSignals": ["ADS_LeReDoorWarningCmd_301h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_LKAFAULT_301H_301",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 769,
+        "getMsgName": "ADS_HW_301h",
+        "getSignals": ["ADS_LkaFault_301h"],
         "options": [""]
       }
     ]
@@ -2964,6 +3822,58 @@
     ]
   },
   {
+    "prop": "ADS_SPEEDLIMITVALUE_301H_301",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [255.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 769,
+        "getMsgName": "ADS_HW_301h",
+        "getSignals": ["ADS_SpeedLimitValue_301h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_SPEEDLIMITWARNING_301H_301",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 769,
+        "getMsgName": "ADS_HW_301h",
+        "getSignals": ["ADS_SpeedLimitWarning_301h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ADS_TAKEOVER_VEC",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -3011,6 +3921,32 @@
         "getMsgId": 769,
         "getMsgName": "ADS_HW_301h",
         "getSignals": ["ADS_TlaWarning_301h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADS_UNOPSTS_31A",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 794,
+        "getMsgName": "ADS_COM_3",
+        "getSignals": ["ADS_UNOPSts"],
         "options": [""]
       }
     ]
@@ -3089,6 +4025,32 @@
         "getMsgId": 1141,
         "getMsgName": "APA_475h",
         "getSignals": ["ApaRpaSts_475h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "APA_AVM_SPEEDSET_475H_475",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1141,
+        "getMsgName": "APA_475h",
+        "getSignals": ["APA_AVM_SpeedSet_475h"],
         "options": [""]
       }
     ]
@@ -3297,6 +4259,32 @@
         "getMsgId": 582,
         "getMsgName": "APA_246h",
         "getSignals": ["APA_FORDistance_246h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "APA_FRONTWARNINGTYPE_246H_246",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 582,
+        "getMsgName": "APA_246h",
+        "getSignals": ["APA_FrontWarningType_246h"],
         "options": [""]
       }
     ]
@@ -4129,6 +5117,32 @@
         "getMsgId": 1141,
         "getMsgName": "APA_475h",
         "getSignals": ["AvmWinDisp_475h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "AWDOUTSERVICEDISPRQ_252H_252",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 594,
+        "getMsgName": "AWD_252h",
+        "getSignals": ["AWDoutserviceDispRq_252h"],
         "options": [""]
       }
     ]
@@ -4992,6 +6006,58 @@
     ]
   },
   {
+    "prop": "BRAKEPEDALSTSVALIDDATA_469H_469",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1129,
+        "getMsgName": "EMS_COM_469h",
+        "getSignals": ["BrakePedalStsValidData_469h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "BRAKEPEDALSTS_469H_469",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1129,
+        "getMsgName": "EMS_COM_469h",
+        "getSignals": ["BrakePedalSts_469h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "BUS_CLOUD_MESSAGE",
     "access": "READ_WRITE",
     "changeMode": "ON_CHANGE",
@@ -5559,6 +6625,32 @@
         "getMsgId": 787,
         "getMsgName": "FRZCU_14",
         "getSignals": ["ChrgHoodSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "COUPLINGFAULTSTATUS_253H_253",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 595,
+        "getMsgName": "ELSD_253h",
+        "getSignals": ["CouplingFaultStatus_253h"],
         "options": [""]
       }
     ]
@@ -6859,6 +7951,32 @@
         "getMsgId": 1043,
         "getMsgName": "FLZCU_8",
         "getSignals": ["EBS_U_BATT"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "EMS_1_G_ENGINESTS_4B2",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1202,
+        "getMsgName": "EMS_1_G",
+        "getSignals": ["EMS_1_G_EngineSts"],
         "options": [""]
       }
     ]
@@ -9771,6 +10889,58 @@
         "getMsgId": 1193,
         "getMsgName": "ONEBOX_2_G",
         "getSignals": ["FWAWarningSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "GASPEDALPOSITIONINVALIDDATA_469H_469",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1129,
+        "getMsgName": "EMS_COM_469h",
+        "getSignals": ["GasPedalPositionInvalidData_469h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "GASPEDALPOSITION_469H_469",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "FLOAT",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0.0],
+        "minValue": [0.0],
+        "maxValue": [100.0],
+        "factor": [0.1],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1129,
+        "getMsgName": "EMS_COM_469h",
+        "getSignals": ["GasPedalPosition_469h"],
         "options": [""]
       }
     ]
@@ -13666,32 +14836,6 @@
     ]
   },
   {
-    "prop": "ICC_FRSEATHEATLEVELCMD_423",
-    "access": "WRITE",
-    "changeMode": "ON_CHANGE",
-    "useArea": "Android_QNX",
-    "liteSnapshot": "DEFAULT_SNAPSHOT",
-    "dataType": "INT32",
-    "config": [
-      {
-        "area": "0",
-        "initValue": [0],
-        "minValue": [0.0],
-        "maxValue": [7.0],
-        "factor": [1.0],
-        "offset": [0.0],
-        "flow": "BUS_CH01",
-        "setMsgId": 1059,
-        "setMsgName": "ICC_BD_21",
-        "setSignals": ["ICC_FRSeatHeatLevelCmd"],
-        "getMsgId": null,
-        "getMsgName": null,
-        "getSignals": [],
-        "options": [""]
-      }
-    ]
-  },
-  {
     "prop": "ICC_FRSEATLIEDOWNCMD2_564",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -13710,32 +14854,6 @@
         "setMsgId": 1380,
         "setMsgName": "ICC_BD_50",
         "setSignals": ["ICC_FRSeatliedownCmd2"],
-        "getMsgId": null,
-        "getMsgName": null,
-        "getSignals": [],
-        "options": [""]
-      }
-    ]
-  },
-  {
-    "prop": "ICC_FRSEATVENTLEVELCMD_423",
-    "access": "WRITE",
-    "changeMode": "ON_CHANGE",
-    "useArea": "Android_QNX",
-    "liteSnapshot": "DEFAULT_SNAPSHOT",
-    "dataType": "INT32",
-    "config": [
-      {
-        "area": "0",
-        "initValue": [0],
-        "minValue": [0.0],
-        "maxValue": [7.0],
-        "factor": [1.0],
-        "offset": [0.0],
-        "flow": "BUS_CH01",
-        "setMsgId": 1059,
-        "setMsgName": "ICC_BD_21",
-        "setSignals": ["ICC_FRSeatVentLevelCmd"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -13814,6 +14932,32 @@
         "setMsgId": 1289,
         "setMsgName": "ICC_34",
         "setSignals": ["ICC_GPSSwitchSet"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_HAZARDLIGHTREQ_4F1",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1265,
+        "setMsgName": "ICC_ZCU_25",
+        "setSignals": ["ICC_HazardLightReq"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -15070,58 +16214,6 @@
     ]
   },
   {
-    "prop": "ICC_RRSEATHEATLEVELCMD_423",
-    "access": "WRITE",
-    "changeMode": "ON_CHANGE",
-    "useArea": "Android_QNX",
-    "liteSnapshot": "DEFAULT_SNAPSHOT",
-    "dataType": "INT32",
-    "config": [
-      {
-        "area": "0",
-        "initValue": [0],
-        "minValue": [0.0],
-        "maxValue": [7.0],
-        "factor": [1.0],
-        "offset": [0.0],
-        "flow": "BUS_CH01",
-        "setMsgId": 1059,
-        "setMsgName": "ICC_BD_21",
-        "setSignals": ["ICC_RRSeatHeatLevelCmd"],
-        "getMsgId": null,
-        "getMsgName": null,
-        "getSignals": [],
-        "options": [""]
-      }
-    ]
-  },
-  {
-    "prop": "ICC_RRSEATVENTLEVELCMD_423",
-    "access": "WRITE",
-    "changeMode": "ON_CHANGE",
-    "useArea": "Android_QNX",
-    "liteSnapshot": "DEFAULT_SNAPSHOT",
-    "dataType": "INT32",
-    "config": [
-      {
-        "area": "0",
-        "initValue": [0],
-        "minValue": [0.0],
-        "maxValue": [7.0],
-        "factor": [1.0],
-        "offset": [0.0],
-        "flow": "BUS_CH01",
-        "setMsgId": 1059,
-        "setMsgName": "ICC_BD_21",
-        "setSignals": ["ICC_RRSeatVentLevelCmd"],
-        "getMsgId": null,
-        "getMsgName": null,
-        "getSignals": [],
-        "options": [""]
-      }
-    ]
-  },
-  {
     "prop": "ICC_SELFCLEARING_4E2",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -15140,6 +16232,136 @@
         "setMsgId": 1250,
         "setMsgName": "ICC_ZCU_6",
         "setSignals": ["ICC_SelfClearing"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_SENTINELHV_REQ_4E2",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1250,
+        "setMsgName": "ICC_ZCU_6",
+        "setSignals": ["ICC_SentinelHV_Req"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_SENTINELMODEALARMSTS_471",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1137,
+        "setMsgName": "ICC_TBOX_27",
+        "setSignals": ["ICC_SentinelModeAlarmSts"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_SENTINELMODEEXITREASON_471",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1137,
+        "setMsgName": "ICC_TBOX_27",
+        "setSignals": ["ICC_SentinelModeExitReason"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_SENTINELMODESWITCHSTS_471",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1137,
+        "setMsgName": "ICC_TBOX_27",
+        "setSignals": ["ICC_SentinelModeSwitchSts"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_SENTINELMODEWORKINGSTS_471",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1137,
+        "setMsgName": "ICC_TBOX_27",
+        "setSignals": ["ICC_SentinelModeWorkingSts"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -16890,6 +18112,32 @@
     ]
   },
   {
+    "prop": "ICM_DRIVINGTIME_B_58BH_58B",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [16382.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1419,
+        "setMsgName": "ICC_58Bh",
+        "setSignals": ["ICM_DrivingTime_B_58Bh"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "ICM_SUMTRIP_471",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -17012,6 +18260,58 @@
         "setMsgId": 917,
         "setMsgName": "ICC_LC_12",
         "setSignals": ["MusicLoudness_55HZ", "MusicLoudness_123HZ", "MusicLoudness_262HZ", "MusicLoudness_440HZ", "MusicLoudness_587HZ", "MusicLoudness_784HZ", "MusicLoudness_1318HZ", "MusicLoudness_2794HZ", "MusicLoudness_6272HZ"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_4F1_GROUP_FL3",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0],
+        "maxValue": [7.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1265,
+        "setMsgName": "ICC_ZCU_25",
+        "setSignals": ["ICC_LightMainSwitchSts", "ICC_FrontFogSw", "ICC_RearFogSw"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_8_GROUP_SET_GUARD",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 31.0, 63.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1366,
+        "setMsgName": "ICC_DA_45",
+        "setSignals": ["TimeToStartSentinelDaySet_556h", "TimeToStartSentinelHourSet_556h", "TimeToStartSentinelMinutSet_556h", "ReservationSentinelReq_556h", "SentinelModeSwitchReq_556h"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -18632,6 +19932,32 @@
     ]
   },
   {
+    "prop": "PARKINGACTIVESUBFUNCST_475H_475",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1141,
+        "getMsgName": "APA_475h",
+        "getSignals": ["ParkingActiveSubFuncSt_475h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "PARKLAMP_264H_264",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -18757,6 +20083,32 @@
         "getMsgId": 1071,
         "getMsgName": "FLZCU_15",
         "getSignals": ["PassFoglightSts_42Fh"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "PASSFRSEATLIEDOWNFB_4D2H_4D2",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1234,
+        "getMsgName": "FRZCU_11",
+        "getSignals": ["PassFRSeatliedownFb_4D2h"],
         "options": [""]
       }
     ]
@@ -18970,6 +20322,32 @@
     ]
   },
   {
+    "prop": "PASSSEATHEATLEVELCMD_423H_423",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1059,
+        "setMsgName": "ICC_BD_21",
+        "setSignals": ["PassSeatHeatLevelCmd_423h"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "PASSSEATHEATLEVELS_4D2H_4D2",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -19121,6 +20499,32 @@
         "getMsgId": 1234,
         "getMsgName": "FRZCU_11",
         "getSignals": ["PassSeatNeedMemory_4D2h"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "PASSSEATVENTLEVELCMD_423H_423",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1059,
+        "setMsgName": "ICC_BD_21",
+        "setSignals": ["PassSeatVentLevelCmd_423h"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
         "options": [""]
       }
     ]
@@ -20322,6 +21726,32 @@
     ]
   },
   {
+    "prop": "RLCR_2_BSDLCWONOFFSTS_40DH_40D",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1037,
+        "getMsgName": "ADAS_ZCU_1",
+        "getSignals": ["RLCR_2_BSDLCWONOFFSts_40Dh"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "RLCR_2_BSDLCWONOFFSTS_450",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -20343,6 +21773,32 @@
         "getMsgId": 1104,
         "getMsgName": "RLCR_2",
         "getSignals": ["RLCR_2_BSDLCWONOFFSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "RLCR_2_DOWONOFFSTS_40DH_40D",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1037,
+        "getMsgName": "ADAS_ZCU_1",
+        "getSignals": ["RLCR_2_DOWONOFFSts_40Dh"],
         "options": [""]
       }
     ]
@@ -20421,6 +21877,32 @@
         "getMsgId": 1104,
         "getMsgName": "RLCR_2",
         "getSignals": ["RLCR_2_RCTAWarn"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "RLCR_2_RCWONOFFSTS_40DH_40D",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1037,
+        "getMsgName": "ADAS_ZCU_1",
+        "getSignals": ["RLCR_2_RCWONOFFSts_40Dh"],
         "options": [""]
       }
     ]
@@ -23364,6 +24846,32 @@
     ]
   },
   {
+    "prop": "TBOX_SENTINELMODESW_427",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1063,
+        "getMsgName": "TBOX_6",
+        "getSignals": ["TBOX_SentinelModeSw"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "TCM_1_TRAILERSTS_4AF",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -23489,6 +24997,32 @@
         "getMsgId": 1130,
         "getMsgName": "TCU_23",
         "getSignals": ["TCU_23_GBFaultstatus"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "TCU_23_GBWARMUPREQ_46A",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1130,
+        "getMsgName": "TCU_23",
+        "getSignals": ["TCU_23_GBWarmUpReq"],
         "options": [""]
       }
     ]

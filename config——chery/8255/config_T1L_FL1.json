@@ -3,7 +3,7 @@
     "prop": "ABM_1_G_AIRBAGFAILSTS_320",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -73,6 +73,136 @@
         "getMsgId": 805,
         "getMsgName": "ABS_ESP_17",
         "getSignals": ["ABS_ESP_17_ATM_ESPShiftAllwd"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADCC_9_SENTINELMODEALARMSTS_3F7",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1015,
+        "getMsgName": "ADCC_9",
+        "getSignals": ["ADCC_9_SentinelModeAlarmSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADCC_9_SENTINELMODEEXITREASONSTS_3F7",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1015,
+        "getMsgName": "ADCC_9",
+        "getSignals": ["ADCC_9_SentinelModeExitReasonSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADCC_9_SENTINELMODESWITCHSTS_3F7",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1015,
+        "getMsgName": "ADCC_9",
+        "getSignals": ["ADCC_9_SentinelModeSwitchSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADCC_9_SENTINELMODEWORKINGSTS_3F7",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1015,
+        "getMsgName": "ADCC_9",
+        "getSignals": ["ADCC_9_SentinelModeWorkingSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ADCC_9_SENTINELMODE_SENSITIVITYS_3F7",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1015,
+        "getMsgName": "ADCC_9",
+        "getSignals": ["ADCC_9_SentinelMode_SensitivityS"],
         "options": [""]
       }
     ]
@@ -1407,7 +1537,7 @@
     "prop": "BMSH_SOC_49F",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -5047,7 +5177,7 @@
     "prop": "CEM_PEPS_SMARTSYSTEMWARNING_5_0_480",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -6061,7 +6191,7 @@
     "prop": "EMS_1_G_GPFWARNING_280",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -8115,7 +8245,7 @@
     "prop": "GBCFAILSTS_420",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -8141,7 +8271,7 @@
     "prop": "GBC_1_INFODISPLAY_420",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -8193,7 +8323,7 @@
     "prop": "GSM_WARNINFO_1B2",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -9048,6 +9178,32 @@
     ]
   },
   {
+    "prop": "IHU_11_GROUP",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1276,
+        "setMsgName": "IHU_11",
+        "setSignals": ["IHU_11_AEBSwtSet", "IHU_11_FCWSnvtySet", "IHU_11_FCWSwtSet", "IHU_11_TJAICAExitTextInfoSwtSet", "IHU_11_SLASwtSet", "IHU_11_SCFSwtSet", "IHU_11_DAISwtSet", "IHU_11_IESSwtSet", "IHU_11_HMASwtSet", "IHU_11_TSISwtSet", "IHU_11_LDWSwtSet", "IHU_11_LDPSwtSet", "IHU_11_LDWLDPSnvtySet", "IHU_11_ELKSwtSet"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "IHU_11_HMASWTSET_4FC",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -9170,6 +9326,32 @@
         "setMsgId": 1407,
         "setMsgName": "IHU_15",
         "setSignals": ["IHU_15_GalleryModeReg"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_15_GROUP",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [7.0, 7.0, 3.0, 7.0, 7.0, 3.0, 3.0, 21.0, 3.0, 7.0, 15.0, 3.0, 15.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1407,
+        "setMsgName": "IHU_15",
+        "setSignals": ["SET_FRSeatHeatVentSwReq", "SET_FLSeatHeatVentSwReq", "SET_IPMCustom_Air_Conditioning", "SET_LeftMirrorCtrl", "SET_Mirror_Flip_CFG", "SET_IPM_Automatic_Ventilation", "SET_Mirror_Fold_Switch", "SET_Passenger_Mirror_Location", "IHU_SpeechControl", "SET_RightMirrorCtrl", "SET_Driver_Mirror_Location", "SET_IHU_ACMAXReq", "IHU15_MessageCounter", "IHU_15_Parkingairconditioning"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -10010,6 +10192,292 @@
     ]
   },
   {
+    "prop": "IHU_23_HAZARDLIGHTREQ_40B",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1035,
+        "setMsgName": "TIHU_IHU_23",
+        "setSignals": ["IHU_23_HazardLightReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_23_SPEAKERREQ_40B",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [1.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1035,
+        "setMsgName": "TIHU_IHU_23",
+        "setSignals": ["IHU_23_SpeakerReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_GROUP",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 63.0, 31.0, 63.0, 31.0, 3.0, 3.0, 3.0, 3.0, 1.0, 1.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_Reservation_SentinelReq", "IHU_24_TimeToStopSentinelMinuteS", "IHU_24_TimeToStopSentinelHourSet", "IHU_24_TimeToStartSentinelMinute", "IHU_24_TimeToStartSentinelHourSe", "IHU_24_TimeToStartSentinelDaySet", "IHU_24_SentinelMode_SensitivityR", "IHU_24_SentinelModeSwitchReq", "IHU_24_Sentinel_RemoteLockFeedba", "FollowingTrackToReverse", "RPASwitch", "Ready2GoSwitch", "IESSwtSet", "IHU_11_TSISwtSet", "ELK_Switch", "DCLC_Switch", "RCW_OnOffSt", "RCTB_OnOffSt"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_GROUP_TIME_TO_START_SENTINEL",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0],
+        "maxValue": [63.0, 31.0, 3.0],
+        "factor": [1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_TimeToStartSentinelMinute", "IHU_24_TimeToStartSentinelHourSe", "IHU_24_TimeToStartSentinelDaySet"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_RESERVATION_SENTINELREQ_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_Reservation_SentinelReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_SENTINELMODESWITCHREQ_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_SentinelModeSwitchReq"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_SENTINELMODE_SENSITIVITYR_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_SentinelMode_SensitivityR"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_SENTINEL_REMOTELOCKFEEDBA_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_Sentinel_RemoteLockFeedba"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_TIMETOSTARTSENTINELDAYSET_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_TimeToStartSentinelDaySet"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_TIMETOSTARTSENTINELHOURSE_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [31.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_TimeToStartSentinelHourSe"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_24_TIMETOSTARTSENTINELMINUTE_588",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [63.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1416,
+        "setMsgName": "IHU_24",
+        "setSignals": ["IHU_24_TimeToStartSentinelMinute"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "IHU_29_DCHASET_532",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -10132,6 +10600,32 @@
         "setMsgId": 1303,
         "setMsgName": "IHU_3",
         "setSignals": ["IHU_3_DVD_Set_RCW"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_3_GROUP",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 1.0, 3.0, 3.0],
+        "factor": [1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1303,
+        "setMsgName": "IHU_3",
+        "setSignals": ["IHU_3_BSDSwitch", "IHU_3_CalibrationRequest", "IHU_3_DVD_Set_RCW", "IHU_3_DVD_Set_DOW"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -11336,6 +11830,32 @@
     ]
   },
   {
+    "prop": "IHU_APA_GROUP_T1L_FL1",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [3.0, 3.0, 3.0, 1.0, 1.0, 3.0, 65535.0, 65535.0, 1.0, 1.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1114,
+        "setMsgName": "IHU_APA",
+        "setSignals": ["IHU_APA_3_VoiceCtrldPrkgCmd", "IHU_APA_3_MEB_Switch", "IHU_APA_3_AVMFloat", "IHU_APA_3_KeySts", "IHU_APA_3_CalibrationReq", "IHU_APA_3_TouchEvt", "IHU_APA_3_NaviBtnPressInputValue", "IHU_APA_3_NaviBtnPressInput_0000", "IHU_APA_3_I_isplayAVMOff", "IHU_APA_3_AVMSwt"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "IHU_CGW_BRAKEPEDALFEELMODESETREQ_51D",
     "access": "WRITE",
     "changeMode": "ON_CHANGE",
@@ -11406,6 +11926,32 @@
         "setMsgId": 1301,
         "setMsgName": "IHU_1",
         "setSignals": ["IHU_DVD_SET_BT_Reduce_Wind_Speed"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "IHU_DVR_T1L_GROUP",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32_VEC",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "maxValue": [255.0, 255.0, 255.0, 255.0, 255.0, 255.0, 255.0, 255.0],
+        "factor": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "offset": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1520,
+        "setMsgName": "IHU_DVR_Interaction",
+        "setSignals": ["IHU_DVR_Data0", "IHU_DVR_Data1", "IHU_DVR_Data2", "IHU_DVR_Data3", "IHU_DVR_Data4", "IHU_DVR_Data5", "IHU_DVR_Data6", "IHU_DVR_Data7"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],
@@ -16175,7 +16721,7 @@
     "prop": "TBOX_3_BATTERYPOWERLIMIT_522",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -16219,6 +16765,110 @@
         "getMsgId": 1312,
         "getMsgName": "AVM_1",
         "getSignals": ["TBOX_3_RemDiagSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "TBOX_3_RESERVATION_SENTINELSTS_520",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1312,
+        "getMsgName": "AVM_1",
+        "getSignals": ["TBOX_3_Reservation_SentinelSts"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "TBOX_3_TIMETOSTARTSENTINELDAYFED_520",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [3.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1312,
+        "getMsgName": "AVM_1",
+        "getSignals": ["TBOX_3_TimeToStartSentinelDayFed"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "TBOX_3_TIMETOSTARTSENTINELHOURFE_520",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [31.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1312,
+        "getMsgName": "AVM_1",
+        "getSignals": ["TBOX_3_TimeToStartSentinelHourFe"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "TBOX_3_TIMETOSTARTSENTINELMINUTE_520",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [63.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1312,
+        "getMsgName": "AVM_1",
+        "getSignals": ["TBOX_3_TimeToStartSentinelMinute"],
         "options": [""]
       }
     ]
@@ -16435,7 +17085,7 @@
     "prop": "TCU_G_CLUTCHTEMPERATURE_301",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -16903,7 +17553,7 @@
     "prop": "WSM_BLK_565",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [

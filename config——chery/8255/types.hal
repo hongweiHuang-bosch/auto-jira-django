@@ -5775,6 +5775,18 @@ enum VehicleProperty : int32_t {
      * @change_mode VehiclePropertyChangeMode:ON_CHANGE
      * @access VehiclePropertyAccess:READ
      */
+    HCU_25_DCM_WARN_522 = (
+        0x2125
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
     TCU_23_TEACHINSTATE_46A = (
         0x2126
         | VehiclePropertyGroup:VENDOR
@@ -13361,6 +13373,30 @@ enum VehicleProperty : int32_t {
         | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
 
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    HCU_DCMSWTFED_522 = (
+        0xC2B3
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_CCMREQ_4E2H_4E2 = (
+        0xC2B5
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
     /* SETTINGS end */
 
 
@@ -18780,18 +18816,6 @@ enum VehicleProperty : int32_t {
         0x211E
         | VehiclePropertyGroup:VENDOR
         | VehiclePropertyType:INT32_VEC
-        | VehicleArea:GLOBAL),
-
-    /**
-     *
-     *
-     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
-     * @access VehiclePropertyAccess:READ
-     */
-    HCU_25_DCM_WARN_522 = (
-        0x2125
-        | VehiclePropertyGroup:VENDOR
-        | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
 
     /* WarningModule end */
@@ -25311,6 +25335,306 @@ enum VehicleProperty : int32_t {
         | VehiclePropertyType:INT32_VEC
         | VehicleArea:GLOBAL),
 
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_SENTINELMODESWITCHREQ_588 = (
+        0x80FA
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADCC_9_SENTINELMODESWITCHSTS_3F7 = (
+        0x80FB
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_RESERVATION_SENTINELREQ_588 = (
+        0x80FC
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    TBOX_3_RESERVATION_SENTINELSTS_520 = (
+        0x80FD
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_TIMETOSTARTSENTINELDAYSET_588 = (
+        0x80FE
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    TBOX_3_TIMETOSTARTSENTINELDAYFED_520 = (
+        0x80FF
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_TIMETOSTARTSENTINELHOURSE_588 = (
+        0x8100
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    TBOX_3_TIMETOSTARTSENTINELHOURFE_520 = (
+        0x8101
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_TIMETOSTARTSENTINELMINUTE_588 = (
+        0x8102
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    TBOX_3_TIMETOSTARTSENTINELMINUTE_520 = (
+        0x8103
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_SENTINELMODE_SENSITIVITYR_588 = (
+        0x8104
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADCC_9_SENTINELMODE_SENSITIVITYS_3F7 = (
+        0x8105
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADCC_9_SENTINELMODEWORKINGSTS_3F7 = (
+        0x8106
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADCC_9_SENTINELMODEEXITREASONSTS_3F7 = (
+        0x8107
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADCC_9_SENTINELMODEALARMSTS_3F7 = (
+        0x8108
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_23_HAZARDLIGHTREQ_40B = (
+        0x8109
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_23_SPEAKERREQ_40B = (
+        0x810A
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_SENTINEL_REMOTELOCKFEEDBA_588 = (
+        0x810B
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_GROUP = (
+        0x810C
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_24_GROUP_TIME_TO_START_SENTINEL = (
+        0x810D
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_3_GROUP = (
+        0x810E
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_11_GROUP = (
+        0x810F
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_15_GROUP = (
+        0x8110
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_APA_GROUP_T1L_FL1 = (
+        0x8111
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_DVR_T1L_GROUP = (
+        0x8112
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
     /* CABIN end */
 
 
@@ -27850,6 +28174,18 @@ enum VehicleProperty : int32_t {
         | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
 
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    APA_FRONTWARNINGTYPE_246H_246 = (
+        0x2151
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
     /* WarningModule end */
 
 
@@ -27969,6 +28305,30 @@ enum VehicleProperty : int32_t {
      */
     CROSSCOUNTRY_COOLINGSTS_468H_468 = (
         0xD0EA
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    PASSSEATHEATLEVELCMD_423H_423 = (
+        0xD0EB
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    PASSSEATVENTLEVELCMD_423H_423 = (
+        0xD0EC
         | VehiclePropertyGroup:VENDOR
         | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
@@ -29046,6 +29406,246 @@ enum VehicleProperty : int32_t {
         | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
 
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    IHU_4F1_GROUP_FL3 = (
+        0xC2AB
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32_VEC
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADC_MDCSENTRYALARMMOD_411H_411 = (
+        0xC2AC
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_SENTINELMODESWITCHSTS_471 = (
+        0xC2AD
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    TBOX_SENTINELMODESW_427 = (
+        0xC2AE
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_SENTINELMODEWORKINGSTS_471 = (
+        0xC2AF
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_SENTINELHV_REQ_4E2 = (
+        0xC2B0
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_SENTINELMODEALARMSTS_471 = (
+        0xC2B1
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICC_SENTINELMODEEXITREASON_471 = (
+        0xC2B2
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADS_HNOPSTS_31A = (
+        0xC2B6
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADS_UNOPSTS_31A = (
+        0xC2B7
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADS_1_APARPASTS_30F = (
+        0xC2B8
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADS_1_HPASTS_30F = (
+        0xC2B9
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    ADS_3_AESSTATUS_31A = (
+        0xC2BA
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    PASSFRSEATLIEDOWNFB_4D2H_4D2 = (
+        0xC2BB
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    RLCR_2_DOWONOFFSTS_40DH_40D = (
+        0xC2BC
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    RLCR_2_RCWONOFFSTS_40DH_40D = (
+        0xC2BD
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    RLCR_2_BSDLCWONOFFSTS_40DH_40D = (
+        0xC2BE
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    APA_AVM_SPEEDSET_475H_475 = (
+        0xC2BF
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    PARKINGACTIVESUBFUNCST_475H_475 = (
+        0xC2C0
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:WRITE
+     */
+    ICM_DRIVINGTIME_B_58BH_58B = (
+        0xC2C1
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
     /* SETTINGS end */
 
 
@@ -29613,6 +30213,30 @@ enum VehicleProperty : int32_t {
         | VehiclePropertyType:INT32
         | VehicleArea:GLOBAL),
 
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    COUPLINGFAULTSTATUS_253H_253 = (
+        0xA067
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    AWDOUTSERVICEDISPRQ_252H_252 = (
+        0xA068
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
     /* Telltale end */
 
 
@@ -29699,6 +30323,54 @@ enum VehicleProperty : int32_t {
 
 
     /* AVAS start 0xA000~0xEFFF */
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    BRAKEPEDALSTS_469H_469 = (
+        0x6003
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    BRAKEPEDALSTSVALIDDATA_469H_469 = (
+        0x6004
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    GASPEDALPOSITION_469H_469 = (
+        0x6005
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:FLOAT
+        | VehicleArea:GLOBAL),
+
+    /**
+     *
+     *
+     * @change_mode VehiclePropertyChangeMode:ON_CHANGE
+     * @access VehiclePropertyAccess:READ
+     */
+    GASPEDALPOSITIONINVALIDDATA_469H_469 = (
+        0x6006
+        | VehiclePropertyGroup:VENDOR
+        | VehiclePropertyType:INT32
+        | VehicleArea:GLOBAL),
 
     /* AVAS end */
 

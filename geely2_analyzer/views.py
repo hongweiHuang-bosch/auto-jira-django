@@ -1,3 +1,5 @@
+import os
+
 from django.db import transaction
 from django.http import StreamingHttpResponse
 from django.shortcuts import get_object_or_404
@@ -203,7 +205,11 @@ class AnalysisResultCommentView(APIView):
             return Response({'detail': '该结果已回填 Jira'})
         try:
             jira_client = build_jira_client(result.analysis_task.credential_binding)
-            jira_client.add_comment(result.issue_key, result.reply_text)
+            image_path = (result.evidence_payload or {}).get('can_trace_image_path', '')
+            if image_path and os.path.isfile(image_path):
+                jira_client.add_comment_with_image(result.issue_key, result.reply_text, image_path)
+            else:
+                jira_client.add_comment(result.issue_key, result.reply_text)
             result.comment_status = 'COMMENTED'
             result.commented_at = timezone.now()
             result.last_error = ''

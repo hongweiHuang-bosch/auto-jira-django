@@ -12457,7 +12457,7 @@
     "prop": "HCU_4LMODEFED_522",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [

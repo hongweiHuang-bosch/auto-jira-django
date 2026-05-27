@@ -802,6 +802,15 @@ class Pipeline:
                 can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, latest_cantrace)
                 cantrace_path = can_trace_path
 
+                # 校验 signals 是否全部出现在 can_trace_outputs 中
+                missing_signals = [s for s in signals if s not in (can_trace_outputs or "")]
+                if missing_signals:
+                    missing_msg = f"以下信号在 CAN Trace 中不存在: {', '.join(missing_signals)}"
+                    logger.warning(f"[{issue_key}] {missing_msg}")
+                    write_model_issue_text_file(f"{model_str}", f"{issue_key}_reply.txt", f"{issue_key}", missing_msg)
+                    self._finalize_issue(issue_key, summary, missing_msg, cantrace_path)
+                    return
+
                 write_model_issue_text_file(f"{model_str}", f"{issue_key}_can_trace.txt", f"{issue_key}", can_trace_outputs or "")
 
                 # 12) 一致性分析
@@ -838,6 +847,16 @@ class Pipeline:
                     return
                 can_trace_outputs, can_trace_path = self._plot_with_multi_dbc(signals, signal_to_info, dbc_paths, can_files[0])
                 cantrace_path = can_trace_path
+
+                # 校验 signals 是否全部出现在 can_trace_outputs 中
+                missing_signals = [s for s in signals if s not in (can_trace_outputs or "")]
+                if missing_signals:
+                    missing_msg = f"以下信号在 CAN Trace 中不存在: {', '.join(missing_signals)}"
+                    logger.warning(f"[{issue_key}] {missing_msg}")
+                    write_model_issue_text_file(f"{model_str}", f"{issue_key}_reply.txt", f"{issue_key}", missing_msg)
+                    self._finalize_issue(issue_key, summary, missing_msg, cantrace_path)
+                    return
+
                 prop_signal_info = propid_text + group_text
                 merged = (
                     "<信号及信号组关系>\n" + prop_signal_info + 

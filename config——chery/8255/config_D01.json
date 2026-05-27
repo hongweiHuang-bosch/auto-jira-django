@@ -11050,6 +11050,32 @@
     ]
   },
   {
+    "prop": "HCU_25_DCM_WARN_522",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [15.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1314,
+        "getMsgName": "HCU_25",
+        "getSignals": ["HCU_25_DCM_Warn"],
+        "options": [""]
+      }
+    ]
+  },
+  {
     "prop": "HCU_25_EDLFED_522",
     "access": "READ",
     "changeMode": "ON_CHANGE",
@@ -11235,7 +11261,7 @@
     "prop": "HCU_4LMODEFED_522",
     "access": "READ",
     "changeMode": "ON_CHANGE",
-    "useArea": "QNX",
+    "useArea": "Android_QNX",
     "liteSnapshot": "DEFAULT_SNAPSHOT",
     "dataType": "INT32",
     "config": [
@@ -11565,6 +11591,32 @@
         "getMsgId": 1314,
         "getMsgName": "HCU_25",
         "getSignals": ["HCU_CruiseLimitSpeedValue"],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "HCU_DCMSWTFED_522",
+    "access": "READ",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": null,
+        "setMsgName": null,
+        "setSignals": [],
+        "getMsgId": 1314,
+        "getMsgName": "HCU_25",
+        "getSignals": ["HCU_DCMSwtFed"],
         "options": [""]
       }
     ]
@@ -14526,6 +14578,32 @@
         "setMsgId": 1289,
         "setMsgName": "ICC_34",
         "setSignals": ["ICC_BtConFlag"],
+        "getMsgId": null,
+        "getMsgName": null,
+        "getSignals": [],
+        "options": [""]
+      }
+    ]
+  },
+  {
+    "prop": "ICC_CCMREQ_4E2H_4E2",
+    "access": "WRITE",
+    "changeMode": "ON_CHANGE",
+    "useArea": "Android_QNX",
+    "liteSnapshot": "DEFAULT_SNAPSHOT",
+    "dataType": "INT32",
+    "config": [
+      {
+        "area": "0",
+        "initValue": [0],
+        "minValue": [0.0],
+        "maxValue": [7.0],
+        "factor": [1.0],
+        "offset": [0.0],
+        "flow": "BUS_CH01",
+        "setMsgId": 1250,
+        "setMsgName": "ICC_ZCU_6",
+        "setSignals": ["ICC_CCMReq_4E2h"],
         "getMsgId": null,
         "getMsgName": null,
         "getSignals": [],

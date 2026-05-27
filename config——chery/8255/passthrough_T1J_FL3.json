@@ -1,0 +1,10 @@
+[
+  {
+    "dest": "PT_HARDKEY",
+    "prop": "HW_KEY_INPUT"
+  },
+  {
+    "dest": "PT_DEFAULT",
+    "prop": "TBOX_MUTE_PIN_STS"
+  }
+]

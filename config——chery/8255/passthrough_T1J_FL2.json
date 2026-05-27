@@ -1,0 +1,70 @@
+[
+  {
+    "dest": "PT_AVM",
+    "prop": "AVM_BUTTON_CLICK"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "AVM_FUNCSTS"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "AVM_FUNCSTS_REPORT"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "CUSTOM_BUTTON"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "DIALOG_BOX"
+  },
+  {
+    "dest": "PT_HARDKEY",
+    "prop": "HW_KEY_INPUT"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "LICENSE_PLATE"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "NOT_AVAILABLE_REASON"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "PDC_MUTE_SWITCH"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "PINP_VIEW_POSITION"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "SVS_ACTIVATION_TRIGGER"
+  },
+  {
+    "dest": "PT_DEFAULT",
+    "prop": "TBOX_MUTE_PIN_STS"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "VEHICLECOLOR"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "VEHICLE_PITCH_ANGLE"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "VEHICLE_ROLL_ANGLE"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "VIEW_ID_MAIN"
+  },
+  {
+    "dest": "PT_AVM",
+    "prop": "VIEW_ID_PINP"
+  }
+]
